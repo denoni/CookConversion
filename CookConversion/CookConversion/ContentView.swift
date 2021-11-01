@@ -50,7 +50,8 @@ struct ConversionsResponses: View {
       Color(UIColor.systemGray5)
       VStack(spacing: 15) {
         Spacer()
-        // Add measurement balloons
+        TextBalloon(horizontalAlignment: .trailing, topLabel: "Grams", text: "120g")
+        TextBalloon(horizontalAlignment: .leading, topLabel: "Tablespoon", text: "5tbsp")
       }
       .padding(.horizontal, 10)
       .padding(.vertical, 30)
