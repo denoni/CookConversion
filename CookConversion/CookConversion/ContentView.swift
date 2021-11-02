@@ -27,8 +27,8 @@ struct TopSelectionSection: View {
       VStack {
         Spacer()
         HStack(alignment: .bottom, spacing: 15) {
-            TapDownButton(text: "Grams")
-            TapDownButton(text: "Tablespoon")
+          TapDownButton(measurementType: .preciseMeasure)
+          TapDownButton(measurementType: .easyMeasure)
         }
         .frame(height: 60)
         .padding(.bottom, 10)

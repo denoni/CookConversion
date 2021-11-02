@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TapDownButton: View {
-  var text: String
+  var measurementType: MeasurementType
 
   @State private var shouldShowMenu = false
+  @State private var selectedItemText = "Ounce (oz.)"
 
   var body: some View {
     Button(action: {
@@ -22,7 +23,7 @@ struct TapDownButton: View {
         RoundedRectangle(cornerRadius: 19, style: .continuous)
           .foregroundColor(.white)
         HStack {
-          Text(text)
+          Text(selectedItemText)
             .foregroundColor(.black)
             .fontWeight(.semibold)
             .padding(.leading, 20)
@@ -43,7 +44,7 @@ struct TapDownButton: View {
       VStack {
         if self.shouldShowMenu {
           Spacer(minLength: 60 + 10)
-          PopOverMenu()
+          PopOverMenu(selectedItemText: $selectedItemText, measurementType: measurementType)
         }
       }, alignment: .topLeading
     )
@@ -51,8 +52,20 @@ struct TapDownButton: View {
 }
 
 struct PopOverMenu: View {
-  var items = ["Sugar", "Flour", "Salt", "Butter", "Water", "Milk",
-               "Sugar", "Flour", "Salt", "Butter", "Water", "Milk"]
+  @Binding var selectedItemText: String
+  var measurementType: MeasurementType
+
+  private let preciseMeasures = ["Ounce (oz.)", "Gallon (gal.)", "Milligrams (mg)", "Grams (g)", "Kilograms (kg)", "Milliliters (mL)", "Liter (L)"]
+  private let easyMeasures = ["Teaspoon (tsp.)", "Tablespoon (tbsp.)", "Cup", "Pinch", "Wineglass", "Teacup"]
+
+  private var measures: [String] {
+    switch measurementType {
+    case .preciseMeasure:
+      return preciseMeasures
+    case .easyMeasure:
+      return easyMeasures
+    }
+  }
 
   var body: some View {
       ZStack {
@@ -60,10 +73,12 @@ struct PopOverMenu: View {
           .foregroundColor(.white)
         ScrollView {
           VStack {
-            ForEach(items, id: \.self) { item in
-              Text(item)
-                .foregroundColor(.black)
-                .padding(.top, 5)
+            ForEach(measures, id: \.self) { measure in
+              Button(action: { selectedItemText = measure }, label: {
+                Text(measure)
+                  .foregroundColor(.black)
+                  .padding(.top, 5)
+              })
               Divider()
             }
           }
@@ -73,9 +88,14 @@ struct PopOverMenu: View {
       .padding(.horizontal, 30)
       .shadow(radius: 25)
       .frame(width: 200)
-      .frame(height: 400)
+      .frame(height: 250)
       .scaledToFit()
       .ignoresSafeArea()
       .zIndex(1)
     }
+}
+
+enum MeasurementType {
+  case preciseMeasure
+  case easyMeasure
 }
