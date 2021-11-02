@@ -22,29 +22,35 @@ struct ContentView: View {
 struct TopSelectionSection: View {
   var body: some View {
     ZStack {
-      Color.green
+      RoundedRectangle(cornerRadius: 19)
+        .foregroundColor(Color(red: 26/255, green: 185/255, blue: 235/255))
       VStack {
         Spacer()
         HStack(alignment: .bottom, spacing: 15) {
-          TapDownButton(text: "Grams")
-          TapDownButton(text: "Tablespoon")
+            TapDownButton(text: "Grams")
+            TapDownButton(text: "Tablespoon")
         }
         .frame(height: 60)
-        .padding(.bottom, 30)
+        .padding(.bottom, 10)
+        .padding(.top, 60)
       }
       .frame(maxHeight: .infinity)
       .padding(30)
     }
-    .frame(height: 200)
+    .ignoresSafeArea()
     .frame(maxWidth: .infinity)
     .padding(.bottom, -30)
+    .zIndex(1)
+    .scaledToFit()
   }
 }
 
 struct ConversionsResponses: View {
+  let lightGrey = Color(red: 229/255, green: 229/255, blue: 229/255)
   var body: some View {
     ZStack {
-      Color(UIColor.systemGray5)
+      RoundedRectangle(cornerRadius: 19)
+        .foregroundColor(lightGrey)
       VStack(spacing: 15) {
         Spacer()
         TextBalloon(horizontalAlignment: .trailing, topLabel: "Grams", text: "120g")
@@ -54,7 +60,6 @@ struct ConversionsResponses: View {
       .padding(.vertical, 30)
       .padding(.bottom, 30)
     }
-    .cornerRadius(19, corners: [.topLeft, .topRight])
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.bottom, -30)
   }
@@ -63,7 +68,8 @@ struct ConversionsResponses: View {
 struct UserInputSection: View {
   var body: some View {
     ZStack {
-      Color.white
+      RoundedRectangle(cornerRadius: 19)
+        .foregroundColor(.white)
       VStack {
         Text("Type the measure to convert...")
           .font(.title2)
@@ -71,9 +77,9 @@ struct UserInputSection: View {
           .opacity(0.35)
       }
     }
-    .cornerRadius(19, corners: [.topLeft, .topRight])
-    .frame(height: 300)
+    .frame(height: 200)
     .frame(maxWidth: .infinity)
+    .ignoresSafeArea()
   }
 }
 
