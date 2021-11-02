@@ -20,14 +20,14 @@ struct TapDownButton: View {
       }
     }, label: {
       ZStack {
-        RoundedRectangle(cornerRadius: 19, style: .continuous)
+        RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.white)
         HStack {
           Text(selectedItemText)
             .foregroundColor(.black)
             .fontWeight(.semibold)
             .padding(.leading, 20)
-            .padding(.trailing, 10)
+            .padding(.trailing, Constants.smallPadding)
           Spacer()
           Rectangle()
             .foregroundColor(.black.opacity(0.2))
@@ -36,14 +36,14 @@ struct TapDownButton: View {
           Image(systemName: shouldShowMenu ? "chevron.up" : "chevron.down")
             .foregroundColor(.black)
             .scaledToFit()
-            .padding(.trailing, 10)
+            .padding(.trailing, Constants.smallPadding)
         }
       }
     })
     .overlay(
       VStack {
         if self.shouldShowMenu {
-          Spacer(minLength: 60 + 10)
+          Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
           PopOverMenu(selectedItemText: $selectedItemText, measurementType: measurementType)
         }
       }, alignment: .topLeading
@@ -69,7 +69,7 @@ struct PopOverMenu: View {
 
   var body: some View {
       ZStack {
-        RoundedRectangle(cornerRadius: 19, style: .continuous)
+        RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.white)
         ScrollView {
           VStack {
@@ -85,7 +85,7 @@ struct PopOverMenu: View {
           .padding()
         }
       }
-      .padding(.horizontal, 30)
+      .padding(.horizontal, Constants.standardPadding)
       .shadow(radius: 25)
       .frame(width: 200)
       .frame(height: 250)

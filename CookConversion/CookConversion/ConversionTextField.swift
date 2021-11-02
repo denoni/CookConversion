@@ -15,10 +15,8 @@ struct ConversionTextField: View {
     TextField("", text: $textInput)
       .modifier(PlaceholderStyle(showPlaceHolder: textInput.isEmpty, placeholderText: placeholderText))
       .font(.title2.weight(.heavy))
-      .padding(.horizontal, 5)
       .foregroundColor(.black)
-      .padding(.vertical, 10)
-      .padding(.horizontal, 15)
+      .padding(Constants.smallPadding)
   }
 
   private struct PlaceholderStyle: ViewModifier {
@@ -29,7 +27,6 @@ struct ConversionTextField: View {
         ZStack(alignment: .leading) {
           if showPlaceHolder {
             Text(placeholderText)
-              .padding(.horizontal, 5)
               .foregroundColor(Color.black.opacity(0.3))
           }
           content

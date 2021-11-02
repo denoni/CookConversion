@@ -24,7 +24,7 @@ struct TextBalloon: View {
         HStack(spacing: 0) {
           BalloonAdjustedArc(horizontalAlignment: .leading, opacity: balloonOpacity)
           ZStack {
-            RoundedRectangle(cornerRadius: 19, style: .continuous)
+            RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
               .opacity(balloonOpacity)
             BalloonText(topLabel: topLabel, text: text, alignment: .leading)
           }
@@ -39,7 +39,7 @@ struct TextBalloon: View {
         HStack(spacing: 0) {
           Spacer()
           ZStack {
-            RoundedRectangle(cornerRadius: 19, style: .continuous)
+            RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
               .opacity(balloonOpacity)
             BalloonText(topLabel: topLabel, text: text, alignment: .trailing)
           }
@@ -86,7 +86,7 @@ private struct BalloonAdjustedArc: View {
       Arc(height: arcHeight, length: arcWidth)
         .rotationEffect(horizontalAlignment == .leading ? .zero : .degrees(180))
         .frame(width: arcHeight, height: arcWidth)
-        .padding(.bottom, 19)
+        .padding(.bottom, Constants.standardRadius)
         .opacity(opacity)
     }
   }

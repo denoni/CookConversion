@@ -16,6 +16,7 @@
 		C05B44AB2730710D004BF02F /* CookConversionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B44AA2730710D004BF02F /* CookConversionUITestsLaunchTests.swift */; };
 		C07CFD8227316E7F00747568 /* ConversionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD8127316E7E00747568 /* ConversionTextField.swift */; };
 		C07CFD842731790A00747568 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD832731790A00747568 /* ColorPalette.swift */; };
+		C07CFD8627317A9500747568 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD8527317A9500747568 /* Constants.swift */; };
 		C08EE32327308A3900BD64AD /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */; };
 		C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3262730B4FF00BD64AD /* TextBalloon.swift */; };
 		C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3282730B7CE00BD64AD /* TapDownButton.swift */; };
@@ -51,6 +52,7 @@
 		C05B44AA2730710D004BF02F /* CookConversionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookConversionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C07CFD8127316E7E00747568 /* ConversionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionTextField.swift; sourceTree = "<group>"; };
 		C07CFD832731790A00747568 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		C07CFD8527317A9500747568 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 		C08EE3262730B4FF00BD64AD /* TextBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBalloon.swift; sourceTree = "<group>"; };
 		C08EE3282730B7CE00BD64AD /* TapDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapDownButton.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				C07CFD8127316E7E00747568 /* ConversionTextField.swift */,
 				C07CFD832731790A00747568 /* ColorPalette.swift */,
 				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
+				C07CFD8527317A9500747568 /* Constants.swift */,
 				C05B44912730710C004BF02F /* Assets.xcassets */,
 				C05B44932730710C004BF02F /* Preview Content */,
 			);
@@ -279,6 +282,7 @@
 				C05B4490273070FC004BF02F /* ContentView.swift in Sources */,
 				C05B448E273070FC004BF02F /* CookConversionApp.swift in Sources */,
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
+				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

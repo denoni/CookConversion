@@ -20,24 +20,25 @@ struct ContentView: View {
 }
 
 struct TopSelectionSection: View {
+
   var body: some View {
     ZStack {
       Rectangle()
         .foregroundColor(Color.skyBlue)
       VStack {
-        HStack(alignment: .bottom, spacing: 15) {
+        HStack(alignment: .bottom, spacing: Constants.smallPadding) {
           TapDownButton(measurementType: .preciseMeasure)
           TapDownButton(measurementType: .easyMeasure)
         }
-        .frame(height: 60)
-        .padding(.top, 60)
-        .padding(30)
+        .frame(height: Constants.bigButtonHeight)
+        .padding(.top, 60) // TODO: Change based on top safe area height
+        .padding(Constants.standardPadding)
       }
       .frame(maxHeight: .infinity)
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity)
-    .frame(height: 120)
+    .frame(height: 120) // TODO: Change based on top safe area height
     .zIndex(1)
   }
 }
@@ -45,32 +46,36 @@ struct TopSelectionSection: View {
 struct ConversionResponses: View {
   var body: some View {
     ZStack {
+
+      // Put in another file to simplify
       VStack(spacing: 0) {
         ZStack {
           Color.skyBlue
           Rectangle()
             .foregroundColor(Color.lightGray)
-            .cornerRadius(25, corners: [.topLeft, .topRight])
+            .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
         }
         .frame(height: 40)
         Rectangle()
           .foregroundColor(Color.lightGray)
       }
+      // --------
+
       ScrollView(showsIndicators: false) {
-        VStack(spacing: 15) {
+        VStack(spacing: Constants.smallPadding) {
           TextBalloon(horizontalAlignment: .trailing, topLabel: "Grams", text: "120g")
           TextBalloon(horizontalAlignment: .leading, topLabel: "Tablespoon", text: "5tbsp")
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-        .padding(.vertical, 30)
+        .padding(.vertical, Constants.standardPadding)
       }
       .padding(.horizontal, 10)
       // To reverse the scroll view
       .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.top, 30)
+    .padding(.top, Constants.standardPadding)
   }
 }
 
@@ -79,24 +84,26 @@ struct UserInputSection: View {
 
   var body: some View {
     ZStack {
+
+      // Put in another file to simplify
       VStack(spacing: 0) {
         ZStack {
           Color.lightGray
           Rectangle()
             .foregroundColor(Color.white)
-            .cornerRadius(25, corners: [.topLeft, .topRight])
+            .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
         }
         .frame(height: 40)
         Rectangle()
           .foregroundColor(.white)
       }
-      Rectangle()
-        .cornerRadius(25, corners: [.topLeft, .topRight])
+      // --------
+
       VStack {
         ConversionTextField(textInput: $textInput, placeholderText: "Type the measure here...")
         Spacer()
       }
-      .padding(30)
+      .padding(Constants.standardPadding)
     }
     .frame(height: 200)
     .frame(maxWidth: .infinity)
