@@ -59,8 +59,8 @@ struct ConversionResponses: View {
     ZStack {
       ScrollView(showsIndicators: false) {
         VStack(spacing: Constants.smallPadding) {
-          TextBalloon(horizontalAlignment: .trailing, topLabel: "Grams", text: "120g")
-          TextBalloon(horizontalAlignment: .leading, topLabel: "Tablespoon", text: "5tbsp")
+          TextBalloon(horizontalAlignment: .leading, topLabel: "Grams", text: "120g")
+          TextBalloon(horizontalAlignment: .trailing, topLabel: "Tablespoon", text: "5tbsp")
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
