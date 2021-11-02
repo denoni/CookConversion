@@ -26,13 +26,10 @@ struct TopSelectionSection: View {
       VStack {
         Spacer()
         HStack(alignment: .bottom, spacing: 15) {
-          RoundedRectangle(cornerRadius: 19, style: .continuous)
-            .foregroundColor(Color(UIColor.white))
-            .frame(height: 60)
-          RoundedRectangle(cornerRadius: 19, style: .continuous)
-            .foregroundColor(Color(UIColor.white))
-            .frame(height: 60)
+          TapDownButton(text: "Grams")
+          TapDownButton(text: "Tablespoon")
         }
+        .frame(height: 60)
         .padding(.bottom, 30)
       }
       .frame(maxHeight: .infinity)
