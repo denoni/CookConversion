@@ -30,6 +30,7 @@ struct TopSelectionSection: View {
           TapDownButton(measurementType: .easyMeasure)
         }
         .frame(height: 60)
+        .padding(.top, 60)
         .padding(30)
       }
       .frame(maxHeight: .infinity)
@@ -38,6 +39,7 @@ struct TopSelectionSection: View {
     .frame(maxWidth: .infinity)
     .frame(height: 120)
     .padding(.bottom, -30)
+    .padding(.top, -30)
     .zIndex(1)
   }
 }
@@ -80,6 +82,7 @@ struct UserInputSection: View {
       }
       .padding(30)
     }
+    .padding(.bottom, -30)
     .frame(height: 200)
     .frame(maxWidth: .infinity)
     .ignoresSafeArea()
