@@ -23,7 +23,7 @@ struct TopSelectionSection: View {
   var body: some View {
     ZStack {
       Rectangle()
-        .foregroundColor(Color(red: 26/255, green: 185/255, blue: 235/255))
+        .foregroundColor(Color.skyBlue)
       VStack {
         HStack(alignment: .bottom, spacing: 15) {
           TapDownButton(measurementType: .preciseMeasure)
@@ -43,19 +43,18 @@ struct TopSelectionSection: View {
 }
 
 struct ConversionResponses: View {
-  let lightGrey = Color(red: 229/255, green: 229/255, blue: 229/255)
   var body: some View {
     ZStack {
       VStack(spacing: 0) {
         ZStack {
-          Color(red: 26/255, green: 185/255, blue: 235/255)
+          Color.skyBlue
           Rectangle()
-            .foregroundColor(Color(red: 229/255, green: 229/255, blue: 229/255))
+            .foregroundColor(Color.lightGray)
             .cornerRadius(25, corners: [.topLeft, .topRight])
         }
         .frame(height: 40)
         Rectangle()
-          .foregroundColor(lightGrey)
+          .foregroundColor(Color.lightGray)
       }
       ScrollView(showsIndicators: false) {
         VStack(spacing: 15) {
@@ -82,7 +81,7 @@ struct UserInputSection: View {
     ZStack {
       VStack(spacing: 0) {
         ZStack {
-          Color(red: 229/255, green: 229/255, blue: 229/255)
+          Color.lightGray
           Rectangle()
             .foregroundColor(Color.white)
             .cornerRadius(25, corners: [.topLeft, .topRight])

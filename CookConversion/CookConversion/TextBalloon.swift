@@ -14,7 +14,7 @@ struct TextBalloon: View {
 
   private let balloonHeight: CGFloat = 80
   private let balloonOpacity = 0.9
-  private let leadingBalloonColor = Color(red: 134/255, green: 226/255, blue: 255/255)
+  private let leadingBalloonColor = Color.lightSkyBlue
   private let trailingBallonColor = Color.white
 
   var body: some View {
