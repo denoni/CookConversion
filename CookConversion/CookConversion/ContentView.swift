@@ -9,10 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
   var body: some View {
-    VStack(spacing: 0) {
-      TopSelectionSection()
-      ConversionResponses()
-      UserInputSection()
+    ZStack {
+      Color.lightGray
+      VStack(spacing: 0) {
+        TopSelectionSection()
+        ConversionResponses()
+        UserInputSection()
+      }
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -20,11 +23,15 @@ struct ContentView: View {
 }
 
 struct TopSelectionSection: View {
+  @ObservedObject private var keyboard = KeyboardResponder()
 
   var body: some View {
     ZStack {
-      Rectangle()
-        .foregroundColor(Color.skyBlue)
+      ZStack {
+        Rectangle()
+          .foregroundColor(Color.skyBlue)
+          .cornerRadius(Constants.bigRadius, corners: [.bottomLeft, .bottomRight])
+      }
       VStack {
         HStack(alignment: .bottom, spacing: Constants.smallPadding) {
           TapDownButton(measurementType: .preciseMeasure)
@@ -40,27 +47,14 @@ struct TopSelectionSection: View {
     .frame(maxWidth: .infinity)
     .frame(height: 120) // TODO: Change based on top safe area height
     .zIndex(1)
+    // Need this negative padding otherwise this view will move up when keyboard opens
+    .padding(.bottom, -keyboard.currentHeight)
   }
 }
 
-struct ConversionResponses: View {
+struct ConversionResponses: View {  
   var body: some View {
     ZStack {
-
-      // Put in another file to simplify
-      VStack(spacing: 0) {
-        ZStack {
-          Color.skyBlue
-          Rectangle()
-            .foregroundColor(Color.lightGray)
-            .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
-        }
-        .frame(height: 40)
-        Rectangle()
-          .foregroundColor(Color.lightGray)
-      }
-      // --------
-
       ScrollView(showsIndicators: false) {
         VStack(spacing: Constants.smallPadding) {
           TextBalloon(horizontalAlignment: .trailing, topLabel: "Grams", text: "120g")
@@ -73,6 +67,7 @@ struct ConversionResponses: View {
       .padding(.horizontal, 10)
       // To reverse the scroll view
       .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+      .padding(.top, -40)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.top, Constants.standardPadding)
@@ -81,33 +76,25 @@ struct ConversionResponses: View {
 
 struct UserInputSection: View {
   @State private var textInput: String = ""
+  @ObservedObject private var keyboard = KeyboardResponder()
 
   var body: some View {
     ZStack {
-
-      // Put in another file to simplify
-      VStack(spacing: 0) {
-        ZStack {
-          Color.lightGray
-          Rectangle()
-            .foregroundColor(Color.white)
-            .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
-        }
-        .frame(height: 40)
-        Rectangle()
-          .foregroundColor(.white)
-      }
-      // --------
-
+      Rectangle()
+        .foregroundColor(Color.white)
+        .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
       VStack {
         ConversionTextField(textInput: $textInput, placeholderText: "Type the measure here...")
         Spacer()
       }
+      // So when the keyboard opens the view goes up accordingly
       .padding(Constants.standardPadding)
     }
-    .frame(height: 200)
+    .frame(height: 120)
     .frame(maxWidth: .infinity)
     .ignoresSafeArea()
+    .padding(.bottom, keyboard.currentHeight)
+    .animation(.easeInOut(duration: 0.16))
   }
 }
 
