@@ -14,9 +14,11 @@ struct ConversionTextField: View {
   var body: some View {
     TextField("", text: $textInput)
       .modifier(PlaceholderStyle(showPlaceHolder: textInput.isEmpty, placeholderText: placeholderText))
+      .keyboardType(.decimalPad)
       .font(.title2.weight(.heavy))
       .foregroundColor(.black)
       .padding(Constants.smallPadding)
+      .multilineTextAlignment(.center)
   }
 
   private struct PlaceholderStyle: ViewModifier {
@@ -24,7 +26,7 @@ struct ConversionTextField: View {
       var placeholderText: String
 
       public func body(content: Content) -> some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: .center) {
           if showPlaceHolder {
             Text(placeholderText)
               .foregroundColor(Color.black.opacity(0.3))

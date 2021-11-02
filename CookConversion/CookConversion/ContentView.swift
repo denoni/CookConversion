@@ -52,7 +52,9 @@ struct TopSelectionSection: View {
   }
 }
 
-struct ConversionResponses: View {  
+struct ConversionResponses: View {
+  @ObservedObject private var keyboard = KeyboardResponder()
+  
   var body: some View {
     ZStack {
       ScrollView(showsIndicators: false) {
@@ -67,10 +69,9 @@ struct ConversionResponses: View {
       .padding(.horizontal, 10)
       // To reverse the scroll view
       .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-      .padding(.top, -40)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.top, Constants.standardPadding)
+    .padding(.vertical, Constants.standardPadding)
   }
 }
 
@@ -84,17 +85,40 @@ struct UserInputSection: View {
         .foregroundColor(Color.white)
         .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
       VStack {
-        ConversionTextField(textInput: $textInput, placeholderText: "Type the measure here...")
+        HStack {
+          ZStack {
+            RoundedRectangle(cornerRadius: Constants.standardRadius)
+              .foregroundColor(Color.lightGray)
+            ConversionTextField(textInput: $textInput, placeholderText: "25")
+          }
+          .scaledToFit()
+          Text("Ounces")
+            .font(.title2.weight(.heavy))
+            .foregroundColor(.black)
+        }
+        .frame(height: Constants.bigButtonHeight)
+        .padding(.bottom, Constants.smallPadding)
+
+        ZStack(alignment: .center) {
+          RoundedRectangle(cornerRadius: Constants.standardRadius)
+            .foregroundColor(Color.skyBlue)
+          Text("Convert")
+            .foregroundColor(.white)
+            .font(.title3.weight(.semibold))
+        }
+        .frame(height: Constants.bigButtonHeight)
+        .padding(.bottom, Constants.standardPadding)
+
         Spacer()
       }
-      // So when the keyboard opens the view goes up accordingly
       .padding(Constants.standardPadding)
     }
-    .frame(height: 120)
+    .frame(height: 160)
     .frame(maxWidth: .infinity)
     .ignoresSafeArea()
+    // So when the keyboard opens the view goes up accordingly
     .padding(.bottom, keyboard.currentHeight)
-    .animation(.easeInOut(duration: 0.16))
+    .animation(.easeOut(duration: 0.16))
   }
 }
 
