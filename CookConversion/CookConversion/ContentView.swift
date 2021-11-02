@@ -25,23 +25,20 @@ struct TopSelectionSection: View {
       RoundedRectangle(cornerRadius: 19)
         .foregroundColor(Color(red: 26/255, green: 185/255, blue: 235/255))
       VStack {
-        Spacer()
         HStack(alignment: .bottom, spacing: 15) {
           TapDownButton(measurementType: .preciseMeasure)
           TapDownButton(measurementType: .easyMeasure)
         }
         .frame(height: 60)
-        .padding(.bottom, 10)
-        .padding(.top, 60)
+        .padding(30)
       }
       .frame(maxHeight: .infinity)
-      .padding(30)
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity)
+    .frame(height: 120)
     .padding(.bottom, -30)
     .zIndex(1)
-    .scaledToFit()
   }
 }
 
