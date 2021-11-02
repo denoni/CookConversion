@@ -68,16 +68,17 @@ struct ConversionResponses: View {
 }
 
 struct UserInputSection: View {
+  @State private var textInput: String = ""
+
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 19)
         .foregroundColor(.white)
       VStack {
-        Text("Type the measure to convert...")
-          .font(.title2)
-          .fontWeight(.bold)
-          .opacity(0.35)
+        ConversionTextField(textInput: $textInput, placeholderText: "Type the measure here...")
+        Spacer()
       }
+      .padding(30)
     }
     .frame(height: 200)
     .frame(maxWidth: .infinity)
