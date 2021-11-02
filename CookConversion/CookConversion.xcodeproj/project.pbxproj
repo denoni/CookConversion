@@ -18,6 +18,8 @@
 		C07CFD842731790A00747568 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD832731790A00747568 /* ColorPalette.swift */; };
 		C07CFD8627317A9500747568 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD8527317A9500747568 /* Constants.swift */; };
 		C07CFD8827317EE000747568 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD8727317EE000747568 /* KeyboardResponder.swift */; };
+		C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD932731A92900747568 /* CookConversionModel.swift */; };
+		C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD952731AC7100747568 /* CookConversionViewModel.swift */; };
 		C08EE32327308A3900BD64AD /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */; };
 		C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3262730B4FF00BD64AD /* TextBalloon.swift */; };
 		C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3282730B7CE00BD64AD /* TapDownButton.swift */; };
@@ -55,6 +57,8 @@
 		C07CFD832731790A00747568 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		C07CFD8527317A9500747568 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C07CFD8727317EE000747568 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		C07CFD932731A92900747568 /* CookConversionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookConversionModel.swift; sourceTree = "<group>"; };
+		C07CFD952731AC7100747568 /* CookConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CookConversionViewModel.swift; path = CookConversion/Model/CookConversionViewModel.swift; sourceTree = SOURCE_ROOT; };
 		C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 		C08EE3262730B4FF00BD64AD /* TextBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBalloon.swift; sourceTree = "<group>"; };
 		C08EE3282730B7CE00BD64AD /* TapDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapDownButton.swift; sourceTree = "<group>"; };
@@ -108,15 +112,12 @@
 		C05B448C273070FC004BF02F /* CookConversion */ = {
 			isa = PBXGroup;
 			children = (
+				C07CFD892731A84C00747568 /* Screens(Views) */,
+				C07CFD8A2731A85A00747568 /* ViewModel */,
+				C07CFD8B2731A86300747568 /* Model */,
+				C07CFD8E2731A8A700747568 /* CustomViews */,
+				C07CFD912731A8F200747568 /* Auxiliary */,
 				C05B448D273070FC004BF02F /* CookConversionApp.swift */,
-				C05B448F273070FC004BF02F /* ContentView.swift */,
-				C08EE3262730B4FF00BD64AD /* TextBalloon.swift */,
-				C08EE3282730B7CE00BD64AD /* TapDownButton.swift */,
-				C07CFD8727317EE000747568 /* KeyboardResponder.swift */,
-				C07CFD8127316E7E00747568 /* ConversionTextField.swift */,
-				C07CFD832731790A00747568 /* ColorPalette.swift */,
-				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
-				C07CFD8527317A9500747568 /* Constants.swift */,
 				C05B44912730710C004BF02F /* Assets.xcassets */,
 				C05B44932730710C004BF02F /* Preview Content */,
 			);
@@ -146,6 +147,59 @@
 				C05B44AA2730710D004BF02F /* CookConversionUITestsLaunchTests.swift */,
 			);
 			path = CookConversionUITests;
+			sourceTree = "<group>";
+		};
+		C07CFD892731A84C00747568 /* Screens(Views) */ = {
+			isa = PBXGroup;
+			children = (
+				C05B448F273070FC004BF02F /* ContentView.swift */,
+			);
+			path = "Screens(Views)";
+			sourceTree = "<group>";
+		};
+		C07CFD8A2731A85A00747568 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C07CFD952731AC7100747568 /* CookConversionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C07CFD8B2731A86300747568 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C07CFD932731A92900747568 /* CookConversionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C07CFD8E2731A8A700747568 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				C08EE3282730B7CE00BD64AD /* TapDownButton.swift */,
+				C08EE3262730B4FF00BD64AD /* TextBalloon.swift */,
+				C07CFD8127316E7E00747568 /* ConversionTextField.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		C07CFD912731A8F200747568 /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				C07CFD922731A90900747568 /* Extensions */,
+				C07CFD8727317EE000747568 /* KeyboardResponder.swift */,
+				C07CFD8527317A9500747568 /* Constants.swift */,
+				C07CFD832731790A00747568 /* ColorPalette.swift */,
+			);
+			path = Auxiliary;
+			sourceTree = "<group>";
+		};
+		C07CFD922731A90900747568 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,8 +339,10 @@
 				C05B4490273070FC004BF02F /* ContentView.swift in Sources */,
 				C07CFD8827317EE000747568 /* KeyboardResponder.swift in Sources */,
 				C05B448E273070FC004BF02F /* CookConversionApp.swift in Sources */,
+				C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */,
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
 				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
+				C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

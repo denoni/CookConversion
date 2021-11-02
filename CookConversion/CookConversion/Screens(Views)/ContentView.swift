@@ -76,8 +76,9 @@ struct ConversionResponses: View {
 }
 
 struct UserInputSection: View {
-  @State private var textInput: String = ""
+  @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
+  @State private var textInput: String = ""
 
   var body: some View {
     ZStack {
@@ -92,7 +93,7 @@ struct UserInputSection: View {
             ConversionTextField(textInput: $textInput, placeholderText: "25")
           }
           .scaledToFit()
-          Text("Ounces")
+          Text(cookConversionViewModel.currentSelectedPreciseMeasure)
             .font(.title2.weight(.heavy))
             .foregroundColor(.black)
         }

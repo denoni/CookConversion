@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct TapDownButton: View {
-  var measurementType: MeasurementType
-
+  @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
+  var measurementType: CookConversionModel.MeasurementType
   @State private var shouldShowMenu = false
-  @State private var selectedItemText = "Ounce (oz.)"
 
   var body: some View {
     Button(action: {
@@ -23,7 +22,7 @@ struct TapDownButton: View {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.white)
         HStack {
-          Text(selectedItemText)
+          Text(cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType))
             .foregroundColor(.black)
             .fontWeight(.semibold)
             .padding(.leading, 20)
@@ -44,7 +43,10 @@ struct TapDownButton: View {
       VStack {
         if self.shouldShowMenu {
           Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
-          PopOverMenu(selectedItemText: $selectedItemText, measurementType: measurementType)
+          PopOverMenu(selectedItemText: measurementType == .preciseMeasure
+                      ? $cookConversionViewModel.currentSelectedPreciseMeasure
+                      : $cookConversionViewModel.currentSelectedEasyMeasure,
+                      measurementType: measurementType)
         }
       }, alignment: .topLeading
     )
@@ -52,20 +54,9 @@ struct TapDownButton: View {
 }
 
 struct PopOverMenu: View {
+  @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @Binding var selectedItemText: String
-  var measurementType: MeasurementType
-
-  private let preciseMeasures = ["Ounces (oz.)", "Gallons (gal.)", "Milligrams (mg)", "Grams (g)", "Kilograms (kg)", "Milliliters (mL)", "Liters (L)"]
-  private let easyMeasures = ["Teaspoons (tsp.)", "Tablespoons (tbsp.)", "Cups", "Pinches", "Wineglasses", "Teacups"]
-
-  private var measures: [String] {
-    switch measurementType {
-    case .preciseMeasure:
-      return preciseMeasures
-    case .easyMeasure:
-      return easyMeasures
-    }
-  }
+  var measurementType: CookConversionModel.MeasurementType
 
   var body: some View {
       ZStack {
@@ -73,11 +64,17 @@ struct PopOverMenu: View {
           .foregroundColor(.white)
         ScrollView {
           VStack {
-            ForEach(measures, id: \.self) { measure in
-              Button(action: { selectedItemText = measure }, label: {
-                Text(measure)
-                  .foregroundColor(.black)
-                  .padding(.top, 5)
+            ForEach(CookConversionViewModel.getMeasuresFor(measurementType), id: \.self.name) { measure in
+              Button(action: { selectedItemText = measure.name }, label: {
+                VStack {
+                  Text(measure.name)
+                  if let abbreviatedName = measure.abbreviated {
+                    Text("(\(abbreviatedName))")
+                      .font(.footnote.weight(.bold))
+                  }
+                }
+                .foregroundColor(.black)
+                .padding(.top, 5)
               })
               Divider()
             }
@@ -95,7 +92,4 @@ struct PopOverMenu: View {
     }
 }
 
-enum MeasurementType {
-  case preciseMeasure
-  case easyMeasure
-}
+

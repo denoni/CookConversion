@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct CookConversionApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  @StateObject var cookConversionViewModel = CookConversionViewModel()
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+        .environmentObject(cookConversionViewModel)
     }
+  }
 }
