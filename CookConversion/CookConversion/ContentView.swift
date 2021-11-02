@@ -22,7 +22,7 @@ struct ContentView: View {
 struct TopSelectionSection: View {
   var body: some View {
     ZStack {
-      RoundedRectangle(cornerRadius: 19)
+      Rectangle()
         .foregroundColor(Color(red: 26/255, green: 185/255, blue: 235/255))
       VStack {
         HStack(alignment: .bottom, spacing: 15) {
@@ -38,8 +38,6 @@ struct TopSelectionSection: View {
     .ignoresSafeArea()
     .frame(maxWidth: .infinity)
     .frame(height: 120)
-    .padding(.bottom, -30)
-    .padding(.top, -30)
     .zIndex(1)
   }
 }
@@ -48,8 +46,17 @@ struct ConversionResponses: View {
   let lightGrey = Color(red: 229/255, green: 229/255, blue: 229/255)
   var body: some View {
     ZStack {
-      RoundedRectangle(cornerRadius: 19)
-        .foregroundColor(lightGrey)
+      VStack(spacing: 0) {
+        ZStack {
+          Color(red: 26/255, green: 185/255, blue: 235/255)
+          Rectangle()
+            .foregroundColor(Color(red: 229/255, green: 229/255, blue: 229/255))
+            .cornerRadius(25, corners: [.topLeft, .topRight])
+        }
+        .frame(height: 40)
+        Rectangle()
+          .foregroundColor(lightGrey)
+      }
       ScrollView(showsIndicators: false) {
         VStack(spacing: 15) {
           TextBalloon(horizontalAlignment: .trailing, topLabel: "Grams", text: "120g")
@@ -59,13 +66,12 @@ struct ConversionResponses: View {
         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
         .padding(.vertical, 30)
       }
-      .padding(.vertical, 30)
       .padding(.horizontal, 10)
       // To reverse the scroll view
       .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.bottom, -30)
+    .padding(.top, 30)
   }
 }
 
@@ -74,15 +80,25 @@ struct UserInputSection: View {
 
   var body: some View {
     ZStack {
-      RoundedRectangle(cornerRadius: 19)
-        .foregroundColor(.white)
+      VStack(spacing: 0) {
+        ZStack {
+          Color(red: 229/255, green: 229/255, blue: 229/255)
+          Rectangle()
+            .foregroundColor(Color.white)
+            .cornerRadius(25, corners: [.topLeft, .topRight])
+        }
+        .frame(height: 40)
+        Rectangle()
+          .foregroundColor(.white)
+      }
+      Rectangle()
+        .cornerRadius(25, corners: [.topLeft, .topRight])
       VStack {
         ConversionTextField(textInput: $textInput, placeholderText: "Type the measure here...")
         Spacer()
       }
       .padding(30)
     }
-    .padding(.bottom, -30)
     .frame(height: 200)
     .frame(maxWidth: .infinity)
     .ignoresSafeArea()
