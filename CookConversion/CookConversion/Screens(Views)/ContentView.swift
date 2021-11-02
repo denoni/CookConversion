@@ -17,6 +17,7 @@ struct ContentView: View {
         UserInputSection()
       }
     }
+    .onTapGesture { UIApplication.shared.stopShowingKeyboard() }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
