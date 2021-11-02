@@ -98,14 +98,15 @@ struct UserInputSection: View {
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(.bottom, Constants.smallPadding)
-
-        ZStack(alignment: .center) {
-          RoundedRectangle(cornerRadius: Constants.standardRadius)
-            .foregroundColor(Color.skyBlue)
-          Text("Convert")
-            .foregroundColor(.white)
-            .font(.title3.weight(.semibold))
-        }
+        Button(action: {  }, label: {
+          ZStack {
+            RoundedRectangle(cornerRadius: Constants.standardRadius)
+              .foregroundColor(Color.skyBlue)
+            Text("Convert")
+              .foregroundColor(.white)
+              .font(.title3.weight(.semibold))
+          }
+        })
         .frame(height: Constants.bigButtonHeight)
         .padding(.bottom, Constants.standardPadding)
 

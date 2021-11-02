@@ -55,8 +55,8 @@ struct PopOverMenu: View {
   @Binding var selectedItemText: String
   var measurementType: MeasurementType
 
-  private let preciseMeasures = ["Ounce (oz.)", "Gallon (gal.)", "Milligrams (mg)", "Grams (g)", "Kilograms (kg)", "Milliliters (mL)", "Liter (L)"]
-  private let easyMeasures = ["Teaspoon (tsp.)", "Tablespoon (tbsp.)", "Cup", "Pinch", "Wineglass", "Teacup"]
+  private let preciseMeasures = ["Ounces (oz.)", "Gallons (gal.)", "Milligrams (mg)", "Grams (g)", "Kilograms (kg)", "Milliliters (mL)", "Liters (L)"]
+  private let easyMeasures = ["Teaspoons (tsp.)", "Tablespoons (tbsp.)", "Cups", "Pinches", "Wineglasses", "Teacups"]
 
   private var measures: [String] {
     switch measurementType {
