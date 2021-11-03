@@ -22,7 +22,7 @@ struct TapDownButton: View {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.white)
         HStack {
-          Text(cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType))
+          Text(cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType).getNameAndAbbreviation().name)
             .foregroundColor(.black)
             .fontWeight(.semibold)
             .padding(.leading, 20)
@@ -43,7 +43,7 @@ struct TapDownButton: View {
       VStack {
         if self.shouldShowMenu {
           Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
-          PopOverMenu(selectedItemText: measurementType == .preciseMeasure
+          PopOverMenu(selectedItem: measurementType == .preciseMeasure
                       ? $cookConversionViewModel.currentSelectedPreciseMeasure
                       : $cookConversionViewModel.currentSelectedEasyMeasure,
                       measurementType: measurementType)
@@ -55,7 +55,7 @@ struct TapDownButton: View {
 
 struct PopOverMenu: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
-  @Binding var selectedItemText: String
+  @Binding var selectedItem: CookConversionModel.Measure
   var measurementType: CookConversionModel.MeasurementType
 
   var body: some View {
@@ -65,7 +65,7 @@ struct PopOverMenu: View {
         ScrollView {
           VStack {
             ForEach(CookConversionViewModel.getMeasuresFor(measurementType), id: \.self.name) { measure in
-              Button(action: { selectedItemText = measure.name }, label: {
+              Button(action: { selectedItem = measure }, label: {
                 VStack {
                   Text(measure.name)
                   if let abbreviatedName = measure.abbreviated {

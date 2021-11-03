@@ -79,7 +79,6 @@ struct ConversionResponses: View {
 struct UserInputSection: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
-  @State private var textInput: String = ""
 
   var body: some View {
     ZStack {
@@ -91,16 +90,16 @@ struct UserInputSection: View {
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(Color.lightGray)
-            ConversionTextField(textInput: $textInput, placeholderText: "25")
+            ConversionTextField(textInput: $cookConversionViewModel.currentTypedNumber, placeholderText: "25")
           }
           .scaledToFit()
-          Text(cookConversionViewModel.currentSelectedPreciseMeasure)
+          Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
             .font(.title2.weight(.heavy))
             .foregroundColor(.black)
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(.bottom, Constants.smallPadding)
-        Button(action: {  }, label: {
+        Button(action: { cookConversionViewModel.convert() }, label: {
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(Color.skyBlue)
