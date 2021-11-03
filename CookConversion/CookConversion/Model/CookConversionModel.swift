@@ -12,11 +12,11 @@ struct CookConversionModel {
     case preciseMeasure
     case easyMeasure
   }
-
+  
   enum Measure {
     case preciseMeasure(_ preciseMeasure: PreciseMeasure)
     case easyMeasure(_ easyMeasure: EasyMeasure)
-
+    
     enum EasyMeasure: CaseIterable {
       case teaspoon
       case tablespoon
@@ -24,7 +24,7 @@ struct CookConversionModel {
       case wineglass
       case teacup
     }
-
+    
     enum PreciseMeasure: CaseIterable {
       case ounce
       case gallon
@@ -35,20 +35,20 @@ struct CookConversionModel {
       case liter
     }
   }
-
+  
   let numberFormatter: NumberFormatter = {
-       let formatter = NumberFormatter()
-      formatter.locale = Locale.current
-      formatter.numberStyle = .decimal
-      formatter.maximumFractionDigits = 1
-       return formatter
-   }()
-
+    let formatter = NumberFormatter()
+    formatter.locale = Locale.current
+    formatter.numberStyle = .decimal
+    formatter.maximumFractionDigits = 1
+    return formatter
+  }()
+  
   func convert(_ number: Double, from initialMeasure: Measure, to finalMeasure: Measure) -> Double {
     let measureInGrams = convertToGram(number, from: initialMeasure)
     return convertFromGramToEasyMeasure(measureInGrams, to: finalMeasure)
   }
-
+  
   func getPreciseMeasures() -> [Measure] {
     var listOfMeasures = [Measure]()
     for measure in Measure.PreciseMeasure.allCases {
@@ -56,7 +56,7 @@ struct CookConversionModel {
     }
     return listOfMeasures
   }
-
+  
   func getEasyMeasures() -> [Measure] {
     var listOfMeasures = [Measure]()
     for measure in Measure.EasyMeasure.allCases {
@@ -64,7 +64,7 @@ struct CookConversionModel {
     }
     return listOfMeasures
   }
-
+  
   private func convertToGram(_ number: Double, from initialMeasure: Measure) -> Double {
     switch initialMeasure {
     case .preciseMeasure(.ounce):
@@ -85,7 +85,7 @@ struct CookConversionModel {
       fatalError("Type not implemented for \(initialMeasure)")
     }
   }
-
+  
   private func convertFromGramToEasyMeasure(_ measureInGrams: Double, to finalMeasure: Measure) -> Double {
     switch finalMeasure {
     case .easyMeasure(.teaspoon):
@@ -102,20 +102,20 @@ struct CookConversionModel {
       fatalError("Type not implemented for \(finalMeasure)")
     }
   }
-
+  
 }
 
 
 extension CookConversionModel.Measure.PreciseMeasure {
-
+  
   var name: String {
     return self.getNameAndAbbreviation().name
   }
-
+  
   var abbreviated: String? {
     return self.getNameAndAbbreviation().abbreviated
   }
-
+  
   private func getNameAndAbbreviation() -> (name: String, abbreviated: String?) {
     switch self {
     case .ounce:
@@ -137,15 +137,15 @@ extension CookConversionModel.Measure.PreciseMeasure {
 }
 
 extension CookConversionModel.Measure.EasyMeasure {
-
+  
   var name: String {
     return self.getNameAndAbbreviation().name
   }
-
+  
   var abbreviated: String? {
     return self.getNameAndAbbreviation().abbreviated
   }
-
+  
   private func getNameAndAbbreviation() -> (name: String, abbreviated: String?) {
     switch self {
     case .teaspoon:
@@ -163,15 +163,15 @@ extension CookConversionModel.Measure.EasyMeasure {
 }
 
 extension CookConversionModel.Measure {
-
+  
   var name: String {
     return self.getNameAndAbbreviation().name
   }
-
+  
   var abbreviated: String? {
     return self.getNameAndAbbreviation().abbreviated
   }
-
+  
   func getNameAndAbbreviation() -> (name: String, abbreviated: String?) {
     switch self {
     case .preciseMeasure(let preciseMeasure):
