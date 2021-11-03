@@ -47,7 +47,7 @@ struct TopSelectionSection: View {
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity)
-    .frame(height: 120) // TODO: Change based on top safe area height
+    .frame(height: topSafeAreaSize + 100)
     .zIndex(1)
     // Need this negative padding otherwise this view will move up when keyboard opens
     .padding(.bottom, -keyboard.currentHeight)
@@ -84,6 +84,7 @@ struct ConversionResponses: View {
       .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .padding(.top, -Constants.smallPadding)
     .padding(.vertical, Constants.standardPadding)
   }
 }
