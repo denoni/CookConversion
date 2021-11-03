@@ -26,7 +26,6 @@ struct TextBalloon: View {
             RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
               .opacity(balloonOpacity)
             BalloonText(topLabel: topLabel, text: text, alignment: .leading)
-              .padding(Constants.smallPadding)
           }
           Spacer()
         }
@@ -40,7 +39,6 @@ struct TextBalloon: View {
             RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
               .opacity(balloonOpacity)
             BalloonText(topLabel: topLabel, text: text, alignment: .trailing)
-              .padding(Constants.smallPadding)
           }
           BalloonAdjustedArc(horizontalAlignment: .trailing, opacity: balloonOpacity)
         }
@@ -57,17 +55,26 @@ struct TextBalloon: View {
     var alignment: HorizontalAlignment
 
     var body: some View {
-      VStack(alignment: alignment) {
-        Text(topLabel)
-          .fontWeight(.semibold)
-        Text(text)
-          .font(.title)
-          .fontWeight(.black)
-          .lineLimit(3)
-          .multilineTextAlignment(alignment == .leading ? .leading : .trailing)
-          .fixedSize(horizontal: false, vertical: true)
+      HStack {
+        if alignment == .trailing { Spacer() }
+
+        VStack(alignment: alignment) {
+          Text(topLabel)
+            .fontWeight(.semibold)
+          Text(text)
+            .font(.title)
+            .fontWeight(.black)
+            .lineLimit(3)
+            .multilineTextAlignment(alignment == .leading ? .leading : .trailing)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.vertical, Constants.smallPadding)
+        .padding(.horizontal, Constants.standardPadding)
+
+        if alignment == .leading { Spacer() }
       }
       .foregroundColor(.black)
+      .frame(maxWidth: .infinity)
     }
   }
 
@@ -93,24 +100,24 @@ private struct BalloonAdjustedArc: View {
 }
 
 fileprivate struct Arc: Shape {
-    var height: CGFloat
-    var length: CGFloat
-    var startY: CGFloat = 0
+  var height: CGFloat
+  var length: CGFloat
+  var startY: CGFloat = 0
 
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let midPoint: CGFloat = (startY + length) / 2
-        let apex1: CGFloat = (startY + midPoint) / 2
-        let apex2: CGFloat = (midPoint + length) / 2
+  func path(in rect: CGRect) -> Path {
+    var path = Path()
+    let midPoint: CGFloat = (startY + length) / 2
+    let apex1: CGFloat = (startY + midPoint) / 2
+    let apex2: CGFloat = (midPoint + length) / 2
 
-        path.move(to: CGPoint(x: height, y: startY))
-        path.addCurve(to: CGPoint(x: 0, y: midPoint),
-                      control1: CGPoint(x: height, y: apex1),
-                      control2: CGPoint(x: 0, y: apex1))
-        path.addCurve(to: CGPoint(x: height, y: length),
-                      control1: CGPoint(x: 0, y: apex2),
-                      control2: CGPoint(x: height, y: apex2))
+    path.move(to: CGPoint(x: height, y: startY))
+    path.addCurve(to: CGPoint(x: 0, y: midPoint),
+                  control1: CGPoint(x: height, y: apex1),
+                  control2: CGPoint(x: 0, y: apex1))
+    path.addCurve(to: CGPoint(x: height, y: length),
+                  control1: CGPoint(x: 0, y: apex2),
+                  control2: CGPoint(x: height, y: apex2))
 
-      return path
-    }
+    return path
+  }
 }
