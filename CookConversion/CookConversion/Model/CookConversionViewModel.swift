@@ -13,8 +13,8 @@ class CookConversionViewModel: ObservableObject {
   @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(.ounce)
   @Published var currentSelectedEasyMeasure: CookConversionModel.Measure = .easyMeasure(.tablespoon)
 
-  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label: "Grams", text: "120 g"),
-                                                                         response: (label: "Tablespoon", text: "6.7 tbsp."))]
+  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label: "oz.", text: "5.0"),
+                                                                         response: (label: "tbsp.", text: "10.0"))]
 
   // The button text is also used to show indications that the typed string is not valid
   // (e.g. is not a double or is bigger than the limit)
@@ -60,11 +60,12 @@ class CookConversionViewModel: ObservableObject {
 
     let formattedResultNumber = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"
 
-    let searchStringFormatted = "\(formattedCurrentTypedNumber) \(currentSelectedPreciseMeasure.abbreviated ?? "")"
-    let resultStringFormatted = "\(formattedResultNumber) \(currentSelectedEasyMeasure.abbreviated ?? "")"
 
-    previousConversions.append(ConversionItem(search: (label: currentSelectedPreciseMeasure.name, text: searchStringFormatted),
-                                              response: (label: currentSelectedEasyMeasure.name, text: resultStringFormatted)))
+    previousConversions.append(ConversionItem(search: (label: currentSelectedPreciseMeasure.abbreviated ?? currentSelectedPreciseMeasure.name,
+                                                       text: String(formattedCurrentTypedNumber)),
+                                              response: (label: currentSelectedEasyMeasure.abbreviated ?? currentSelectedEasyMeasure.name,
+                                                         text: String(formattedResultNumber))
+                                             ))
   }
 
 
