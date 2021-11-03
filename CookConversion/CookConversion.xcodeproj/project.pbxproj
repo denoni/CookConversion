@@ -25,6 +25,7 @@
 		C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3262730B4FF00BD64AD /* TextBalloon.swift */; };
 		C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3282730B7CE00BD64AD /* TapDownButton.swift */; };
 		C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C5273233420088AB03 /* Double+Rounded.swift */; };
+		C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		C08EE3262730B4FF00BD64AD /* TextBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBalloon.swift; sourceTree = "<group>"; };
 		C08EE3282730B7CE00BD64AD /* TapDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapDownButton.swift; sourceTree = "<group>"; };
 		C092E5C5273233420088AB03 /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
+		C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
+				C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */,
 				C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */,
 				C092E5C5273233420088AB03 /* Double+Rounded.swift */,
 			);
@@ -348,6 +351,7 @@
 				C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */,
 				C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */,
 				C07CFD982731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift in Sources */,
+				C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */,
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
 				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
 				C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */,

@@ -25,6 +25,7 @@ struct ContentView: View {
 
 struct TopSelectionSection: View {
   @ObservedObject private var keyboard = KeyboardResponder()
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   var body: some View {
     ZStack {
@@ -39,7 +40,7 @@ struct TopSelectionSection: View {
           TapDownButton(measurementType: .easyMeasure)
         }
         .frame(height: Constants.bigButtonHeight)
-        .padding(.top, 60) // TODO: Change based on top safe area height
+        .padding(.top, topSafeAreaSize + Constants.standardPadding)
         .padding(Constants.standardPadding)
       }
       .frame(maxHeight: .infinity)
@@ -64,8 +65,14 @@ struct ConversionResponses: View {
       ScrollView(showsIndicators: false) {
         VStack(spacing: Constants.smallPadding) {
           ForEach(cookConversionViewModel.previousConversions, id: \.self.id) { conversion in
-            TextBalloon(horizontalAlignment: .leading, topLabel: conversion.search.label, text: conversion.search.text)
-            TextBalloon(horizontalAlignment: .trailing, topLabel: conversion.response.label, text: conversion.response.text)
+            HStack {
+              TextBalloon(horizontalAlignment: .leading,
+                          topLabel: conversion.search.label,
+                          text: conversion.search.text)
+              TextBalloon(horizontalAlignment: .trailing,
+                          topLabel: conversion.response.label,
+                          text: conversion.response.text)
+            }
           }
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
@@ -121,7 +128,7 @@ struct UserInputSection: View {
       }
       .padding(Constants.standardPadding)
     }
-    .frame(height: 160)
+    .frame(height: 150)
     .frame(maxWidth: .infinity)
     .ignoresSafeArea()
     // So when the keyboard opens the view goes up accordingly

@@ -12,7 +12,6 @@ struct TextBalloon: View {
   var topLabel: String
   var text: String
 
-  private let balloonHeight: CGFloat = 80
   private let balloonOpacity = 0.9
   private let leadingBalloonColor = Color.white
   private let trailingBallonColor = Color.lightSkyBlue
@@ -27,11 +26,10 @@ struct TextBalloon: View {
             RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
               .opacity(balloonOpacity)
             BalloonText(topLabel: topLabel, text: text, alignment: .leading)
+              .padding(Constants.smallPadding)
           }
-          .scaledToFit()
           Spacer()
         }
-        .frame(height: balloonHeight)
         .foregroundColor(leadingBalloonColor)
       }
 
@@ -42,16 +40,15 @@ struct TextBalloon: View {
             RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
               .opacity(balloonOpacity)
             BalloonText(topLabel: topLabel, text: text, alignment: .trailing)
+              .padding(Constants.smallPadding)
           }
-          .scaledToFit()
           BalloonAdjustedArc(horizontalAlignment: .trailing, opacity: balloonOpacity)
         }
-        .frame(height: balloonHeight)
         .foregroundColor(trailingBallonColor)
       }
 
     }
-    .frame(maxWidth: .infinity)
+    .frame(maxWidth: .infinity, maxHeight: 120)
   }
 
   private struct BalloonText: View {
@@ -64,8 +61,11 @@ struct TextBalloon: View {
         Text(topLabel)
           .fontWeight(.semibold)
         Text(text)
-          .font(.largeTitle)
+          .font(.title)
           .fontWeight(.black)
+          .lineLimit(3)
+          .multilineTextAlignment(alignment == .leading ? .leading : .trailing)
+          .fixedSize(horizontal: false, vertical: true)
       }
       .foregroundColor(.black)
     }
