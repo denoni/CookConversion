@@ -54,14 +54,19 @@ struct TopSelectionSection: View {
 }
 
 struct ConversionResponses: View {
+  @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
-  
+
+  func getRandomID() -> String { UUID().uuidString }
+
   var body: some View {
     ZStack {
       ScrollView(showsIndicators: false) {
         VStack(spacing: Constants.smallPadding) {
-          TextBalloon(horizontalAlignment: .leading, topLabel: "Grams", text: "120g")
-          TextBalloon(horizontalAlignment: .trailing, topLabel: "Tablespoon", text: "5tbsp")
+          ForEach(cookConversionViewModel.previousConversions, id: \.self.id) { conversion in
+            TextBalloon(horizontalAlignment: .leading, topLabel: conversion.search.label, text: conversion.search.text)
+            TextBalloon(horizontalAlignment: .trailing, topLabel: conversion.response.label, text: conversion.response.text)
+          }
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
