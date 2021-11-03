@@ -36,7 +36,7 @@ class CookConversionViewModel: ObservableObject {
                                                        from: currentSelectedPreciseMeasure,
                                                        to: currentSelectedEasyMeasure)
     let searchStringFormatted = "\(currentTypedNumber) \(currentSelectedPreciseMeasure.abbreviated ?? "")"
-    let resultStringFormatted = "\(String(format: "%.2f", result)) \(currentSelectedEasyMeasure.abbreviated ?? "")"
+    let resultStringFormatted = "\(result.rounded(toPlaces: 2)) \(currentSelectedEasyMeasure.abbreviated ?? "")"
 
     previousConversions.append(ConversionItem(search: (label: currentSelectedPreciseMeasure.name, text: searchStringFormatted),
                                               response: (label: currentSelectedEasyMeasure.name, text: resultStringFormatted)))

@@ -20,10 +20,11 @@
 		C07CFD8827317EE000747568 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD8727317EE000747568 /* KeyboardResponder.swift */; };
 		C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD932731A92900747568 /* CookConversionModel.swift */; };
 		C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD952731AC7100747568 /* CookConversionViewModel.swift */; };
-		C07CFD982731B6BB00747568 /* UIApplication+stopShowingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD972731B6BB00747568 /* UIApplication+stopShowingKeyboard.swift */; };
+		C07CFD982731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */; };
 		C08EE32327308A3900BD64AD /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */; };
 		C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3262730B4FF00BD64AD /* TextBalloon.swift */; };
 		C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3282730B7CE00BD64AD /* TapDownButton.swift */; };
+		C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C5273233420088AB03 /* Double+Rounded.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,10 +61,11 @@
 		C07CFD8727317EE000747568 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		C07CFD932731A92900747568 /* CookConversionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookConversionModel.swift; sourceTree = "<group>"; };
 		C07CFD952731AC7100747568 /* CookConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CookConversionViewModel.swift; path = CookConversion/Model/CookConversionViewModel.swift; sourceTree = SOURCE_ROOT; };
-		C07CFD972731B6BB00747568 /* UIApplication+stopShowingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+stopShowingKeyboard.swift"; sourceTree = "<group>"; };
+		C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+StopShowingKeyboard.swift"; sourceTree = "<group>"; };
 		C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 		C08EE3262730B4FF00BD64AD /* TextBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBalloon.swift; sourceTree = "<group>"; };
 		C08EE3282730B7CE00BD64AD /* TapDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapDownButton.swift; sourceTree = "<group>"; };
+		C092E5C5273233420088AB03 /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,7 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
-				C07CFD972731B6BB00747568 /* UIApplication+stopShowingKeyboard.swift */,
+				C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */,
+				C092E5C5273233420088AB03 /* Double+Rounded.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,8 +345,9 @@
 				C05B4490273070FC004BF02F /* ContentView.swift in Sources */,
 				C07CFD8827317EE000747568 /* KeyboardResponder.swift in Sources */,
 				C05B448E273070FC004BF02F /* CookConversionApp.swift in Sources */,
+				C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */,
 				C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */,
-				C07CFD982731B6BB00747568 /* UIApplication+stopShowingKeyboard.swift in Sources */,
+				C07CFD982731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift in Sources */,
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
 				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
 				C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */,

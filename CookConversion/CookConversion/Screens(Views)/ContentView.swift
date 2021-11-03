@@ -95,7 +95,8 @@ struct UserInputSection: View {
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(Color.lightGray)
-            ConversionTextField(textInput: $cookConversionViewModel.currentTypedNumber, placeholderText: "25")
+            ConversionTextField(textInput: $cookConversionViewModel.currentTypedNumber,
+                                placeholderText: "25")
           }
           .scaledToFit()
           Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
