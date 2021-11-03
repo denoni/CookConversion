@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class CookConversionViewModel: ObservableObject {
   private static let model = CookConversionModel()
@@ -21,6 +22,9 @@ class CookConversionViewModel: ObservableObject {
   // (e.g. is not a double or is bigger than the limit)
   @Published var convertButtonText = "Convert"
   @Published var buttonIsCurrentlyShowingErrorMessage = false
+
+  @Published var isShowingPreciseMeasureMenu = false
+  @Published var isShowingEasyMeasureMenu = false
   
   struct ConversionItem: Identifiable {
     var search: (label: String, text: String)
@@ -71,7 +75,7 @@ class CookConversionViewModel: ObservableObject {
   
   
   // MARK: - Auxiliary Functions
-  
+
   static func getMeasuresFor(_ measurementType: CookConversionModel.MeasurementType) -> [CookConversionModel.Measure] {
     switch measurementType {
     case .preciseMeasure:
@@ -83,6 +87,12 @@ class CookConversionViewModel: ObservableObject {
   
   static func getOnlyFirstMeasuresFor(_ measurementType: CookConversionModel.MeasurementType) -> CookConversionModel.Measure {
     return getMeasuresFor(measurementType).first!
+  }
+
+  func stopShowingKeyboardAndMenus() {
+    UIApplication.shared.stopShowingKeyboard()
+    isShowingPreciseMeasureMenu = false
+    isShowingEasyMeasureMenu = false
   }
   
   func getCurrentSelectedMeasureFor(_ measurementType: CookConversionModel.MeasurementType) -> CookConversionModel.Measure {

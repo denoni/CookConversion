@@ -10,12 +10,12 @@ import SwiftUI
 struct TapDownButton: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   var measurementType: CookConversionModel.MeasurementType
-  @State private var shouldShowMenu = false
+  @Binding var isShowingMenu: Bool
 
   var body: some View {
     Button(action: {
       withAnimation(.interactiveSpring()) {
-        shouldShowMenu.toggle()
+        isShowingMenu.toggle()
       }
     }, label: {
       ZStack {
@@ -33,7 +33,7 @@ struct TapDownButton: View {
             .foregroundColor(.black.opacity(0.2))
             .frame(width: 2)
             .frame(maxHeight: .infinity)
-          Image(systemName: shouldShowMenu ? "chevron.up" : "chevron.down")
+          Image(systemName: isShowingMenu ? "chevron.up" : "chevron.down")
             .foregroundColor(.black)
             .scaledToFit()
             .padding(.trailing, Constants.smallPadding)
@@ -42,7 +42,7 @@ struct TapDownButton: View {
     })
     .overlay(
       VStack {
-        if self.shouldShowMenu {
+        if self.isShowingMenu {
           Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
           PopOverMenu(selectedItem: measurementType == .preciseMeasure
                       ? $cookConversionViewModel.currentSelectedPreciseMeasure

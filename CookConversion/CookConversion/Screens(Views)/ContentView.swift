@@ -17,13 +17,13 @@ struct ContentView: View {
         UserInputSection()
       }
     }
-    .onTapGesture { UIApplication.shared.stopShowingKeyboard() }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 
 struct TopSelectionSection: View {
+  @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
@@ -36,8 +36,8 @@ struct TopSelectionSection: View {
       }
       VStack {
         HStack(alignment: .bottom, spacing: Constants.smallPadding) {
-          TapDownButton(measurementType: .preciseMeasure)
-          TapDownButton(measurementType: .easyMeasure)
+          TapDownButton(measurementType: .preciseMeasure, isShowingMenu: $cookConversionViewModel.isShowingPreciseMeasureMenu)
+          TapDownButton(measurementType: .easyMeasure, isShowingMenu: $cookConversionViewModel.isShowingEasyMeasureMenu)
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(.top, topSafeAreaSize + Constants.standardPadding)
@@ -51,18 +51,19 @@ struct TopSelectionSection: View {
     .zIndex(1)
     // Need this negative padding otherwise this view will move up when keyboard opens
     .padding(.bottom, -keyboard.currentHeight)
+    .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
   }
 }
 
 struct ConversionResponses: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
-
+  @State var currentScrollViewPosition: CGFloat = 0
   func getRandomID() -> String { UUID().uuidString }
 
   var body: some View {
     ZStack {
-      ScrollView(showsIndicators: false) {
+      ReadableScrollView(currentPosition: $currentScrollViewPosition) {
         VStack(spacing: Constants.smallPadding) {
           ForEach(cookConversionViewModel.previousConversions, id: \.self.id) { conversion in
             HStack {
@@ -76,16 +77,20 @@ struct ConversionResponses: View {
           }
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
-        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+        .rotationEffect(Angle(degrees: 180))
         .padding(.vertical, Constants.standardPadding)
       }
       .padding(.horizontal, 10)
       // To reverse the scroll view
-      .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+      .rotationEffect(Angle(degrees: 180))
+      .onChange(of: currentScrollViewPosition, perform: { _ in
+        cookConversionViewModel.stopShowingKeyboardAndMenus()
+      })
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.top, -Constants.smallPadding)
     .padding(.vertical, Constants.standardPadding)
+    .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
   }
 }
 
@@ -122,8 +127,8 @@ struct UserInputSection: View {
               .font(.title3.weight(.semibold))
           }
         })
-        .frame(height: Constants.bigButtonHeight)
-        .padding(.bottom, Constants.standardPadding)
+          .frame(height: Constants.bigButtonHeight)
+          .padding(.bottom, Constants.standardPadding)
 
         Spacer()
       }
@@ -135,6 +140,7 @@ struct UserInputSection: View {
     // So when the keyboard opens the view goes up accordingly
     .padding(.bottom, keyboard.currentHeight)
     .animation(.easeOut(duration: 0.16))
+    .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
   }
 }
 
