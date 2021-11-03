@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Constants {
-  static let standardPadding: CGFloat = 30
+  static let standardPadding: CGFloat = 20
   static let smallPadding: CGFloat = 10
 
   static let standardRadius: CGFloat = 19

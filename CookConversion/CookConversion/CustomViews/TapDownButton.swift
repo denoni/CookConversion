@@ -24,9 +24,10 @@ struct TapDownButton: View {
         HStack {
           Text(cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType).getNameAndAbbreviation().name)
             .foregroundColor(.black)
+            .font(.system(size: 15))
             .fontWeight(.semibold)
             .padding(.leading, 20)
-            .padding(.trailing, Constants.smallPadding)
+            .padding(.trailing, 5)
           Spacer()
           Rectangle()
             .foregroundColor(.black.opacity(0.2))
