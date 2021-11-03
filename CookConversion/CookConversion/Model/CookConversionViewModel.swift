@@ -43,7 +43,6 @@ class CookConversionViewModel: ObservableObject {
   }
   
   func convert() {
-    
     guard currentTypedNumberIsValid().booleanResponse == true else {
       buttonIsCurrentlyShowingErrorMessage = true
       
@@ -56,6 +55,8 @@ class CookConversionViewModel: ObservableObject {
       }
       return
     }
+
+    stopShowingKeyboardAndMenus()
     
     let formattedCurrentTypedNumber = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
     

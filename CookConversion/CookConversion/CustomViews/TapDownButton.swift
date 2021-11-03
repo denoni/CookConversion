@@ -47,6 +47,7 @@ struct TapDownButton: View {
           PopOverMenu(selectedItem: measurementType == .preciseMeasure
                       ? $cookConversionViewModel.currentSelectedPreciseMeasure
                       : $cookConversionViewModel.currentSelectedEasyMeasure,
+                      isShowingMenu: $isShowingMenu,
                       measurementType: measurementType)
         }
       }, alignment: .topLeading
@@ -57,6 +58,7 @@ struct TapDownButton: View {
 struct PopOverMenu: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @Binding var selectedItem: CookConversionModel.Measure
+  @Binding var isShowingMenu: Bool
   var measurementType: CookConversionModel.MeasurementType
 
   var body: some View {
@@ -66,7 +68,10 @@ struct PopOverMenu: View {
         ScrollView {
           VStack {
             ForEach(CookConversionViewModel.getMeasuresFor(measurementType), id: \.self.name) { measure in
-              Button(action: { selectedItem = measure }, label: {
+              Button(action: {
+                selectedItem = measure
+                isShowingMenu = false
+              }, label: {
                 VStack {
                   Text(measure.name)
                   if let abbreviatedName = measure.abbreviated {
