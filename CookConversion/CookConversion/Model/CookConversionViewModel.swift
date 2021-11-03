@@ -14,7 +14,7 @@ class CookConversionViewModel: ObservableObject {
   @Published var currentSelectedEasyMeasure: CookConversionModel.Measure = .easyMeasure(.tablespoon)
 
   @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label: "Grams", text: "120 g"),
-                                                                         response: (label: "Tablespoon", text: "10 tbsp."))]
+                                                                         response: (label: "Tablespoon", text: "6.7 tbsp."))]
 
   struct ConversionItem: Identifiable {
     var search: (label: String, text: String)
