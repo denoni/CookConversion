@@ -15,12 +15,11 @@ struct ConversionTextField: View {
   var body: some View {
     TextField("", text: $textInput)
       .modifier(PlaceholderStyle(showPlaceHolder: textInput.isEmpty, placeholderText: placeholderText))
-      .keyboardType(.numberPad)
+      .keyboardType(.decimalPad)
       .font(.title2.weight(.heavy))
       .foregroundColor(.black)
       .padding(Constants.smallPadding)
       .multilineTextAlignment(.center)
-      .onReceive(Just(textInput)) { _ in limitText(4) }
   }
 
   private struct PlaceholderStyle: ViewModifier {
@@ -38,10 +37,4 @@ struct ConversionTextField: View {
     }
   }
 
-  // to keep text length in limits
-  private func limitText(_ characterLimit: Int) {
-    if textInput.count > characterLimit {
-      textInput = String(textInput.prefix(characterLimit))
-    }
-  }
 }

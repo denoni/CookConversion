@@ -115,8 +115,8 @@ struct UserInputSection: View {
         Button(action: { cookConversionViewModel.convert() }, label: {
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
-              .foregroundColor(Color.skyBlue)
-            Text("Convert")
+              .foregroundColor(cookConversionViewModel.buttonIsCurrentlyShowingErrorMessage ? .red : .skyBlue)
+            Text(cookConversionViewModel.convertButtonText)
               .foregroundColor(.white)
               .font(.title3.weight(.semibold))
           }

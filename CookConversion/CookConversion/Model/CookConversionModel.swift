@@ -36,6 +36,14 @@ struct CookConversionModel {
     }
   }
 
+  let numberFormatter: NumberFormatter = {
+       let formatter = NumberFormatter()
+      formatter.locale = Locale.current
+      formatter.numberStyle = .decimal
+      formatter.maximumFractionDigits = 1
+       return formatter
+   }()
+
   func convert(_ number: Double, from initialMeasure: Measure, to finalMeasure: Measure) -> Double {
     let measureInGrams = convertToGram(number, from: initialMeasure)
     return convertFromGramToEasyMeasure(measureInGrams, to: finalMeasure)
