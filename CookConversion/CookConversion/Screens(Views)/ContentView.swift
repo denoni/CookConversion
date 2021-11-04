@@ -90,13 +90,13 @@ struct ConversionResponses: View {
       })
 
       // Small linear gradient in the top and bottom of the scroll view for a better looking when user scrolls.
-        VStack {
-          LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .top, endPoint: .bottom)
-            .frame(height: 15)
-          Spacer()
-          LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .bottom, endPoint: .top)
-            .frame(height: 15)
-        }
+      VStack {
+        LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .top, endPoint: .bottom)
+          .frame(height: 15)
+        Spacer()
+        LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .bottom, endPoint: .top)
+          .frame(height: 15)
+      }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.top, -Constants.smallPadding)
@@ -116,6 +116,23 @@ struct UserInputSection: View {
         .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
       VStack {
         HStack {
+
+          HStack(spacing: 5) {
+            Button(action: { cookConversionViewModel.decreaseCurrentTypedNumberByOne() }, label: {
+              RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.lightGray)
+                .overlay(Text("-").font(.title3).bold().foregroundColor(Color.black))
+            })
+            Button(action: { cookConversionViewModel.increaseCurrentTypedNumberByOne() }, label: {
+              RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.lightGray)
+                .overlay(Text("+").font(.title3).bold().foregroundColor(Color.black))
+            })
+          }
+          .padding(.trailing, Constants.smallPadding)
+
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(Color.lightGray)
@@ -123,9 +140,11 @@ struct UserInputSection: View {
                                 placeholderText: "25")
           }
           .scaledToFit()
+
           Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
             .font(.title2.weight(.heavy))
             .foregroundColor(.black)
+            .padding(.leading, 5)
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(.bottom, Constants.smallPadding)

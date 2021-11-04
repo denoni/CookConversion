@@ -43,19 +43,11 @@ class CookConversionViewModel: ObservableObject {
   }
   
   func convert() {
-    guard currentTypedNumberIsValid().booleanResponse == true else {
-      buttonIsCurrentlyShowingErrorMessage = true
-      
-      // Change the button text to a message saying why the number is invalid
-      convertButtonText = currentTypedNumberIsValid().description
-      // After 1 sec, start to show the standard button text again (e.g. "Convert")
-      DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-        self.buttonIsCurrentlyShowingErrorMessage = false
-        self.convertButtonText = "Convert"
-      }
+
+    guard currentTypedNumberIsValid().booleanResponse != false else {
+      handleInvalidCurrentTypedValue()
       return
     }
-
     stopShowingKeyboardAndMenus()
     
     let formattedCurrentTypedNumber = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
@@ -90,6 +82,32 @@ class CookConversionViewModel: ObservableObject {
     return getMeasuresFor(measurementType).first!
   }
 
+  func increaseCurrentTypedNumberByOne() {
+    if currentTypedNumber.isEmpty { currentTypedNumber = "0" }
+    guard currentTypedNumberIsValid().booleanResponse != false else {
+      handleInvalidCurrentTypedValue()
+      return
+    }
+
+    var currentTypedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
+    currentTypedNumberAsDouble += 1
+    print(currentTypedNumberAsDouble)
+    let newCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedNumberAsDouble))!
+    currentTypedNumber = newCurrentTypedNumberAsString
+  }
+
+  func decreaseCurrentTypedNumberByOne() {
+    if currentTypedNumber.isEmpty { currentTypedNumber = "0" }
+    guard currentTypedNumberIsValid().booleanResponse != false else {
+      handleInvalidCurrentTypedValue()
+      return
+    }
+    var currentTypedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
+    currentTypedNumberAsDouble -= 1
+    let newCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedNumberAsDouble))!
+    currentTypedNumber = newCurrentTypedNumberAsString
+  }
+
   func stopShowingKeyboardAndMenus() {
     UIApplication.shared.stopShowingKeyboard()
     isShowingPreciseMeasureMenu = false
@@ -102,6 +120,18 @@ class CookConversionViewModel: ObservableObject {
       return currentSelectedPreciseMeasure
     case .easyMeasure:
       return currentSelectedEasyMeasure
+    }
+  }
+
+  private func handleInvalidCurrentTypedValue() {
+    buttonIsCurrentlyShowingErrorMessage = true
+
+    // Change the button text to a message saying why the number is invalid
+    convertButtonText = currentTypedNumberIsValid().description
+    // After 1 sec, start to show the standard button text again (e.g. "Convert")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      self.buttonIsCurrentlyShowingErrorMessage = false
+      self.convertButtonText = "Convert"
     }
   }
   
