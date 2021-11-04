@@ -40,6 +40,7 @@ struct CookConversionModel {
     let formatter = NumberFormatter()
     formatter.locale = Locale.current
     formatter.numberStyle = .decimal
+    formatter.minimum = 0
     formatter.maximumFractionDigits = 1
     return formatter
   }()

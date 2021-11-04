@@ -98,6 +98,7 @@ class CookConversionViewModel: ObservableObject {
 
   func decreaseCurrentTypedNumberByOne() {
     if currentTypedNumber.isEmpty { currentTypedNumber = "0" }
+    if currentTypedNumber == "0" { return }
     guard currentTypedNumberIsValid().booleanResponse != false else {
       handleInvalidCurrentTypedValue()
       return
