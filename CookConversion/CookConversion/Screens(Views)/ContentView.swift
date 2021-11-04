@@ -63,6 +63,7 @@ struct ConversionResponses: View {
 
   var body: some View {
     ZStack {
+      
       ReadableScrollView(currentPosition: $currentScrollViewPosition) {
         VStack(spacing: Constants.smallPadding) {
           ForEach(cookConversionViewModel.previousConversions, id: \.self.id) { conversion in
@@ -75,7 +76,6 @@ struct ConversionResponses: View {
                           text: conversion.response.text)
             }
             .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.6)))
-            .zIndex(1)
           }
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
@@ -88,6 +88,15 @@ struct ConversionResponses: View {
       .onChange(of: currentScrollViewPosition, perform: { _ in
         cookConversionViewModel.stopShowingKeyboardAndMenus()
       })
+
+      // Small linear gradient in the top and bottom of the scroll view for a better looking when user scrolls.
+        VStack {
+          LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .top, endPoint: .bottom)
+            .frame(height: 15)
+          Spacer()
+          LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .bottom, endPoint: .top)
+            .frame(height: 15)
+        }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.top, -Constants.smallPadding)
