@@ -74,6 +74,8 @@ struct ConversionResponses: View {
                           topLabel: conversion.response.label,
                           text: conversion.response.text)
             }
+            .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.6)))
+            .zIndex(1)
           }
         }
         // The scroll view is reversed, the views need to be reversed again so they don't get upside down
