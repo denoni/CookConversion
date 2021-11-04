@@ -64,7 +64,8 @@ struct TextBalloon: View {
           Text(text)
             .font(.title)
             .fontWeight(.black)
-            .lineLimit(3)
+            .minimumScaleFactor(0.5)
+            .lineLimit(2)
             .multilineTextAlignment(alignment == .leading ? .leading : .trailing)
             .fixedSize(horizontal: false, vertical: true)
         }
