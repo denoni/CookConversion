@@ -20,21 +20,21 @@ struct TapDownButton: View {
     }, label: {
       ZStack {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
-          .foregroundColor(.white)
+          .foregroundColor(.whiteDarkSensitive)
         HStack {
           Text(cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType).getNameAndAbbreviation().name)
-            .foregroundColor(.black)
+            .foregroundColor(.blackDarkSensitive)
             .font(.system(size: 15))
             .fontWeight(.semibold)
             .padding(.leading, 20)
             .padding(.trailing, 5)
           Spacer()
           Rectangle()
-            .foregroundColor(.black.opacity(0.2))
+            .foregroundColor(.blackDarkSensitive.opacity(0.2))
             .frame(width: 2)
             .frame(maxHeight: .infinity)
           Image(systemName: isShowingMenu ? "chevron.up" : "chevron.down")
-            .foregroundColor(.black)
+            .foregroundColor(.blackDarkSensitive)
             .scaledToFit()
             .padding(.trailing, Constants.smallPadding)
         }
@@ -64,7 +64,7 @@ struct PopOverMenu: View {
   var body: some View {
       ZStack {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
-          .foregroundColor(.white)
+          .foregroundColor(.whiteDarkSensitive)
         ScrollView {
           VStack {
             ForEach(CookConversionViewModel.getMeasuresFor(measurementType), id: \.self.name) { measure in
@@ -79,7 +79,7 @@ struct PopOverMenu: View {
                       .font(.footnote.weight(.bold))
                   }
                 }
-                .foregroundColor(.black)
+                .foregroundColor(.blackDarkSensitive)
                 .padding(.top, 5)
               })
               Divider()

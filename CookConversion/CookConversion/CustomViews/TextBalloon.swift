@@ -13,7 +13,7 @@ struct TextBalloon: View {
   var text: String
 
   private let balloonOpacity = 0.9
-  private let leadingBalloonColor = Color.white
+  private let leadingBalloonColor = Color.whiteDarkSensitive
   private let trailingBallonColor = Color.lightSkyBlue
 
   var body: some View {
@@ -74,7 +74,7 @@ struct TextBalloon: View {
 
         if alignment == .leading { Spacer() }
       }
-      .foregroundColor(.black)
+      .foregroundColor(.blackDarkSensitive)
       .frame(maxWidth: .infinity)
     }
   }

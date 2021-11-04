@@ -108,11 +108,12 @@ struct ConversionResponses: View {
 struct UserInputSection: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
+  @Environment(\.colorScheme) var colorScheme
 
   var body: some View {
     ZStack {
       Rectangle()
-        .foregroundColor(Color.white)
+        .foregroundColor(Color.whiteDarkSensitive)
         .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
       VStack {
         HStack {
@@ -122,13 +123,13 @@ struct UserInputSection: View {
               RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .frame(width: 40, height: 40)
                 .foregroundColor(Color.lightGray)
-                .overlay(Text("-").font(.title3).bold().foregroundColor(Color.black))
+                .overlay(Text("-").font(.title3).bold().foregroundColor(Color.blackDarkSensitive))
             })
             Button(action: { cookConversionViewModel.increaseCurrentTypedNumberByOne() }, label: {
               RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .frame(width: 40, height: 40)
                 .foregroundColor(Color.lightGray)
-                .overlay(Text("+").font(.title3).bold().foregroundColor(Color.black))
+                .overlay(Text("+").font(.title3).bold().foregroundColor(Color.blackDarkSensitive))
             })
           }
           .padding(.trailing, Constants.smallPadding)
@@ -143,7 +144,7 @@ struct UserInputSection: View {
 
           Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
             .font(.title2.weight(.heavy))
-            .foregroundColor(.black)
+            .foregroundColor(.blackDarkSensitive)
             .padding(.leading, 5)
         }
         .frame(height: Constants.bigButtonHeight)
@@ -153,7 +154,7 @@ struct UserInputSection: View {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(cookConversionViewModel.buttonIsCurrentlyShowingErrorMessage ? .red : .skyBlue)
             Text(cookConversionViewModel.convertButtonText)
-              .foregroundColor(.white)
+              .foregroundColor(colorScheme == .light ? .whiteDarkSensitive : .blackDarkSensitive)
               .font(.title3.weight(.semibold))
           }
         })

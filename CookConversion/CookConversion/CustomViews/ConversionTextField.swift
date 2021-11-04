@@ -17,7 +17,7 @@ struct ConversionTextField: View {
       .modifier(PlaceholderStyle(showPlaceHolder: textInput.isEmpty, placeholderText: placeholderText))
       .keyboardType(.decimalPad)
       .font(.title2.weight(.heavy))
-      .foregroundColor(.black)
+      .foregroundColor(.blackDarkSensitive)
       .padding(Constants.smallPadding)
       .multilineTextAlignment(.center)
   }
@@ -30,7 +30,7 @@ struct ConversionTextField: View {
       ZStack(alignment: .center) {
         if showPlaceHolder {
           Text(placeholderText)
-            .foregroundColor(Color.black.opacity(0.3))
+            .foregroundColor(Color.blackDarkSensitive.opacity(0.3))
         }
         content
       }

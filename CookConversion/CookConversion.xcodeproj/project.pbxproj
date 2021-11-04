@@ -198,7 +198,6 @@
 				C07CFD922731A90900747568 /* Extensions */,
 				C07CFD8727317EE000747568 /* KeyboardResponder.swift */,
 				C07CFD8527317A9500747568 /* Constants.swift */,
-				C07CFD832731790A00747568 /* ColorPalette.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -210,6 +209,7 @@
 				C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */,
 				C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */,
 				C092E5C5273233420088AB03 /* Double+Rounded.swift */,
+				C07CFD832731790A00747568 /* ColorPalette.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
