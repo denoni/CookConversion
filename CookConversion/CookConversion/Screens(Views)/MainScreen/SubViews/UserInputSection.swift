@@ -29,6 +29,8 @@ struct UserInputSection: View {
           .scaledToFit()
           Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
             .font(.title2.weight(.heavy))
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
             .foregroundColor(.blackDarkSensitive)
             .padding(.leading, 5)
         }
