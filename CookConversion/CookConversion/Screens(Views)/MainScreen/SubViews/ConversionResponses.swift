@@ -20,13 +20,16 @@ struct ConversionResponses: View {
           ForEach(cookConversionViewModel.previousConversions, id: \.self.id) { conversion in
             HStack {
               TextBalloon(horizontalAlignment: .leading,
-                          topLabel: conversion.search.label,
-                          text: conversion.search.text)
+                          topLabel: conversion.search.abbreviated,
+                          text: conversion.search.value)
               TextBalloon(horizontalAlignment: .trailing,
-                          topLabel: conversion.response.label,
-                          text: conversion.response.text)
+                          topLabel: conversion.response.abbreviated,
+                          text: conversion.response.value)
             }
             .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.6)))
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Conversion: \(conversion.search.value) \(conversion.search.measure) is equal to \(conversion.response.value) \(conversion.response.measure)")
+            .accessibility(sortPriority: 2)
           }
         }
         .padding(.vertical, Constants.standardPadding)

@@ -11,6 +11,30 @@ struct UserInputSection: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboardResponder = KeyboardResponder()
 
+  var currentPreciseMeasure: String {
+    cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name
+  }
+
+  var currentCommonMeasure: String {
+    cookConversionViewModel.currentSelectedCommonMeasure.getNameAndAbbreviation().name
+  }
+
+  var accessibilityLabelOfCurrentValueTextField: Text {
+    if cookConversionViewModel.currentTypedNumber == "" {
+      return Text("Current value is empty")
+    } else {
+      return Text("Current value is \(cookConversionViewModel.currentTypedNumber + currentPreciseMeasure)")
+    }
+  }
+
+  var accessibilityLabelOfConvertButton: Text {
+    if cookConversionViewModel.currentTypedNumber == "" {
+      return Text("Convert")
+    } else {
+      return Text("Tap to convert \(cookConversionViewModel.currentTypedNumber) \(currentPreciseMeasure) to \(currentCommonMeasure)")
+    }
+  }
+
   var body: some View {
     ZStack {
       Rectangle()
@@ -20,24 +44,35 @@ struct UserInputSection: View {
         HStack {
           CustomStepper()
             .padding(.trailing, Constants.smallPadding)
-          ZStack {
-            RoundedRectangle(cornerRadius: Constants.standardRadius)
-              .foregroundColor(Color.lightGray)
-            ConversionTextField(textInput: $cookConversionViewModel.currentTypedNumber,
-                                placeholderText: "25")
-          }
-          .scaledToFit()
-          Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
-            .font(.title2.weight(.heavy))
-            .lineLimit(1)
-            .minimumScaleFactor(0.5)
-            .foregroundColor(.blackDarkSensitive)
-            .padding(.leading, 5)
+
+            ZStack {
+              RoundedRectangle(cornerRadius: Constants.standardRadius)
+                .foregroundColor(Color.lightGray)
+                .accessibilityElement(children: .ignore)
+              ConversionTextField(textInput: $cookConversionViewModel.currentTypedNumber,
+                                  placeholderText: "25")
+            }
+            .scaledToFit()
+            .accessibilityHint("Tap to write a new current value.")
+            .accessibility(addTraits: .isSearchField)
+            .accessibilityElement(children: .combine)
+            .accessibility(label: accessibilityLabelOfCurrentValueTextField)
+            .accessibility(sortPriority: 3)
+
+            Text(currentPreciseMeasure)
+              .font(.title2.weight(.heavy))
+              .lineLimit(1)
+              .minimumScaleFactor(0.5)
+              .foregroundColor(.blackDarkSensitive)
+              .padding(.leading, 5)
+              .accessibilityElement(children: .ignore)
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(.bottom, Constants.smallPadding)
         ConversionButton()
           .padding(.bottom, Constants.standardPadding)
+          .accessibility(label: accessibilityLabelOfConvertButton)
+          .accessibility(sortPriority: 3)
         Spacer()
       }
       .padding(Constants.standardPadding)
@@ -63,12 +98,18 @@ struct UserInputSection: View {
             .foregroundColor(Color.lightGray)
             .overlay(Text("-").font(.title3).bold().foregroundColor(Color.blackDarkSensitive))
         })
+          .accessibilityLabel("Decrease")
+          .accessibilityHint("Tap to increase current value by one")
+          .accessibility(sortPriority: 1)
         Button(action: { cookConversionViewModel.increaseCurrentTypedNumberByOne() }, label: {
           RoundedRectangle(cornerRadius: 10, style: .continuous)
             .frame(width: 40, height: 40)
             .foregroundColor(Color.lightGray)
             .overlay(Text("+").font(.title3).bold().foregroundColor(Color.blackDarkSensitive))
         })
+          .accessibilityLabel("Increase")
+          .accessibilityHint("Tap to increase current value by one")
+          .accessibility(sortPriority: 1)
       }
     }
   }

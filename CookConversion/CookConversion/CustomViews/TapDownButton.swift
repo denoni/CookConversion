@@ -92,6 +92,7 @@ struct PopOverMenu: View {
                   if let abbreviatedName = measure.abbreviated {
                     Text("(\(abbreviatedName))")
                       .font(.footnote.weight(.bold))
+                      .accessibility(hidden: true)
                   }
                 }
                 .foregroundColor(.blackDarkSensitive)

@@ -18,10 +18,12 @@ class CookConversionViewModel: ObservableObject {
   @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]()
   
   // Create the list of conversions and add a sample conversion as the first element
-  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label:  LocalizedStringKey("ounces-abbreviated").stringValue(),
-                                                                                  text: "10"),
-                                                                         response: (label: LocalizedStringKey("tablespoons-abbreviated").stringValue(),
-                                                                                    text: "20"))]
+  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (measure: LocalizedStringKey("ounces").stringValue(),
+                                                                                  abbreviated:  LocalizedStringKey("ounces-abbreviated").stringValue(),
+                                                                                  value: "10"),
+                                                                         response: (measure: LocalizedStringKey("tablespoons").stringValue(),
+                                                                                    abbreviated: LocalizedStringKey("tablespoons-abbreviated").stringValue(),
+                                                                                    value: "20"))]
   
   // The button text is also used to show indications that the typed string is not valid
   // (e.g. is not a double or is bigger than the limit)
@@ -33,8 +35,8 @@ class CookConversionViewModel: ObservableObject {
   @Published var isShowingOnboardingScreen = true
 
   struct ConversionItem: Identifiable {
-    var search: (label: String, text: String)
-    var response: (label: String, text: String)
+    var search: (measure: String, abbreviated: String, value: String)
+    var response: (measure: String, abbreviated: String, value: String)
     let id = UUID()
   }
 
@@ -63,6 +65,7 @@ class CookConversionViewModel: ObservableObject {
 
     guard currentTypedNumberIsValid().booleanResponse != false else {
       handleInvalidCurrentTypedValue()
+      Accessibility.postConversionFailedNotification(errorMessage: convertButtonText)
       return
     }
     stopShowingKeyboardAndMenus()
@@ -77,10 +80,17 @@ class CookConversionViewModel: ObservableObject {
     let formattedResultNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"
     
     
-    previousConversions.append(ConversionItem(search: (label: currentSelectedPreciseMeasure.abbreviated ?? currentSelectedPreciseMeasure.name,
-                                                       text: formattedCurrentTypedNumberAsString),
-                                              response: (label: currentSelectedCommonMeasure.abbreviated ?? currentSelectedCommonMeasure.name,
-                                                         text: formattedResultNumberAsString) ))
+    previousConversions.append(ConversionItem(search: (measure: currentSelectedPreciseMeasure.name,
+                                                       abbreviated: currentSelectedPreciseMeasure.abbreviated ?? currentSelectedPreciseMeasure.name,
+                                                       value: formattedCurrentTypedNumberAsString),
+                                              response: (measure: currentSelectedCommonMeasure.name,
+                                                         abbreviated: currentSelectedCommonMeasure.abbreviated ?? currentSelectedCommonMeasure.name,
+                                                         value: formattedResultNumberAsString) ))
+    
+    Accessibility.postConversionCompletedNotification(conversionInputValue: formattedCurrentTypedNumberAsString,
+                                                      inputMeasure: currentSelectedPreciseMeasure.name,
+                                                      outputValue: formattedResultNumberAsString,
+                                                      outputMeasure: currentSelectedCommonMeasure.name)
   }
   
   
