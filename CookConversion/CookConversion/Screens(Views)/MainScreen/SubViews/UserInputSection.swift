@@ -19,7 +19,7 @@ struct UserInputSection: View {
       VStack {
         HStack {
           CustomStepper()
-          .padding(.trailing, Constants.smallPadding)
+            .padding(.trailing, Constants.smallPadding)
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(Color.lightGray)
@@ -80,12 +80,20 @@ struct UserInputSection: View {
         ZStack {
           RoundedRectangle(cornerRadius: Constants.standardRadius)
             .foregroundColor(cookConversionViewModel.buttonIsCurrentlyShowingErrorMessage ? .red : .skyBlue)
+            .onChange(of: cookConversionViewModel.buttonIsCurrentlyShowingErrorMessage) { isShowingErrorMessage in
+              if isShowingErrorMessage == true { simpleErrorHaptic() }
+            }
           Text(cookConversionViewModel.convertButtonText)
             .foregroundColor(colorScheme == .light ? .whiteDarkSensitive : .blackDarkSensitive)
             .font(.title3.weight(.semibold))
         }
       })
         .frame(height: Constants.bigButtonHeight)
+    }
+
+    private func simpleErrorHaptic() {
+      let generator = UINotificationFeedbackGenerator()
+      generator.notificationOccurred(.error)
     }
   }
 }
