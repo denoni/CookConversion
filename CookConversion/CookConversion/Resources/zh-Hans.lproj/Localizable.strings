@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  CookConversion
+
+  Created by Gabriel on 11/5/21.
+  
+*/
+
+"enabled-precise-measures" = "启用精确测量";
+"enabled-common-measures" = "启用通用措施";
+
+"settings" = "设置";
+"convert" = "转换";
+"close" = "关闭";
+"invalid-number" = "输入的值不是数字";
+"too-high-number" = "该值不能大于 5000";
+
+"ounces" = "盎司";
+"gallons" = "加仑";
+"grams" = "克";
+"kilograms" = "公斤";
+"milliliters" = "毫升";
+"liters" = "升";
+
+"teaspoons" = "茶匙";
+"tablespoons" = "汤匙";
+"teacups" = "及耳";
+"cups" = "杯";
+
+"ounces-abbreviated" = "oz.(盎司)";
+"gallons-abbreviated" = "gal.(加仑)";
+"grams-abbreviated" = "g(克)";
+"kilograms-abbreviated" = "kg(公斤)";
+"milliliters-abbreviated" = "mL(毫升)";
+"liters-abbreviated" = "L(升)";
+
+"teaspoons-abbreviated" = "茶匙";
+"tablespoons-abbreviated" = "汤匙";

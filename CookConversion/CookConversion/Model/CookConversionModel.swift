@@ -40,6 +40,7 @@ struct CookConversionModel {
     case portuguese = "pt"
     case spanish = "es"
     case french = "fr"
+    case chinese = "zh"
 
     var localizedLanguageCode: String {
       switch self {
@@ -51,6 +52,8 @@ struct CookConversionModel {
         return "es"
       case .french:
         return "fr"
+      case .chinese:
+        return "zh-Hans"
       }
     }
   }
