@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  CookConversion
 //
 //  Created by Gabriel on 11/1/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
   var body: some View {
     ZStack {
       Color.lightGray
@@ -90,6 +90,8 @@ struct TopSelectionSection: View {
           // TODO: Add option to select language
         }
         .navigationBarTitle("Settings")
+        .navigationBarItems(leading: Button(action: { settingsScreenIsOpen = false },
+                                            label: { Text("Close") } ))
       }
     }
   }
@@ -217,6 +219,6 @@ struct UserInputSection: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    MainView()
   }
 }

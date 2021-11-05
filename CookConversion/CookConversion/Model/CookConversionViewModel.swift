@@ -28,6 +28,7 @@ class CookConversionViewModel: ObservableObject {
 
   @Published var isShowingPreciseMeasureMenu = false
   @Published var isShowingEasyMeasureMenu = false
+  @Published var isShowingOnboardingScreen = true
 
   struct ConversionItem: Identifiable {
     var search: (label: String, text: String)
