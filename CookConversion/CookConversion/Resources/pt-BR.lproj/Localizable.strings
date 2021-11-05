@@ -17,7 +17,6 @@
 
 "ounces" = "Onças";
 "gallons" = "Galões";
-"milligrams" = "Miligramas";
 "grams" = "Gramas";
 "kilograms" = "Quilogramas";
 "milliliters" = "Mililitros";
@@ -26,7 +25,6 @@
 "teaspoons" = "Colheres de Chá";
 "tablespoons" = "Colheres de Sopa";
 "teacups" = "Xícaras";
-"wineglasses" = "Taças";
 "cups" = "Copos";
 
 "ounces-abbreviated" = "oz.";

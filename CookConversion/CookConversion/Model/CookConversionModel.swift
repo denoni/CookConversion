@@ -22,14 +22,12 @@ struct CookConversionModel {
       case teaspoon
       case tablespoon
       case cups
-      case wineglass
       case teacup
     }
     
     enum PreciseMeasure: CaseIterable {
       case ounce
       case gallon
-      case milligram
       case gram
       case kilogram
       case milliliter
@@ -41,6 +39,7 @@ struct CookConversionModel {
     case english = "en"
     case portuguese = "pt"
     case spanish = "es"
+    case french = "fr"
 
     var localizedLanguageCode: String {
       switch self {
@@ -50,6 +49,8 @@ struct CookConversionModel {
         return "pt-BR"
       case .spanish:
         return "es"
+      case .french:
+        return "fr"
       }
     }
   }
@@ -90,8 +91,6 @@ struct CookConversionModel {
       return number * 29.5735 / 0.82
     case .preciseMeasure(.gallon):
       return number * 3785.4 / 0.82
-    case .preciseMeasure(.milligram):
-      return number / 1000
     case .preciseMeasure(.gram):
       return number
     case .preciseMeasure(.kilogram):
@@ -113,8 +112,6 @@ struct CookConversionModel {
       return measureInGrams / 14.7868 * 0.82
     case .commonMeasure(.cups):
       return measureInGrams / 236.588 * 0.82
-    case .commonMeasure(.wineglass):
-      return measureInGrams / 59.1471 * 0.82
     case .commonMeasure(.teacup):
       return measureInGrams / 118.294 * 0.82
     default:
@@ -141,8 +138,6 @@ extension CookConversionModel.Measure.PreciseMeasure {
       return (name: "ounces", abbreviated: "ounces-abbreviated")
     case .gallon:
       return (name: "gallons", abbreviated: "gallons-abbreviated")
-    case .milligram:
-      return (name: "milligrams", abbreviated: "milligrams-abbreviated")
     case .gram:
       return (name: "grams", abbreviated: "grams-abbreviated")
     case .kilogram:
@@ -173,8 +168,6 @@ extension CookConversionModel.Measure.CommonMeasure {
       return (name: "tablespoons", abbreviated: "tablespoons-abbreviated")
     case .cups:
       return (name: "cups", abbreviated: nil)
-    case .wineglass:
-      return (name: "wineglasses", abbreviated: nil)
     case .teacup:
       return (name: "teacups", abbreviated: nil)
     }
