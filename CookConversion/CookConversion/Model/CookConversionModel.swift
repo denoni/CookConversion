@@ -13,7 +13,7 @@ struct CookConversionModel {
     case easyMeasure
   }
   
-  enum Measure {
+  enum Measure: Hashable {
     case preciseMeasure(_ preciseMeasure: PreciseMeasure)
     case easyMeasure(_ easyMeasure: EasyMeasure)
     

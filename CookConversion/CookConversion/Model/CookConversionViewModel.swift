@@ -11,8 +11,11 @@ import SwiftUI
 class CookConversionViewModel: ObservableObject {
   private static let model = CookConversionModel()
   @Published var currentTypedNumber: String = ""
-  @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(.ounce)
+  @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(.milliliter)
   @Published var currentSelectedEasyMeasure: CookConversionModel.Measure = .easyMeasure(.tablespoon)
+
+  // User can disable a measure so it won't appear in the list anymore. This dictionary controls what is active and what is not.
+  @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]()
   
   // Create the list of conversions and add a sample conversion as the first element
   @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label:  "oz.",text: "10"),
@@ -25,14 +28,25 @@ class CookConversionViewModel: ObservableObject {
 
   @Published var isShowingPreciseMeasureMenu = false
   @Published var isShowingEasyMeasureMenu = false
-  
+
   struct ConversionItem: Identifiable {
     var search: (label: String, text: String)
     var response: (label: String, text: String)
     let id = UUID()
   }
-  
-  
+
+  init() {
+    for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
+      measuresEnabledStatus[preciseMeasure] = true
+    }
+    for easyMeasure in CookConversionViewModel.getEasyMeasures() {
+      measuresEnabledStatus[easyMeasure] = true
+    }
+
+    currentSelectedEasyMeasure = getOnlyFirstEnabledMeasure(for: .easyMeasure)
+    currentSelectedPreciseMeasure = getOnlyFirstEnabledMeasure(for: .preciseMeasure)
+  }
+
   // MARK: - Intent(s)
   static func getPreciseMeasures() -> [CookConversionModel.Measure] {
     return model.getPreciseMeasures()
@@ -77,9 +91,29 @@ class CookConversionViewModel: ObservableObject {
       return getEasyMeasures()
     }
   }
-  
-  static func getOnlyFirstMeasuresFor(_ measurementType: CookConversionModel.MeasurementType) -> CookConversionModel.Measure {
-    return getMeasuresFor(measurementType).first!
+
+  func getOnlyFirstEnabledMeasure(for measurementType: CookConversionModel.MeasurementType) -> CookConversionModel.Measure {
+    return getEnabledMeasures(for: measurementType).first!
+  }
+
+  func getEnabledMeasures(for measureType: CookConversionModel.MeasurementType) -> [CookConversionModel.Measure] {
+      var activeMeasures = [CookConversionModel.Measure]()
+      let currentMeasures = CookConversionViewModel.getMeasuresFor(measureType)
+
+      // Gets only the measures that weren't disabled by the user.
+      for (measure, isEnabled) in measuresEnabledStatus {
+        for currentMeasure in currentMeasures {
+          if currentMeasure == measure && isEnabled == true {
+            activeMeasures.append(currentMeasure)
+          }
+        }
+      }
+
+      return activeMeasures
+  }
+
+  func numberOfEnableItems(for measureType: CookConversionModel.MeasurementType) -> Int {
+    return getEnabledMeasures(for: measureType).count
   }
 
   func increaseCurrentTypedNumberByOne() {
@@ -91,7 +125,6 @@ class CookConversionViewModel: ObservableObject {
 
     var currentTypedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
     currentTypedNumberAsDouble += 1
-    print(currentTypedNumberAsDouble)
     let newCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedNumberAsDouble))!
     currentTypedNumber = newCurrentTypedNumberAsString
   }
@@ -122,6 +155,11 @@ class CookConversionViewModel: ObservableObject {
     case .easyMeasure:
       return currentSelectedEasyMeasure
     }
+  }
+
+  func updateCurrentSelectedMeasures() {
+    currentSelectedEasyMeasure = getOnlyFirstEnabledMeasure(for: .easyMeasure)
+    currentSelectedPreciseMeasure = getOnlyFirstEnabledMeasure(for: .preciseMeasure)
   }
 
   private func handleInvalidCurrentTypedValue() {

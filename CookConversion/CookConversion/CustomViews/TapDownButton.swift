@@ -61,13 +61,14 @@ struct PopOverMenu: View {
   @Binding var isShowingMenu: Bool
   var measurementType: CookConversionModel.MeasurementType
 
+
   var body: some View {
       ZStack {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.whiteDarkSensitive)
         ScrollView {
           VStack {
-            ForEach(CookConversionViewModel.getMeasuresFor(measurementType), id: \.self.name) { measure in
+            ForEach(cookConversionViewModel.getEnabledMeasures(for: measurementType), id: \.self.name) { measure in
               Button(action: {
                 selectedItem = measure
                 isShowingMenu = false

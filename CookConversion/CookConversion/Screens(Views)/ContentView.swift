@@ -26,32 +26,72 @@ struct TopSelectionSection: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
-
+  @State var settingsScreenIsOpen = false
+  
   var body: some View {
     ZStack {
-      ZStack {
-        Rectangle()
-          .foregroundColor(Color.skyBlue)
-          .cornerRadius(Constants.bigRadius, corners: [.bottomLeft, .bottomRight])
-      }
+      Rectangle()
+        .foregroundColor(Color.skyBlue)
+        .cornerRadius(Constants.bigRadius, corners: [.bottomLeft, .bottomRight])
       VStack {
+        HStack {
+          Spacer()
+          Button(action: {
+            settingsScreenIsOpen = true
+          }, label: {
+            Image(systemName: "gear")
+              .resizable()
+              .renderingMode(.template)
+              .foregroundColor(Color.blackDarkSensitive)
+              .frame(width: 25, height: 25)
+          })
+        }
+        .padding(.horizontal, Constants.standardPadding)
+        
         HStack(alignment: .bottom, spacing: Constants.smallPadding) {
           TapDownButton(measurementType: .preciseMeasure, isShowingMenu: $cookConversionViewModel.isShowingPreciseMeasureMenu)
           TapDownButton(measurementType: .easyMeasure, isShowingMenu: $cookConversionViewModel.isShowingEasyMeasureMenu)
         }
         .frame(height: Constants.bigButtonHeight)
-        .padding(.top, topSafeAreaSize + Constants.standardPadding)
         .padding(Constants.standardPadding)
       }
       .frame(maxHeight: .infinity)
+      .padding(.top, topSafeAreaSize + Constants.standardPadding)
     }
     .ignoresSafeArea()
-    .frame(maxWidth: .infinity)
-    .frame(height: topSafeAreaSize + 100)
+    .frame(height: topSafeAreaSize + 150)
     .zIndex(1)
     // Need this negative padding otherwise this view will move up when keyboard opens
     .padding(.bottom, -keyboard.currentHeight)
     .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
+    .sheet(isPresented: $settingsScreenIsOpen, onDismiss: { cookConversionViewModel.updateCurrentSelectedMeasures() }) {
+      NavigationView {
+        Form {
+          Section(header: Text("PRECISE MEASURES TO SHOW")) {
+            ForEach(CookConversionViewModel.getPreciseMeasures(), id: \.self.name) { preciseMeasure in
+              Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[preciseMeasure])!) {
+                Text(preciseMeasure.name)
+              }
+              // Disables the very last enabled item to prevent user from disabling all measures for measure type
+              .disabled(cookConversionViewModel.numberOfEnableItems(for: .preciseMeasure) == 1
+                        && cookConversionViewModel.measuresEnabledStatus[preciseMeasure]! == true)
+            }
+          }
+          Section(header: Text("COMMON MEASURES TO SHOW")) {
+            ForEach(CookConversionViewModel.getEasyMeasures(), id: \.self.name) { easyMeasure in
+              Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[easyMeasure])!) {
+                Text(easyMeasure.name)
+              }
+              // Disables the very last enabled item to prevent user from disabling all measures for measure type
+              .disabled(cookConversionViewModel.numberOfEnableItems(for: .easyMeasure) == 1
+                        && cookConversionViewModel.measuresEnabledStatus[easyMeasure]! == true)
+            }
+          }
+          // TODO: Add option to select language
+        }
+        .navigationBarTitle("Settings")
+      }
+    }
   }
 }
 
@@ -60,7 +100,7 @@ struct ConversionResponses: View {
   @ObservedObject private var keyboard = KeyboardResponder()
   @State var currentScrollViewPosition: CGFloat = 0
   func getRandomID() -> String { UUID().uuidString }
-
+  
   var body: some View {
     ZStack {
       
@@ -88,7 +128,7 @@ struct ConversionResponses: View {
       .onChange(of: currentScrollViewPosition, perform: { _ in
         cookConversionViewModel.stopShowingKeyboardAndMenus()
       })
-
+      
       // Small linear gradient in the top and bottom of the scroll view for a better looking when user scrolls.
       VStack {
         LinearGradient(colors: [.lightGray, .lightGray.opacity(0)], startPoint: .top, endPoint: .bottom)
@@ -109,7 +149,7 @@ struct UserInputSection: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   @Environment(\.colorScheme) var colorScheme
-
+  
   var body: some View {
     ZStack {
       Rectangle()
@@ -117,7 +157,7 @@ struct UserInputSection: View {
         .cornerRadius(Constants.bigRadius, corners: [.topLeft, .topRight])
       VStack {
         HStack {
-
+          
           HStack(spacing: 5) {
             Button(action: { cookConversionViewModel.decreaseCurrentTypedNumberByOne() }, label: {
               RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -133,7 +173,7 @@ struct UserInputSection: View {
             })
           }
           .padding(.trailing, Constants.smallPadding)
-
+          
           ZStack {
             RoundedRectangle(cornerRadius: Constants.standardRadius)
               .foregroundColor(Color.lightGray)
@@ -141,7 +181,7 @@ struct UserInputSection: View {
                                 placeholderText: "25")
           }
           .scaledToFit()
-
+          
           Text(cookConversionViewModel.currentSelectedPreciseMeasure.getNameAndAbbreviation().name)
             .font(.title2.weight(.heavy))
             .foregroundColor(.blackDarkSensitive)
@@ -160,7 +200,7 @@ struct UserInputSection: View {
         })
           .frame(height: Constants.bigButtonHeight)
           .padding(.bottom, Constants.standardPadding)
-
+        
         Spacer()
       }
       .padding(Constants.standardPadding)
