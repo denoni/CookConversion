@@ -44,21 +44,26 @@ struct TapDownButton: View {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.whiteDarkSensitive)
         HStack {
-          Text(cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType).getNameAndAbbreviation().name)
-            .foregroundColor(.blackDarkSensitive)
-            .font(.system(size: 15))
-            .fontWeight(.semibold)
-            .padding(.leading, 20)
-            .padding(.trailing, 5)
-          Spacer()
-          Rectangle()
-            .foregroundColor(.blackDarkSensitive.opacity(0.2))
-            .frame(width: 2)
-            .frame(maxHeight: .infinity)
-          Image(systemName: isShowingMenu ? "chevron.up" : "chevron.down")
-            .foregroundColor(.blackDarkSensitive)
-            .scaledToFit()
-            .padding(.trailing, Constants.smallPadding)
+          Group {
+            let currentMeasure = cookConversionViewModel.getCurrentSelectedMeasureFor(measurementType).getNameAndAbbreviation().name
+            Text(currentMeasure)
+              .foregroundColor(.blackDarkSensitive)
+              .font(.system(size: 15))
+              .fontWeight(.semibold)
+              .minimumScaleFactor(0.7)
+              .lineLimit(currentMeasure.contains(" ") ? 2 : 1) // If the measure name contains spaces, set limit to 2, else to 1
+              .padding(.leading, 20)
+              .padding(.trailing, 5)
+            Spacer()
+            Rectangle()
+              .foregroundColor(.blackDarkSensitive.opacity(0.2))
+              .frame(width: 2)
+              .frame(maxHeight: .infinity)
+            Image(systemName: isShowingMenu ? "chevron.up" : "chevron.down")
+              .foregroundColor(.blackDarkSensitive)
+              .scaledToFit()
+              .padding(.trailing, Constants.smallPadding)
+          }
         }
       }
     }
