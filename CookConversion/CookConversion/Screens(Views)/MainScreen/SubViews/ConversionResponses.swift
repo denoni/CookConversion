@@ -33,6 +33,7 @@ struct ConversionResponses: View {
       }
       .padding(.horizontal, 10)
       .onChange(of: currentScrollViewPosition, perform: { _ in
+        print(currentScrollViewPosition)
         // If user scrolls, automatically close keyboard and menus
         cookConversionViewModel.stopShowingKeyboardAndMenus()
       })
