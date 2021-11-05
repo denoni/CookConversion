@@ -22,7 +22,7 @@ struct TopSelectionSection: View {
         TopButtonsBar(settingsScreenIsOpen: $settingsScreenIsOpen)
         HStack(alignment: .bottom, spacing: Constants.smallPadding) {
           TapDownButton(measurementType: .preciseMeasure, isShowingMenu: $cookConversionViewModel.isShowingPreciseMeasureMenu)
-          TapDownButton(measurementType: .easyMeasure, isShowingMenu: $cookConversionViewModel.isShowingEasyMeasureMenu)
+          TapDownButton(measurementType: .commonMeasure, isShowingMenu: $cookConversionViewModel.isShowingCommonMeasureMenu)
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(Constants.standardPadding)

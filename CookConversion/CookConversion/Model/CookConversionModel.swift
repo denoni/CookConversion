@@ -10,14 +10,14 @@ import Foundation
 struct CookConversionModel {
   enum MeasurementType {
     case preciseMeasure
-    case easyMeasure
+    case commonMeasure
   }
   
   enum Measure: Hashable {
     case preciseMeasure(_ preciseMeasure: PreciseMeasure)
-    case easyMeasure(_ easyMeasure: EasyMeasure)
+    case commonMeasure(_ commonMeasure: CommonMeasure)
     
-    enum EasyMeasure: CaseIterable {
+    enum CommonMeasure: CaseIterable {
       case teaspoon
       case tablespoon
       case cups
@@ -47,7 +47,7 @@ struct CookConversionModel {
   
   func convert(_ number: Double, from initialMeasure: Measure, to finalMeasure: Measure) -> Double {
     let measureInGrams = convertToGram(number, from: initialMeasure)
-    return convertFromGramToEasyMeasure(measureInGrams, to: finalMeasure)
+    return convertFromGramToCommonMeasure(measureInGrams, to: finalMeasure)
   }
   
   func getPreciseMeasures() -> [Measure] {
@@ -58,10 +58,10 @@ struct CookConversionModel {
     return listOfMeasures
   }
   
-  func getEasyMeasures() -> [Measure] {
+  func getCommonMeasures() -> [Measure] {
     var listOfMeasures = [Measure]()
-    for measure in Measure.EasyMeasure.allCases {
-      listOfMeasures.append(.easyMeasure(measure))
+    for measure in Measure.CommonMeasure.allCases {
+      listOfMeasures.append(.commonMeasure(measure))
     }
     return listOfMeasures
   }
@@ -87,17 +87,17 @@ struct CookConversionModel {
     }
   }
   
-  private func convertFromGramToEasyMeasure(_ measureInGrams: Double, to finalMeasure: Measure) -> Double {
+  private func convertFromGramToCommonMeasure(_ measureInGrams: Double, to finalMeasure: Measure) -> Double {
     switch finalMeasure {
-    case .easyMeasure(.teaspoon):
+    case .commonMeasure(.teaspoon):
       return measureInGrams / 4.92892 * 0.82
-    case .easyMeasure(.tablespoon):
+    case .commonMeasure(.tablespoon):
       return measureInGrams / 14.7868 * 0.82
-    case .easyMeasure(.cups):
+    case .commonMeasure(.cups):
       return measureInGrams / 236.588 * 0.82
-    case .easyMeasure(.wineglass):
+    case .commonMeasure(.wineglass):
       return measureInGrams / 59.1471 * 0.82
-    case .easyMeasure(.teacup):
+    case .commonMeasure(.teacup):
       return measureInGrams / 118.294 * 0.82
     default:
       fatalError("Type not implemented for \(finalMeasure)")
@@ -137,7 +137,7 @@ extension CookConversionModel.Measure.PreciseMeasure {
   }
 }
 
-extension CookConversionModel.Measure.EasyMeasure {
+extension CookConversionModel.Measure.CommonMeasure {
   
   var name: String {
     return self.getNameAndAbbreviation().name
@@ -177,8 +177,8 @@ extension CookConversionModel.Measure {
     switch self {
     case .preciseMeasure(let preciseMeasure):
       return (preciseMeasure.name, preciseMeasure.abbreviated)
-    case .easyMeasure(let easyMeasure):
-      return (easyMeasure.name, easyMeasure.abbreviated)
+    case .commonMeasure(let commonMeasure):
+      return (commonMeasure.name, commonMeasure.abbreviated)
     }
   }
 }

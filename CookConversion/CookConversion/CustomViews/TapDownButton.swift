@@ -26,7 +26,7 @@ struct TapDownButton: View {
           Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
           PopOverMenu(selectedItem: measurementType == .preciseMeasure
                       ? $cookConversionViewModel.currentSelectedPreciseMeasure
-                      : $cookConversionViewModel.currentSelectedEasyMeasure,
+                      : $cookConversionViewModel.currentSelectedCommonMeasure,
                       isShowingMenu: $isShowingMenu,
                       measurementType: measurementType)
         }

@@ -25,13 +25,13 @@ struct SettingsView: View {
           }
         }
         Section(header: Text("COMMON MEASURES TO SHOW")) {
-          ForEach(CookConversionViewModel.getEasyMeasures(), id: \.self.name) { easyMeasure in
-            Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[easyMeasure])!) {
-              Text(easyMeasure.name)
+          ForEach(CookConversionViewModel.getCommonMeasures(), id: \.self.name) { commonMeasure in
+            Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[commonMeasure])!) {
+              Text(commonMeasure.name)
             }
             // Disables the very last enabled item to prevent user from disabling all measures for measure type
-            .disabled(cookConversionViewModel.numberOfEnableItems(for: .easyMeasure) == 1
-                      && cookConversionViewModel.measuresEnabledStatus[easyMeasure]! == true)
+            .disabled(cookConversionViewModel.numberOfEnableItems(for: .commonMeasure) == 1
+                      && cookConversionViewModel.measuresEnabledStatus[commonMeasure]! == true)
           }
         }
         // TODO: Add option to select language

@@ -12,7 +12,7 @@ class CookConversionViewModel: ObservableObject {
   private static let model = CookConversionModel()
   @Published var currentTypedNumber: String = ""
   @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(.milliliter)
-  @Published var currentSelectedEasyMeasure: CookConversionModel.Measure = .easyMeasure(.tablespoon)
+  @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(.tablespoon)
 
   // User can disable a measure so it won't appear in the list anymore. This dictionary controls what is active and what is not.
   @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]()
@@ -27,7 +27,7 @@ class CookConversionViewModel: ObservableObject {
   @Published var buttonIsCurrentlyShowingErrorMessage = false
 
   @Published var isShowingPreciseMeasureMenu = false
-  @Published var isShowingEasyMeasureMenu = false
+  @Published var isShowingCommonMeasureMenu = false
   @Published var isShowingOnboardingScreen = true
 
   struct ConversionItem: Identifiable {
@@ -40,11 +40,11 @@ class CookConversionViewModel: ObservableObject {
     for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
       measuresEnabledStatus[preciseMeasure] = true
     }
-    for easyMeasure in CookConversionViewModel.getEasyMeasures() {
-      measuresEnabledStatus[easyMeasure] = true
+    for commonMeasure in CookConversionViewModel.getCommonMeasures() {
+      measuresEnabledStatus[commonMeasure] = true
     }
 
-    currentSelectedEasyMeasure = getOnlyFirstEnabledMeasure(for: .easyMeasure)
+    currentSelectedCommonMeasure = getOnlyFirstEnabledMeasure(for: .commonMeasure)
     currentSelectedPreciseMeasure = getOnlyFirstEnabledMeasure(for: .preciseMeasure)
   }
 
@@ -53,8 +53,8 @@ class CookConversionViewModel: ObservableObject {
     return model.getPreciseMeasures()
   }
   
-  static func getEasyMeasures() -> [CookConversionModel.Measure] {
-    return model.getEasyMeasures()
+  static func getCommonMeasures() -> [CookConversionModel.Measure] {
+    return model.getCommonMeasures()
   }
   
   func convert() {
@@ -69,7 +69,7 @@ class CookConversionViewModel: ObservableObject {
     
     let result = CookConversionViewModel.model.convert(formattedCurrentTypedNumber,
                                                        from: currentSelectedPreciseMeasure,
-                                                       to: currentSelectedEasyMeasure)
+                                                       to: currentSelectedCommonMeasure)
     
     let formattedCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: formattedCurrentTypedNumber))!
     let formattedResultNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"
@@ -77,7 +77,7 @@ class CookConversionViewModel: ObservableObject {
     
     previousConversions.append(ConversionItem(search: (label: currentSelectedPreciseMeasure.abbreviated ?? currentSelectedPreciseMeasure.name,
                                                        text: formattedCurrentTypedNumberAsString),
-                                              response: (label: currentSelectedEasyMeasure.abbreviated ?? currentSelectedEasyMeasure.name,
+                                              response: (label: currentSelectedCommonMeasure.abbreviated ?? currentSelectedCommonMeasure.name,
                                                          text: formattedResultNumberAsString) ))
   }
   
@@ -88,8 +88,8 @@ class CookConversionViewModel: ObservableObject {
     switch measurementType {
     case .preciseMeasure:
       return getPreciseMeasures()
-    case .easyMeasure:
-      return getEasyMeasures()
+    case .commonMeasure:
+      return getCommonMeasures()
     }
   }
 
@@ -146,20 +146,20 @@ class CookConversionViewModel: ObservableObject {
   func stopShowingKeyboardAndMenus() {
     UIApplication.shared.stopShowingKeyboard()
     isShowingPreciseMeasureMenu = false
-    isShowingEasyMeasureMenu = false
+    isShowingCommonMeasureMenu = false
   }
   
   func getCurrentSelectedMeasureFor(_ measurementType: CookConversionModel.MeasurementType) -> CookConversionModel.Measure {
     switch measurementType {
     case .preciseMeasure:
       return currentSelectedPreciseMeasure
-    case .easyMeasure:
-      return currentSelectedEasyMeasure
+    case .commonMeasure:
+      return currentSelectedCommonMeasure
     }
   }
 
   func updateCurrentSelectedMeasures() {
-    currentSelectedEasyMeasure = getOnlyFirstEnabledMeasure(for: .easyMeasure)
+    currentSelectedCommonMeasure = getOnlyFirstEnabledMeasure(for: .commonMeasure)
     currentSelectedPreciseMeasure = getOnlyFirstEnabledMeasure(for: .preciseMeasure)
   }
 
