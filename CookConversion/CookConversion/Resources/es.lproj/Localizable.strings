@@ -6,28 +6,28 @@
   
 */
 
-"enabled-precise-measures" = "ENABLED MEASURES";
-"enabled-common-measures" = "ENABLED COMMON MEASURES";
+"enabled-precise-measures" = "MEDIDAS PRECISAS HABILITADAS";
+"enabled-common-measures" = "MEDIDAS COMUNES HABILITADAS";
 
-"settings" = "Settings";
-"convert" = "Convert";
-"close" = "Close";
-"invalid-number" = "Typed value is not a number";
-"too-high-number" = "Value can't be higher than 5000";
+"settings" = "Ajustes";
+"convert" = "Convertir";
+"close" = "Cerrar";
+"invalid-number" = "El valor introducido no es un número";
+"too-high-number" = "El valor no puede ser superior a 5000";
 
-"ounces" = "Ounces";
-"gallons" = "Gallons";
-"milligrams" = "Milligrams";
-"grams" = "Grams";
-"kilograms" = "Kilograms";
-"milliliters" = "Milliliters";
-"liters" = "Liters";
+"ounces" = "Onzas";
+"gallons" = "Galons";
+"milligrams" = "Miligramos";
+"grams" = "Gramos";
+"kilograms" = "Kilogramos";
+"milliliters" = "Mililitros";
+"liters" = "Litros";
 
-"teaspoons" = "Teaspoons";
-"tablespoons" = "Tablespoons";
-"teacups" = "Teacups";
-"wineglasses" = "Wineglasses";
-"cups" = "Cups";
+"teaspoons" = "Cucharaditas";
+"tablespoons" = "Cucharadas";
+"teacups" = "Taza de Té";
+"wineglasses" = "Copa de Vino";
+"cups" = "Taza";
 
 "ounces-abbreviated" = "oz.";
 "gallons-abbreviated" = "gal.";
@@ -37,5 +37,5 @@
 "milliliters-abbreviated" = "mL";
 "liters-abbreviated" = "L";
 
-"teaspoons-abbreviated" = "tsp.";
-"tablespoons-abbreviated" = "tbsp.";
+"teaspoons-abbreviated" = "cdta.";
+"tablespoons-abbreviated" = "cda.";

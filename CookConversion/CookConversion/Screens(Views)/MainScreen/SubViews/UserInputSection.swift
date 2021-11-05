@@ -88,6 +88,10 @@ struct UserInputSection: View {
           Text(cookConversionViewModel.convertButtonText)
             .foregroundColor(colorScheme == .light ? .whiteDarkSensitive : .blackDarkSensitive)
             .font(.title3.weight(.semibold))
+            .lineLimit(2)
+            .minimumScaleFactor(0.6)
+            .padding(.vertical, Constants.smallPadding)
+            .padding(.horizontal, Constants.standardPadding)
         }
       })
         .frame(height: Constants.bigButtonHeight)

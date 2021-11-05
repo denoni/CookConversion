@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI // Need SwiftUI because of LocalizedStringKey
 
 struct CookConversionModel {
   enum MeasurementType {
@@ -33,6 +34,23 @@ struct CookConversionModel {
       case kilogram
       case milliliter
       case liter
+    }
+  }
+
+  enum AvailableLanguages: String, CaseIterable {
+    case english = "en"
+    case portuguese = "pt"
+    case spanish = "es"
+
+    var localizedLanguageCode: String {
+      switch self {
+      case .english:
+        return "en"
+      case .portuguese:
+        return "pt-BR"
+      case .spanish:
+        return "es"
+      }
     }
   }
   
@@ -110,29 +128,29 @@ struct CookConversionModel {
 extension CookConversionModel.Measure.PreciseMeasure {
   
   var name: String {
-    return self.getNameAndAbbreviation().name
+    return self.getNameAndAbbreviation().name.stringValue()
   }
   
   var abbreviated: String? {
-    return self.getNameAndAbbreviation().abbreviated
+    return self.getNameAndAbbreviation().abbreviated?.stringValue()
   }
   
-  private func getNameAndAbbreviation() -> (name: String, abbreviated: String?) {
+  private func getNameAndAbbreviation() -> (name: LocalizedStringKey, abbreviated: LocalizedStringKey?) {
     switch self {
     case .ounce:
-      return (name: "Ounces", abbreviated: "oz.")
+      return (name: "ounces", abbreviated: "ounces-abbreviated")
     case .gallon:
-      return (name: "Gallons", abbreviated: "gal.")
+      return (name: "gallons", abbreviated: "gallons-abbreviated")
     case .milligram:
-      return (name: "Milligrams", abbreviated: "mg")
+      return (name: "milligrams", abbreviated: "milligrams-abbreviated")
     case .gram:
-      return (name: "Grams", abbreviated: "g")
+      return (name: "grams", abbreviated: "grams-abbreviated")
     case .kilogram:
-      return (name: "Kilograms", abbreviated: "kg")
+      return (name: "kilograms", abbreviated: "kilograms-abbreviated")
     case .milliliter:
-      return (name: "Milliliters", abbreviated: "mL")
+      return (name: "milliliters", abbreviated: "milliliters-abbreviated")
     case .liter:
-      return (name: "Liters", abbreviated: "L")
+      return (name: "liters", abbreviated: "liters-abbreviated")
     }
   }
 }
@@ -140,25 +158,25 @@ extension CookConversionModel.Measure.PreciseMeasure {
 extension CookConversionModel.Measure.CommonMeasure {
   
   var name: String {
-    return self.getNameAndAbbreviation().name
+    return self.getNameAndAbbreviation().name.stringValue()
   }
   
   var abbreviated: String? {
-    return self.getNameAndAbbreviation().abbreviated
+    return self.getNameAndAbbreviation().abbreviated?.stringValue()
   }
   
-  private func getNameAndAbbreviation() -> (name: String, abbreviated: String?) {
+  private func getNameAndAbbreviation() -> (name: LocalizedStringKey, abbreviated: LocalizedStringKey?) {
     switch self {
     case .teaspoon:
-      return (name: "Teaspoons", abbreviated: "tsp.")
+      return (name: "teaspoons", abbreviated: "teaspoons-abbreviated")
     case .tablespoon:
-      return (name: "Tablespoons", abbreviated: "tbsp.")
+      return (name: "tablespoons", abbreviated: "tablespoons-abbreviated")
     case .cups:
-      return (name: "Cups", abbreviated: nil)
+      return (name: "cups", abbreviated: nil)
     case .wineglass:
-      return (name: "Wineglasses", abbreviated: nil)
+      return (name: "wineglasses", abbreviated: nil)
     case .teacup:
-      return (name: "Teacups", abbreviated: nil)
+      return (name: "teacups", abbreviated: nil)
     }
   }
 }

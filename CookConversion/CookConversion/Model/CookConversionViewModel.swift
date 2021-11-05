@@ -18,12 +18,14 @@ class CookConversionViewModel: ObservableObject {
   @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]()
   
   // Create the list of conversions and add a sample conversion as the first element
-  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label:  "oz.",text: "10"),
-                                                                         response: (label: "tbsp.", text: "20"))]
+  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (label:  LocalizedStringKey("ounces-abbreviated").stringValue(),
+                                                                                  text: "10"),
+                                                                         response: (label: LocalizedStringKey("tablespoons-abbreviated").stringValue(),
+                                                                                    text: "20"))]
   
   // The button text is also used to show indications that the typed string is not valid
   // (e.g. is not a double or is bigger than the limit)
-  @Published var convertButtonText = "Convert"
+  @Published var convertButtonText: String = LocalizedStringKey("convert").stringValue()
   @Published var buttonIsCurrentlyShowingErrorMessage = false
 
   @Published var isShowingPreciseMeasureMenu = false
@@ -171,17 +173,18 @@ class CookConversionViewModel: ObservableObject {
     // After 1 sec, start to show the standard button text again (e.g. "Convert")
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
       self.buttonIsCurrentlyShowingErrorMessage = false
-      self.convertButtonText = "Convert"
+      self.convertButtonText = LocalizedStringKey("convert").stringValue()
     }
   }
   
   private func currentTypedNumberIsValid() -> (booleanResponse: Bool, description: String) {
     guard let typedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)?.doubleValue else {
-      return (booleanResponse: false, description: "Typed value is not a number")
+      return (booleanResponse: false, description: LocalizedStringKey("invalid-number").stringValue())
     }
     guard typedNumberAsDouble <= 5000 else {
-      return (booleanResponse: false, description: "Value can't be higher than 5000")
+      return (booleanResponse: false, description: LocalizedStringKey("too-high-number").stringValue())
     }
+    // This text will never be showed
     return (booleanResponse: true, description: "Success")
   }
   

@@ -14,7 +14,7 @@ struct SettingsView: View {
   var body: some View {
     NavigationView {
       Form {
-        Section(header: Text("PRECISE MEASURES TO SHOW")) {
+        Section(header: Text("enabled-precise-measures")) {
           ForEach(CookConversionViewModel.getPreciseMeasures(), id: \.self.name) { preciseMeasure in
             Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[preciseMeasure])!) {
               Text(preciseMeasure.name)
@@ -24,7 +24,7 @@ struct SettingsView: View {
                       && cookConversionViewModel.measuresEnabledStatus[preciseMeasure]! == true)
           }
         }
-        Section(header: Text("COMMON MEASURES TO SHOW")) {
+        Section(header: Text("enabled-common-measures")) {
           ForEach(CookConversionViewModel.getCommonMeasures(), id: \.self.name) { commonMeasure in
             Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[commonMeasure])!) {
               Text(commonMeasure.name)
@@ -36,9 +36,9 @@ struct SettingsView: View {
         }
         // TODO: Add option to select language
       }
-      .navigationBarTitle("Settings")
+      .navigationBarTitle("settings")
       .navigationBarItems(leading: Button(action: { presentationMode.wrappedValue.dismiss() },
-                                          label: { Text("Close") } ))
+                                          label: { Text("close") } ))
     }
   }
 }
