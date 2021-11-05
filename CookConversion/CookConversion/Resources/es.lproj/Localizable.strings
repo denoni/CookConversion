@@ -25,9 +25,9 @@
 
 "teaspoons" = "Cucharaditas";
 "tablespoons" = "Cucharadas";
-"teacups" = "Taza de Té";
-"wineglasses" = "Copa de Vino";
-"cups" = "Taza";
+"teacups" = "Tazas de Té";
+"wineglasses" = "Copas de Vino";
+"cups" = "Tazas";
 
 "ounces-abbreviated" = "oz.";
 "gallons-abbreviated" = "gal.";

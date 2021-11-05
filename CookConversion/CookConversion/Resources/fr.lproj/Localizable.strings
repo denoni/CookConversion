@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  CookConversion
+
+  Created by Gabriel on 11/5/21.
+  
+*/
+
+"enabled-precise-measures" = "MESURES PRÉCISES ACTIVÉES";
+"enabled-common-measures" = "MESURES COMMUNES ACTIVÉES";
+
+"settings" = "Réglage";
+"convert" = "Convertir";
+"close" = "Fermer";
+"invalid-number" = "La valeur saisie n'est pas un nombre";
+"too-high-number" = "La valeur ne peut pas être supérieure à 5000";
+
+"ounces" = "Onces";
+"gallons" = "Gallons";
+"milligrams" = "Milligrammes";
+"grams" = "Grammes";
+"kilograms" = "Kilogrammes";
+"milliliters" = "Millilitres";
+"liters" = "Litres";
+
+"teaspoons" = "Cuillères à Thé";
+"tablespoons" = "Cuillères à Soupe";
+"teacups" = "Tasses à Thé";
+"wineglasses" = "Verres de Vin";
+"cups" = "Tasses";
+
+"ounces-abbreviated" = "oz.";
+"gallons-abbreviated" = "gal.";
+"milligrams-abbreviated" = "mg";
+"grams-abbreviated" = "g";
+"kilograms-abbreviated" = "kg";
+"milliliters-abbreviated" = "mL";
+"liters-abbreviated" = "L";
+
+"teaspoons-abbreviated" = "C. à thé";
+"tablespoons-abbreviated" = "C. à soupe";
