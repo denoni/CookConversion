@@ -6,8 +6,8 @@
   
 */
 
-"enabled-precise-measures" = "MEDIDAS PRECISAS ATIVAS";
-"enabled-common-measures" = "MEDIDAS COMUNS ATIVAS";
+"enabled-precise-measures" = "MEDIDAS PRECISAS HABILITADAS";
+"enabled-common-measures" = "MEDIDAS COMUNS HABILITADAS";
 
 "settings" = "Configurações";
 "convert" = "Converter";
@@ -29,7 +29,6 @@
 
 "ounces-abbreviated" = "oz.";
 "gallons-abbreviated" = "gal.";
-"milligrams-abbreviated" = "mg";
 "grams-abbreviated" = "g";
 "kilograms-abbreviated" = "kg";
 "milliliters-abbreviated" = "mL";
