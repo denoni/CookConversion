@@ -15,7 +15,7 @@ struct ConversionResponses: View {
 
   var body: some View {
     ZStack {
-      ReadableScrollView(currentPosition: $currentScrollViewPosition) {
+      ReadableScrollView(currentPosition: $currentScrollViewPosition, reversedScrolling: true) {
         VStack(spacing: Constants.smallPadding) {
           ForEach(cookConversionViewModel.previousConversions, id: \.self.id) { conversion in
             HStack {
@@ -29,14 +29,9 @@ struct ConversionResponses: View {
             .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.6)))
           }
         }
-        // TODO: Do this better
-        // The scroll view is reversed, the views need to be reversed again so they don't get upside down
-        .rotationEffect(Angle(degrees: 180))
         .padding(.vertical, Constants.standardPadding)
       }
       .padding(.horizontal, 10)
-      // To reverse the scroll view
-      .rotationEffect(Angle(degrees: 180))
       .onChange(of: currentScrollViewPosition, perform: { _ in
         // If user scrolls, automatically close keyboard and menus
         cookConversionViewModel.stopShowingKeyboardAndMenus()

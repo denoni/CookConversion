@@ -9,12 +9,15 @@ import SwiftUI
 
 struct ReadableScrollView<Content: View>: View {
   @Binding var currentPosition: CGFloat
+  var reversedScrolling = false
   @ViewBuilder var content: Content
 
   var body: some View {
     ScrollView(showsIndicators: false) {
       Group {
         content
+        // The scroll view is reversed, the views need to be reversed again so they don't get upside down
+        .rotationEffect(Angle(degrees: 180))
       }
       .background(GeometryReader {
           Color.clear.preference(key: ViewOffsetKey.self,
@@ -22,6 +25,8 @@ struct ReadableScrollView<Content: View>: View {
       })
       .onPreferenceChange(ViewOffsetKey.self) { currentPosition = $0 }
     }
+    // To reverse the scroll view
+    .rotationEffect(Angle(degrees: 180))
     .coordinateSpace(name: "scroll")
   }
 }
