@@ -13,7 +13,7 @@ struct CookConversionApp: App {
   
   var body: some Scene {
     WindowGroup {
-      NavigationHandlerView()
+      NavigationHandlerScreen()
         .environmentObject(cookConversionViewModel)
     }
   }

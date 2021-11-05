@@ -18,6 +18,28 @@ struct TapDownButton: View {
         isShowingMenu.toggle()
       }
     }, label: {
+      TapButtonLayout(isShowingMenu: $isShowingMenu, measurementType: measurementType)
+    })
+    .overlay(
+      VStack {
+        if self.isShowingMenu {
+          Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
+          PopOverMenu(selectedItem: measurementType == .preciseMeasure
+                      ? $cookConversionViewModel.currentSelectedPreciseMeasure
+                      : $cookConversionViewModel.currentSelectedEasyMeasure,
+                      isShowingMenu: $isShowingMenu,
+                      measurementType: measurementType)
+        }
+      }, alignment: .topLeading
+    )
+  }
+
+  fileprivate struct TapButtonLayout: View {
+    @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
+    @Binding var isShowingMenu: Bool
+    var measurementType: CookConversionModel.MeasurementType
+
+    var body: some View {
       ZStack {
         RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
           .foregroundColor(.whiteDarkSensitive)
@@ -39,19 +61,7 @@ struct TapDownButton: View {
             .padding(.trailing, Constants.smallPadding)
         }
       }
-    })
-    .overlay(
-      VStack {
-        if self.isShowingMenu {
-          Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
-          PopOverMenu(selectedItem: measurementType == .preciseMeasure
-                      ? $cookConversionViewModel.currentSelectedPreciseMeasure
-                      : $cookConversionViewModel.currentSelectedEasyMeasure,
-                      isShowingMenu: $isShowingMenu,
-                      measurementType: measurementType)
-        }
-      }, alignment: .topLeading
-    )
+    }
   }
 }
 
@@ -60,7 +70,6 @@ struct PopOverMenu: View {
   @Binding var selectedItem: CookConversionModel.Measure
   @Binding var isShowingMenu: Bool
   var measurementType: CookConversionModel.MeasurementType
-
 
   var body: some View {
       ZStack {
@@ -92,7 +101,7 @@ struct PopOverMenu: View {
       .padding(.horizontal, Constants.standardPadding)
       .shadow(radius: 25)
       .frame(width: 200)
-      .frame(height: 250)
+      .frame(height: 220)
       .scaledToFit()
       .ignoresSafeArea()
       .zIndex(1)
