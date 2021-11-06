@@ -8,6 +8,8 @@
 
 "enabled-precise-measures" = "MEDIDAS PRECISAS HABILITADAS";
 "enabled-common-measures" = "MEDIDAS COMUNES HABILITADAS";
+"language-settings" = "AJUSTES DE IDIOMA";
+"language" = "Idioma";
 
 "settings" = "Ajustes";
 "convert" = "Convertir";

@@ -14,7 +14,7 @@ struct SettingsView: View {
   var body: some View {
     NavigationView {
       Form {
-        Section(header: Text("enabled-precise-measures")) {
+        Section(header: Text( LocalizedStringKey("enabled-precise-measures").stringValue() )) {
           ForEach(CookConversionViewModel.getPreciseMeasures(), id: \.self.name) { preciseMeasure in
             Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[preciseMeasure])!) {
               Text(preciseMeasure.name)
@@ -24,7 +24,7 @@ struct SettingsView: View {
                       && cookConversionViewModel.measuresEnabledStatus[preciseMeasure]! == true)
           }
         }
-        Section(header: Text("enabled-common-measures")) {
+        Section(header: Text( LocalizedStringKey("enabled-common-measures").stringValue() )) {
           ForEach(CookConversionViewModel.getCommonMeasures(), id: \.self.name) { commonMeasure in
             Toggle(isOn: Binding($cookConversionViewModel.measuresEnabledStatus[commonMeasure])!) {
               Text(commonMeasure.name)
@@ -34,11 +34,19 @@ struct SettingsView: View {
                       && cookConversionViewModel.measuresEnabledStatus[commonMeasure]! == true)
           }
         }
-        // TODO: Add option to select language
+        Section(header: Text( LocalizedStringKey("language-settings").stringValue() )) {
+          Section {
+            Picker( LocalizedStringKey("language").stringValue() , selection: $cookConversionViewModel.currentLanguage) {
+              ForEach(CookConversionModel.AvailableLanguages.allCases, id: \.self) {
+                Text($0.languageFullName)
+              }
+            }
+          }
+        }
       }
-      .navigationBarTitle("settings")
+      .navigationBarTitle( LocalizedStringKey("settings").stringValue() )
       .navigationBarItems(leading: Button(action: { presentationMode.wrappedValue.dismiss() },
-                                          label: { Text("close") } ))
+                                          label: { Text( LocalizedStringKey("close").stringValue() ) } ))
     }
   }
 }

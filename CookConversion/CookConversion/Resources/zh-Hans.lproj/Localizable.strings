@@ -8,6 +8,8 @@
 
 "enabled-precise-measures" = "启用精确测量";
 "enabled-common-measures" = "启用通用措施";
+"language-settings" = "选择您的首选语言";
+"language" = "语言";
 
 "settings" = "设置";
 "convert" = "转换";

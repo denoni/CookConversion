@@ -15,6 +15,7 @@ struct CookConversionApp: App {
     WindowGroup {
       NavigationHandlerScreen()
         .environmentObject(cookConversionViewModel)
+        .environment(\.locale, .init(identifier: cookConversionViewModel.currentLanguage.localizedLanguageCode))
     }
   }
 }

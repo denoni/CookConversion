@@ -37,6 +37,9 @@
 		C0AAD6DF27357AF500D3EC89 /* LocalizedStringKey+StringValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AAD6DE27357AF500D3EC89 /* LocalizedStringKey+StringValue.swift */; };
 		C0AAD6E12735937D00D3EC89 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AAD6E02735937D00D3EC89 /* Utility.swift */; };
 		C0AAD6E72735D63E00D3EC89 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AAD6E62735D63E00D3EC89 /* Accessibility.swift */; };
+		C0C97D7A27360E430042914F /* PreciseMeasure+getNameAndAbbreviated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C97D7927360E430042914F /* PreciseMeasure+getNameAndAbbreviated.swift */; };
+		C0C97D7C27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C97D7B27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift */; };
+		C0C97D7E27360EBB0042914F /* Measure+getNameAndAbbreviated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C97D7D27360EBB0042914F /* Measure+getNameAndAbbreviated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +97,9 @@
 		C0AAD6E32735A2D100D3EC89 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C0AAD6E52735BA7E00D3EC89 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C0AAD6E62735D63E00D3EC89 /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
+		C0C97D7927360E430042914F /* PreciseMeasure+getNameAndAbbreviated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreciseMeasure+getNameAndAbbreviated.swift"; sourceTree = "<group>"; };
+		C0C97D7B27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonMeasure+getNameAndAbbreviated.swift"; sourceTree = "<group>"; };
+		C0C97D7D27360EBB0042914F /* Measure+getNameAndAbbreviated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measure+getNameAndAbbreviated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +245,9 @@
 				C092E5C5273233420088AB03 /* Double+Rounded.swift */,
 				C07CFD832731790A00747568 /* ColorPalette.swift */,
 				C0AAD6DE27357AF500D3EC89 /* LocalizedStringKey+StringValue.swift */,
+				C0C97D7927360E430042914F /* PreciseMeasure+getNameAndAbbreviated.swift */,
+				C0C97D7D27360EBB0042914F /* Measure+getNameAndAbbreviated.swift */,
+				C0C97D7B27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -420,16 +429,19 @@
 				C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */,
 				C0AAD6DF27357AF500D3EC89 /* LocalizedStringKey+StringValue.swift in Sources */,
 				C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */,
+				C0C97D7C27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift in Sources */,
 				C07CFD982731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift in Sources */,
 				C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */,
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
 				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
 				C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */,
 				C098B0422734D3A1003F7CCA /* OnboardingScreen.swift in Sources */,
+				C0C97D7E27360EBB0042914F /* Measure+getNameAndAbbreviated.swift in Sources */,
 				C098B04A2734D946003F7CCA /* UserInputSection.swift in Sources */,
 				C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */,
 				C098B0402734D001003F7CCA /* NavigationHandlerScreen.swift in Sources */,
 				C0AAD6E72735D63E00D3EC89 /* Accessibility.swift in Sources */,
+				C0C97D7A27360E430042914F /* PreciseMeasure+getNameAndAbbreviated.swift in Sources */,
 				C0AAD6E12735937D00D3EC89 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

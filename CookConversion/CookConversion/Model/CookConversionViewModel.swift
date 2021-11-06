@@ -13,6 +13,14 @@ class CookConversionViewModel: ObservableObject {
   @Published var currentTypedNumber: String = ""
   @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(preciseMeasure: .milliliter)
   @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(commonMeasure: .tablespoon)
+  @Environment(\.locale) var locale
+
+  @Published var currentLanguage: CookConversionModel.AvailableLanguages {
+    didSet {
+      UserDefaults.standard.set(currentLanguage.localizedLanguageCode, forKey: "language")
+      forceUpdateViewsWithNewLanguage()
+    }
+  }
 
   // User can disable a measure so it won't appear in the list anymore. This dictionary controls what is active and what is not.
   @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]() {
@@ -22,15 +30,19 @@ class CookConversionViewModel: ObservableObject {
       }
     }
   }
-  
+
+  static var sampleConversionItem: ConversionItem {
+    ConversionItem(search: (measure: LocalizedStringKey("ounces").stringValue(),
+                            abbreviated:  LocalizedStringKey("ounces-abbreviated").stringValue(),
+                            value: "10"),
+                   response: (measure: LocalizedStringKey("tablespoons").stringValue(),
+                              abbreviated: LocalizedStringKey("tablespoons-abbreviated").stringValue(),
+                              value: "20"))
+  }
+
   // Create the list of conversions and add a sample conversion as the first element
-  @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (measure: LocalizedStringKey("ounces").stringValue(),
-                                                                                  abbreviated:  LocalizedStringKey("ounces-abbreviated").stringValue(),
-                                                                                  value: "10"),
-                                                                         response: (measure: LocalizedStringKey("tablespoons").stringValue(),
-                                                                                    abbreviated: LocalizedStringKey("tablespoons-abbreviated").stringValue(),
-                                                                                    value: "20"))]
-  
+  @Published var previousConversions: [ConversionItem]
+
   // The button text is also used to show indications that the typed string is not valid
   // (e.g. is not a double or is bigger than the limit)
   @Published var convertButtonText: String = LocalizedStringKey("convert").stringValue()
@@ -46,8 +58,19 @@ class CookConversionViewModel: ObservableObject {
     let id = UUID()
   }
 
+  @objc func localeChanged() { currentLanguage = CookConversionModel.AvailableLanguages.getLanguage(from: Locale.current.languageCode ?? "") }
+
   init() {
     let encodedMeasuresEnabledStatus = UserDefaults.standard.object(forKey: "measures-enabled-status") as? Data
+    let userLanguage = UserDefaults.standard.string(forKey: "language")
+
+    previousConversions = [CookConversionViewModel.sampleConversionItem]
+
+    if userLanguage != nil {
+      currentLanguage = CookConversionModel.AvailableLanguages.getLanguage(from: userLanguage!)
+    } else {
+      currentLanguage = CookConversionModel.AvailableLanguages.getLanguage(from: Locale.current.languageCode!)
+    }
 
     if encodedMeasuresEnabledStatus == nil {
       for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
@@ -63,6 +86,8 @@ class CookConversionViewModel: ObservableObject {
 
     currentSelectedCommonMeasure = getOnlyFirstEnabledMeasure(for: .commonMeasure)
     currentSelectedPreciseMeasure = getOnlyFirstEnabledMeasure(for: .preciseMeasure)
+
+    NotificationCenter.default.addObserver(self, selector: #selector(localeChanged), name: NSLocale.currentLocaleDidChangeNotification, object: nil)
   }
 
   // MARK: - Intent(s)
@@ -123,19 +148,19 @@ class CookConversionViewModel: ObservableObject {
   }
 
   func getEnabledMeasures(for measureType: CookConversionModel.MeasurementType) -> [CookConversionModel.Measure] {
-      var activeMeasures = [CookConversionModel.Measure]()
-      let currentMeasures = CookConversionViewModel.getMeasuresFor(measureType)
+    var activeMeasures = [CookConversionModel.Measure]()
+    let currentMeasures = CookConversionViewModel.getMeasuresFor(measureType)
 
-      // Gets only the measures that weren't disabled by the user.
-      for (measure, isEnabled) in measuresEnabledStatus {
-        for currentMeasure in currentMeasures {
-          if currentMeasure == measure && isEnabled == true {
-            activeMeasures.append(currentMeasure)
-          }
+    // Gets only the measures that weren't disabled by the user.
+    for (measure, isEnabled) in measuresEnabledStatus {
+      for currentMeasure in currentMeasures {
+        if currentMeasure == measure && isEnabled == true {
+          activeMeasures.append(currentMeasure)
         }
       }
+    }
 
-      return activeMeasures
+    return activeMeasures
   }
 
   func numberOfEnableItems(for measureType: CookConversionModel.MeasurementType) -> Int {
@@ -186,6 +211,13 @@ class CookConversionViewModel: ObservableObject {
   func updateCurrentSelectedMeasures() {
     currentSelectedCommonMeasure = getOnlyFirstEnabledMeasure(for: .commonMeasure)
     currentSelectedPreciseMeasure = getOnlyFirstEnabledMeasure(for: .preciseMeasure)
+  }
+
+  private func forceUpdateViewsWithNewLanguage() {
+    // Force update the view button message
+    convertButtonText = LocalizedStringKey("convert").stringValue()
+    // Add a new conversion to the history in the new language to indicate the change
+    previousConversions.append(CookConversionViewModel.sampleConversionItem)
   }
 
   private func handleInvalidCurrentTypedValue() {

@@ -36,7 +36,10 @@ fileprivate extension String {
 }
 
 extension LocalizedStringKey {
-  func stringValue(locale: Locale = .current) -> String {
+  var userLanguage: String? { UserDefaults.standard.string(forKey: "language") }
+
+  func stringValue() -> String {
+    let locale = userLanguage == nil ? .current : Locale(identifier: userLanguage!)
     return .localizedString(for: self.stringKey, locale: locale)
   }
 }

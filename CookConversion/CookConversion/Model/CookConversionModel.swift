@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI // Need SwiftUI because of LocalizedStringKey
 
 struct CookConversionModel {
   enum MeasurementType {
@@ -56,6 +55,32 @@ struct CookConversionModel {
         return "zh-Hans"
       }
     }
+
+    var languageFullName: String {
+      switch self {
+      case .english:
+        return "English"
+      case .portuguese:
+        return "Português"
+      case .spanish:
+        return "Español"
+      case .french:
+        return "Français"
+      case .chinese:
+        return "中国人"
+      }
+    }
+
+    static func getLanguage(from languageCode: String) -> AvailableLanguages {
+      for availableLanguageCode in AvailableLanguages.allCases {
+        if languageCode == availableLanguageCode.localizedLanguageCode {
+          return availableLanguageCode
+        }
+      }
+      // if didn't find a match
+      return .english
+    }
+
   }
   
   let numberFormatter: NumberFormatter = {
@@ -122,77 +147,4 @@ struct CookConversionModel {
     }
   }
   
-}
-
-
-extension CookConversionModel.Measure.PreciseMeasure {
-  
-  var name: String {
-    return self.getNameAndAbbreviation().name.stringValue()
-  }
-  
-  var abbreviated: String? {
-    return self.getNameAndAbbreviation().abbreviated?.stringValue()
-  }
-  
-  private func getNameAndAbbreviation() -> (name: LocalizedStringKey, abbreviated: LocalizedStringKey?) {
-    switch self {
-    case .ounce:
-      return (name: "ounces", abbreviated: "ounces-abbreviated")
-    case .gallon:
-      return (name: "gallons", abbreviated: "gallons-abbreviated")
-    case .gram:
-      return (name: "grams", abbreviated: "grams-abbreviated")
-    case .kilogram:
-      return (name: "kilograms", abbreviated: "kilograms-abbreviated")
-    case .milliliter:
-      return (name: "milliliters", abbreviated: "milliliters-abbreviated")
-    case .liter:
-      return (name: "liters", abbreviated: "liters-abbreviated")
-    }
-  }
-}
-
-extension CookConversionModel.Measure.CommonMeasure {
-  
-  var name: String {
-    return self.getNameAndAbbreviation().name.stringValue()
-  }
-  
-  var abbreviated: String? {
-    return self.getNameAndAbbreviation().abbreviated?.stringValue()
-  }
-  
-  private func getNameAndAbbreviation() -> (name: LocalizedStringKey, abbreviated: LocalizedStringKey?) {
-    switch self {
-    case .teaspoon:
-      return (name: "teaspoons", abbreviated: "teaspoons-abbreviated")
-    case .tablespoon:
-      return (name: "tablespoons", abbreviated: "tablespoons-abbreviated")
-    case .cups:
-      return (name: "cups", abbreviated: nil)
-    case .teacup:
-      return (name: "teacups", abbreviated: nil)
-    }
-  }
-}
-
-extension CookConversionModel.Measure {
-  
-  var name: String {
-    return self.getNameAndAbbreviation().name
-  }
-  
-  var abbreviated: String? {
-    return self.getNameAndAbbreviation().abbreviated
-  }
-  
-  func getNameAndAbbreviation() -> (name: String, abbreviated: String?) {
-    switch self {
-    case .preciseMeasure(let preciseMeasure):
-      return (preciseMeasure.name, preciseMeasure.abbreviated)
-    case .commonMeasure(let commonMeasure):
-      return (commonMeasure.name, commonMeasure.abbreviated)
-    }
-  }
 }

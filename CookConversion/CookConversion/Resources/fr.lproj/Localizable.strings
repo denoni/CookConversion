@@ -8,6 +8,8 @@
 
 "enabled-precise-measures" = "MESURES PRÉCISES ACTIVÉES";
 "enabled-common-measures" = "MESURES COMMUNES ACTIVÉES";
+"language-settings" = "PARAMÈTRES DE LANGUE";
+"language" = "Langue";
 
 "settings" = "Réglage";
 "convert" = "Convertir";

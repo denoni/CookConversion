@@ -8,6 +8,8 @@
 
 "enabled-precise-measures" = "ENABLED PRECISE MEASURES";
 "enabled-common-measures" = "ENABLED COMMON MEASURES";
+"language-settings" = "LANGUAGE SETTINGS";
+"language" = "Language";
 
 "settings" = "Settings";
 "convert" = "Convert";
