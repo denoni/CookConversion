@@ -58,7 +58,7 @@ struct TopSelectionSection: View {
           Image(systemName: "gear")
             .resizable()
             .renderingMode(.template)
-            .foregroundColor(Color.blackDarkSensitive)
+            .foregroundColor(.white)
             .frame(width: 25, height: 25)
         })
       }
