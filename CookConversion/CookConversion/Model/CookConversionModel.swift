@@ -14,18 +14,18 @@ struct CookConversionModel {
     case commonMeasure
   }
   
-  enum Measure: Hashable {
-    case preciseMeasure(_ preciseMeasure: PreciseMeasure)
-    case commonMeasure(_ commonMeasure: CommonMeasure)
+  enum Measure: Hashable & Codable {
+    case preciseMeasure(preciseMeasure: PreciseMeasure)
+    case commonMeasure(commonMeasure: CommonMeasure)
     
-    enum CommonMeasure: CaseIterable {
+    enum CommonMeasure: CaseIterable & Codable {
       case teaspoon
       case tablespoon
       case cups
       case teacup
     }
     
-    enum PreciseMeasure: CaseIterable {
+    enum PreciseMeasure: CaseIterable & Codable {
       case ounce
       case gallon
       case gram
@@ -75,7 +75,7 @@ struct CookConversionModel {
   func getPreciseMeasures() -> [Measure] {
     var listOfMeasures = [Measure]()
     for measure in Measure.PreciseMeasure.allCases {
-      listOfMeasures.append(.preciseMeasure(measure))
+      listOfMeasures.append(.preciseMeasure(preciseMeasure: measure))
     }
     return listOfMeasures
   }
@@ -83,7 +83,7 @@ struct CookConversionModel {
   func getCommonMeasures() -> [Measure] {
     var listOfMeasures = [Measure]()
     for measure in Measure.CommonMeasure.allCases {
-      listOfMeasures.append(.commonMeasure(measure))
+      listOfMeasures.append(.commonMeasure(commonMeasure: measure))
     }
     return listOfMeasures
   }

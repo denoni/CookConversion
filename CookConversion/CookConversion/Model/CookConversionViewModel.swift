@@ -11,11 +11,17 @@ import SwiftUI
 class CookConversionViewModel: ObservableObject {
   private static let model = CookConversionModel()
   @Published var currentTypedNumber: String = ""
-  @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(.milliliter)
-  @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(.tablespoon)
+  @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(preciseMeasure: .milliliter)
+  @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(commonMeasure: .tablespoon)
 
   // User can disable a measure so it won't appear in the list anymore. This dictionary controls what is active and what is not.
-  @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]()
+  @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]() {
+    didSet {
+      if let encodedMeasuresEnabledStatus = try? JSONEncoder().encode(measuresEnabledStatus) {
+        UserDefaults.standard.set(encodedMeasuresEnabledStatus, forKey: "measures-enabled-status")
+      }
+    }
+  }
   
   // Create the list of conversions and add a sample conversion as the first element
   @Published var previousConversions: [ConversionItem] = [ConversionItem(search: (measure: LocalizedStringKey("ounces").stringValue(),
@@ -41,11 +47,18 @@ class CookConversionViewModel: ObservableObject {
   }
 
   init() {
-    for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
-      measuresEnabledStatus[preciseMeasure] = true
-    }
-    for commonMeasure in CookConversionViewModel.getCommonMeasures() {
-      measuresEnabledStatus[commonMeasure] = true
+    let encodedMeasuresEnabledStatus = UserDefaults.standard.object(forKey: "measures-enabled-status") as? Data
+
+    if encodedMeasuresEnabledStatus == nil {
+      for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
+        measuresEnabledStatus[preciseMeasure] = true
+      }
+      for commonMeasure in CookConversionViewModel.getCommonMeasures() {
+        measuresEnabledStatus[commonMeasure] = true
+      }
+    } else {
+      let measuresEnabledStatusInUserDefaults = try? JSONDecoder().decode([CookConversionModel.Measure: Bool].self, from: encodedMeasuresEnabledStatus!)
+      measuresEnabledStatus = measuresEnabledStatusInUserDefaults!
     }
 
     currentSelectedCommonMeasure = getOnlyFirstEnabledMeasure(for: .commonMeasure)
