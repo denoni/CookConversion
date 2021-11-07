@@ -21,6 +21,8 @@ extension CookConversionModel.Measure.PreciseMeasure {
     switch self {
     case .ounce:
       return (name: "ounces", abbreviated: "ounces-abbreviated")
+    case .fluidOunce:
+      return (name: "fluid-ounces", abbreviated: "fluid-ounces-abbreviated")
     case .gallon:
       return (name: "gallons", abbreviated: "gallons-abbreviated")
     case .gram:

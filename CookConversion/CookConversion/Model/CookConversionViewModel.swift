@@ -69,16 +69,18 @@ class CookConversionViewModel: ObservableObject {
       currentLanguage = CookConversionModel.AvailableLanguages.getLanguage(from: Locale.current.languageCode!)
     }
 
-    if encodedMeasuresEnabledStatus == nil {
-      for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
-        measuresEnabledStatus[preciseMeasure] = true
-      }
-      for commonMeasure in CookConversionViewModel.getCommonMeasures() {
-        measuresEnabledStatus[commonMeasure] = true
+    // Test if we have 'measuresEnabledStatus' stored in UserDefaults
+    if encodedMeasuresEnabledStatus != nil {
+      let measuresEnabledStatusInUserDefaults = try? JSONDecoder().decode([CookConversionModel.Measure: Bool].self, from: encodedMeasuresEnabledStatus!)
+      // If the number of measures in UserDefaults is different from the total number of measures, that means that some measure is missing
+      // in UserDefaults, so we can't use the UserDefaults data to get the enabledStatus of the measures
+      if measuresEnabledStatusInUserDefaults!.count == CookConversionModel.getTotalNumberOfMeasures() {
+        measuresEnabledStatus = measuresEnabledStatusInUserDefaults!
+      } else {
+        giveDefaultStatusToAllMeasures()
       }
     } else {
-      let measuresEnabledStatusInUserDefaults = try? JSONDecoder().decode([CookConversionModel.Measure: Bool].self, from: encodedMeasuresEnabledStatus!)
-      measuresEnabledStatus = measuresEnabledStatusInUserDefaults!
+      giveDefaultStatusToAllMeasures()
     }
 
     currentSelectedCommonMeasure = getOnlyFirstEnabledMeasure(for: .commonMeasure)
@@ -134,6 +136,15 @@ class CookConversionViewModel: ObservableObject {
   
   
   // MARK: - Auxiliary Functions
+
+  func giveDefaultStatusToAllMeasures() {
+    for preciseMeasure in CookConversionViewModel.getPreciseMeasures() {
+      measuresEnabledStatus[preciseMeasure] = true
+    }
+    for commonMeasure in CookConversionViewModel.getCommonMeasures() {
+      measuresEnabledStatus[commonMeasure] = true
+    }
+  }
 
   static func getMeasuresFor(_ measurementType: CookConversionModel.MeasurementType) -> [CookConversionModel.Measure] {
     switch measurementType {

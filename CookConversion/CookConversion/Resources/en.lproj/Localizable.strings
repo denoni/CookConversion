@@ -18,6 +18,7 @@
 "too-high-number" = "Value can't be higher than 5000";
 
 "ounces" = "Ounces";
+"fluid-ounces" = "Fluid Ounces";
 "gallons" = "Gallons";
 "grams" = "Grams";
 "kilograms" = "Kilograms";
@@ -29,6 +30,7 @@
 "teacups" = "Teacups";
 "cups" = "Cups";
 
+"fluid-ounces-abbreviated" = "fl. oz.";
 "ounces-abbreviated" = "oz.";
 "gallons-abbreviated" = "gal.";
 "grams-abbreviated" = "g";

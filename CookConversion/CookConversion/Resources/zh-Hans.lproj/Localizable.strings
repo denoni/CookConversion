@@ -18,6 +18,7 @@
 "too-high-number" = "该值不能大于 5000";
 
 "ounces" = "盎司";
+"fluid-ounces" = "液体盎司";
 "gallons" = "加仑";
 "grams" = "克";
 "kilograms" = "公斤";
@@ -30,6 +31,7 @@
 "cups" = "杯";
 
 "ounces-abbreviated" = "oz.(盎司)";
+"fluid-ounces-abbreviated" = "fl. oz.(液体盎司)";
 "gallons-abbreviated" = "gal.(加仑)";
 "grams-abbreviated" = "g(克)";
 "kilograms-abbreviated" = "kg(公斤)";

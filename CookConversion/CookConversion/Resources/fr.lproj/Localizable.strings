@@ -17,7 +17,8 @@
 "invalid-number" = "La valeur saisie n'est pas un nombre";
 "too-high-number" = "La valeur ne peut pas être supérieure à 5000";
 
-"ounces" = "Onces";
+"fluid-ounces" = "Onces";
+"fluid-ounces" = "Onces Liquides";
 "gallons" = "Gallons";
 "grams" = "Grammes";
 "kilograms" = "Kilogrammes";
@@ -30,6 +31,7 @@
 "cups" = "Tasses";
 
 "ounces-abbreviated" = "oz.";
+"fluid-ounces-abbreviated" = "fl. oz.";
 "gallons-abbreviated" = "gal.";
 "grams-abbreviated" = "g";
 "kilograms-abbreviated" = "kg";

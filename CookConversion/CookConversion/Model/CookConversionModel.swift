@@ -26,6 +26,7 @@ struct CookConversionModel {
     
     enum PreciseMeasure: CaseIterable & Codable {
       case ounce
+      case fluidOunce
       case gallon
       case gram
       case kilogram
@@ -117,11 +118,28 @@ struct CookConversionModel {
     }
     return listOfMeasures
   }
-  
+
+  // MARK: - Auxiliary
+
+  static func getTotalNumberOfMeasures() -> Int {
+    var measureCount = 0
+    for _ in Measure.CommonMeasure.allCases {
+      measureCount += 1
+    }
+    for _ in Measure.PreciseMeasure.allCases {
+      measureCount += 1
+    }
+    return measureCount
+  }
+
+  // MARK: - Convertions
+
   private func convertToGram(_ inputValue: Double, from initialMeasure: Measure) -> Double {
     switch initialMeasure {
     case .preciseMeasure(.ounce):
       return inputValue * 29.5735
+    case .preciseMeasure(.fluidOunce):
+      return inputValue * 29.5735 * 0.82 // TODO: Depends on density
     case .preciseMeasure(.gallon):
       return inputValue * 3785.4 * 0.82 // TODO: Depends on density
     case .preciseMeasure(.gram):
@@ -171,6 +189,8 @@ struct CookConversionModel {
     switch finalMeasure {
     case .preciseMeasure(.ounce):
       return measureInTablespoons / 2 * 0.82 // TODO: Depends on density
+    case .preciseMeasure(.fluidOunce):
+      return measureInTablespoons / 2
     case .preciseMeasure(.gallon):
       return measureInTablespoons / 256
     case .preciseMeasure(.gram):

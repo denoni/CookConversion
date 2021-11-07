@@ -18,6 +18,7 @@
 "too-high-number" = "O valor não pode ser maior que 5000";
 
 "ounces" = "Onças";
+"fluid-ounces" = "Onças Líquidas";
 "gallons" = "Galões";
 "grams" = "Gramas";
 "kilograms" = "Quilogramas";
@@ -30,6 +31,7 @@
 "cups" = "Copos";
 
 "ounces-abbreviated" = "oz.";
+"fluid-ounces-abbreviated" = "fl. oz.";
 "gallons-abbreviated" = "gal.";
 "grams-abbreviated" = "g";
 "kilograms-abbreviated" = "kg";
