@@ -59,7 +59,7 @@ struct UserInputSection: View {
             .accessibility(label: accessibilityLabelOfCurrentValueTextField)
             .accessibility(sortPriority: 3)
 
-          Text(cookConversionViewModel.getCurrentSelectedOutputMeasure().name)
+          Text(cookConversionViewModel.getCurrentSelectedInputMeasure().name)
               .font(.title2.weight(.heavy))
               .lineLimit(1)
               .minimumScaleFactor(0.5)

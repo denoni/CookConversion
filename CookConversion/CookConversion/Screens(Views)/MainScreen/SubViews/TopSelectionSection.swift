@@ -48,6 +48,7 @@ struct TopSelectionSection: View {
     .padding(.bottom, -keyboardResponder.currentHeight)
     // If user taps in some view(that's not a tappable item), close keyboard and menus
     .onTapGesture { UIApplication.shared.stopShowingKeyboard() }
+    .zIndex(1)
     .sheet(isPresented: $settingsScreenIsOpen,
            onDismiss: { cookConversionViewModel.updateCurrentSelectedMeasures() }) {
       SettingsView()
