@@ -108,30 +108,28 @@ class CookConversionViewModel: ObservableObject {
     UIApplication.shared.stopShowingKeyboard()
     
     let formattedCurrentTypedValue = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)!.doubleValue
+    let currentInputMeasure = getCurrentSelectedInputMeasure()
+    let currentOutputMeasure = getCurrentSelectedOutputMeasure()
+
+    let result = CookConversionViewModel.model.convert(formattedCurrentTypedValue, from: currentInputMeasure, to: currentOutputMeasure)
     
-    var result: Double {
-      if inputMeasureType == .preciseMeasure {
-        return CookConversionViewModel.model.convert(formattedCurrentTypedValue, from: currentSelectedPreciseMeasure, to: currentSelectedCommonMeasure)
-      } else {
-        return CookConversionViewModel.model.convert(formattedCurrentTypedValue, from: currentSelectedCommonMeasure, to: currentSelectedPreciseMeasure)
-      }
-    }
+    print(result)
     
     let formattedCurrentTypedValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: formattedCurrentTypedValue))!
     let formattedResultValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"
     
     
-    previousConversions.append(ConversionItem(search: (measure: currentSelectedPreciseMeasure.name,
-                                                       abbreviated: currentSelectedPreciseMeasure.abbreviated ?? currentSelectedPreciseMeasure.name,
+    previousConversions.append(ConversionItem(search: (measure: currentInputMeasure.name,
+                                                       abbreviated: currentInputMeasure.abbreviated ?? currentInputMeasure.name,
                                                        value: formattedCurrentTypedValueAsString),
-                                              response: (measure: currentSelectedCommonMeasure.name,
-                                                         abbreviated: currentSelectedCommonMeasure.abbreviated ?? currentSelectedCommonMeasure.name,
+                                              response: (measure: currentOutputMeasure.name,
+                                                         abbreviated: currentOutputMeasure.abbreviated ?? currentOutputMeasure.name,
                                                          value: formattedResultValueAsString) ))
     
     Accessibility.postConversionCompletedNotification(conversionInputValue: formattedCurrentTypedValueAsString,
-                                                      inputMeasure: currentSelectedPreciseMeasure.name,
+                                                      inputMeasure: currentInputMeasure.name,
                                                       outputValue: formattedResultValueAsString,
-                                                      outputMeasure: currentSelectedCommonMeasure.name)
+                                                      outputMeasure: currentOutputMeasure.name)
   }
   
   
@@ -238,6 +236,22 @@ class CookConversionViewModel: ObservableObject {
     }
     // This text will never be showed
     return (booleanResponse: true, description: "Success")
+  }
+
+  func getCurrentSelectedInputMeasure() -> CookConversionModel.Measure {
+    if inputMeasureType == .preciseMeasure {
+      return currentSelectedPreciseMeasure
+    } else {
+      return currentSelectedCommonMeasure
+    }
+  }
+
+  func getCurrentSelectedOutputMeasure() -> CookConversionModel.Measure {
+    if inputMeasureType == .preciseMeasure {
+      return currentSelectedCommonMeasure
+    } else {
+      return currentSelectedPreciseMeasure
+    }
   }
   
 }

@@ -13,7 +13,7 @@ struct TopSelectionSection: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
   @State var settingsScreenIsOpen = false
 
-  private var outputMeasure: CookConversionModel.MeasurementType {
+  private var outputMeasureType: CookConversionModel.MeasurementType {
     if cookConversionViewModel.inputMeasureType == .preciseMeasure {
       return .commonMeasure
     } else {
@@ -32,7 +32,7 @@ struct TopSelectionSection: View {
           TapDownButton(measurementType: cookConversionViewModel.inputMeasureType)
             .accessibilityHint("Tap to open a list of possible input measures to choose.")
             .accessibility(sortPriority: 3)
-          TapDownButton(measurementType: outputMeasure)
+          TapDownButton(measurementType: outputMeasureType)
             .accessibilityHint("Tap to open a list of possible output measures to choose.")
             .accessibility(sortPriority: 3)
         }
