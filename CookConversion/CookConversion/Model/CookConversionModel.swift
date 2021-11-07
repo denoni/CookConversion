@@ -88,7 +88,7 @@ struct CookConversionModel {
     formatter.locale = Locale.current
     formatter.numberStyle = .decimal
     formatter.minimum = 0
-    formatter.maximumFractionDigits = 1
+    formatter.maximumFractionDigits = 2
     return formatter
   }()
   
@@ -121,17 +121,17 @@ struct CookConversionModel {
   private func convertToGram(_ inputValue: Double, from initialMeasure: Measure) -> Double {
     switch initialMeasure {
     case .preciseMeasure(.ounce):
-      return inputValue * 29.5735 / 0.82 // TODO: Depends on density
+      return inputValue * 29.5735
     case .preciseMeasure(.gallon):
-      return inputValue * 3785.4 / 0.82 // TODO: Depends on density
+      return inputValue * 3785.4 * 0.82 // TODO: Depends on density
     case .preciseMeasure(.gram):
       return inputValue
     case .preciseMeasure(.kilogram):
       return inputValue * 1000
     case .preciseMeasure(.milliliter):
-      return inputValue / 0.82 // TODO: Depends on density
+      return inputValue * 0.82 // TODO: Depends on density
     case .preciseMeasure(.liter):
-      return inputValue / 0.82 * 1000 // TODO: Depends on density
+      return inputValue * 0.82 * 1000 // TODO: Depends on density
     default:
       fatalError("Type not implemented for \(initialMeasure)")
     }
@@ -140,13 +140,13 @@ struct CookConversionModel {
   private func convertFromGramToCommonMeasure(_ measureInGrams: Double, to finalMeasure: Measure) -> Double {
     switch finalMeasure {
     case .commonMeasure(.teaspoon):
-      return measureInGrams / 4.92892 * 0.82 // TODO: Depends on density
+      return measureInGrams / 4.92892 / 0.82 // TODO: Depends on density
     case .commonMeasure(.tablespoon):
-      return measureInGrams / 14.7868 * 0.82 // TODO: Depends on density
+      return measureInGrams / 14.7868 / 0.82 // TODO: Depends on density
     case .commonMeasure(.cups):
-      return measureInGrams / 236.588 * 0.82 // TODO: Depends on density
+      return measureInGrams / 236.588 / 0.82 // TODO: Depends on density
     case .commonMeasure(.teacup):
-      return measureInGrams / 118.294 * 0.82 // TODO: Depends on density
+      return measureInGrams / 118.294 / 0.82 // TODO: Depends on density
     default:
       fatalError("Type not implemented for \(finalMeasure)")
     }
@@ -170,17 +170,17 @@ struct CookConversionModel {
   private func convertFromTablespoonToPreciseMeasure(_ measureInTablespoons: Double, to finalMeasure: Measure) -> Double {
     switch finalMeasure {
     case .preciseMeasure(.ounce):
-      return measureInTablespoons / 2
+      return measureInTablespoons / 2 * 0.82 // TODO: Depends on density
     case .preciseMeasure(.gallon):
       return measureInTablespoons / 256
     case .preciseMeasure(.gram):
-      return measureInTablespoons * 16 / 0.82 // TODO: Depends on density
+      return measureInTablespoons * 14.7868 * 0.82 // TODO: Depends on density
     case .preciseMeasure(.kilogram):
-      return measureInTablespoons * 16 / 0.82 / 1000 // TODO: Depends on density
+      return measureInTablespoons * 14.7868 * 0.82 / 1000 // TODO: Depends on density
     case .preciseMeasure(.milliliter):
-      return measureInTablespoons * 16
+      return measureInTablespoons * 14.7868
     case .preciseMeasure(.liter):
-      return measureInTablespoons * 16 / 1000
+      return measureInTablespoons * 14.7868 / 1000
     default:
       fatalError("Type not implemented for \(finalMeasure)")
     }
