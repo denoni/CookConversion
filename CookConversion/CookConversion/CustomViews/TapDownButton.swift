@@ -70,7 +70,7 @@ struct TapDownButton: View {
       ForEach(cookConversionViewModel.getEnabledMeasures(for: measurementType), id: \.self.name) { measure in
         Group {
           let name = measure.name
-          let abbreviated = measure.abbreviated != nil ? "- (\(measure.abbreviated!))" : ""
+          let abbreviated = measure.abbreviated != nil ? "\n(\(measure.abbreviated!))" : ""
 
           Button(action: { selectItemOfCurrentType(item: measure) }, label: {
             Text("\(name) \(abbreviated)")

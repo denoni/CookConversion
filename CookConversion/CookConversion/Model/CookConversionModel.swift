@@ -132,7 +132,7 @@ struct CookConversionModel {
     return measureCount
   }
 
-  // MARK: - Convertions
+  // MARK: - Conversions
 
   private func convertToGram(_ inputValue: Double, from initialMeasure: Measure) -> Double {
     switch initialMeasure {
