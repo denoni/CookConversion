@@ -11,10 +11,6 @@ struct NavigationHandlerScreen: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
 
   var body: some View {
-    if cookConversionViewModel.isShowingOnboardingScreen {
-      OnboardingScreen()
-    } else {
-      MainScreen()
-    }
+    MainScreen()
   }
 }

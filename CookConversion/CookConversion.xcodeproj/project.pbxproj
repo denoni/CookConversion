@@ -29,7 +29,6 @@
 		C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */; };
 		C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097C1842732DDA0000D7763 /* ReadableScrollView.swift */; };
 		C098B0402734D001003F7CCA /* NavigationHandlerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B03F2734D001003F7CCA /* NavigationHandlerScreen.swift */; };
-		C098B0422734D3A1003F7CCA /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B0412734D3A1003F7CCA /* OnboardingScreen.swift */; };
 		C098B0462734D8EE003F7CCA /* TopSelectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B0452734D8EE003F7CCA /* TopSelectionSection.swift */; };
 		C098B0482734D914003F7CCA /* ConversionResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B0472734D914003F7CCA /* ConversionResponses.swift */; };
 		C098B04A2734D946003F7CCA /* UserInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B0492734D946003F7CCA /* UserInputSection.swift */; };
@@ -86,7 +85,6 @@
 		C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C097C1842732DDA0000D7763 /* ReadableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableScrollView.swift; sourceTree = "<group>"; };
 		C098B03F2734D001003F7CCA /* NavigationHandlerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHandlerScreen.swift; sourceTree = "<group>"; };
-		C098B0412734D3A1003F7CCA /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		C098B0452734D8EE003F7CCA /* TopSelectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSelectionSection.swift; sourceTree = "<group>"; };
 		C098B0472734D914003F7CCA /* ConversionResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionResponses.swift; sourceTree = "<group>"; };
 		C098B0492734D946003F7CCA /* UserInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputSection.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 			children = (
 				C098B0432734D734003F7CCA /* MainScreen */,
 				C098B03F2734D001003F7CCA /* NavigationHandlerScreen.swift */,
-				C098B0412734D3A1003F7CCA /* OnboardingScreen.swift */,
 			);
 			path = "Screens(Views)";
 			sourceTree = "<group>";
@@ -439,7 +436,6 @@
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
 				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
 				C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */,
-				C098B0422734D3A1003F7CCA /* OnboardingScreen.swift in Sources */,
 				C0C97D7E27360EBB0042914F /* Measure+getNameAndAbbreviated.swift in Sources */,
 				C098B04A2734D946003F7CCA /* UserInputSection.swift in Sources */,
 				C07CFD962731AC7100747568 /* CookConversionViewModel.swift in Sources */,

@@ -48,8 +48,6 @@ class CookConversionViewModel: ObservableObject {
   @Published var convertButtonText: String = LocalizedStringKey("convert").stringValue()
   @Published var buttonIsCurrentlyShowingErrorMessage = false
 
-  @Published var isShowingOnboardingScreen = true
-
   struct ConversionItem: Identifiable {
     var search: (measure: String, abbreviated: String, value: String)
     var response: (measure: String, abbreviated: String, value: String)
