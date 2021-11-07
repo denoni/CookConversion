@@ -21,10 +21,10 @@ struct TopSelectionSection: View {
       VStack {
         TopButtonsBar(settingsScreenIsOpen: $settingsScreenIsOpen)
         HStack(alignment: .bottom, spacing: Constants.smallPadding) {
-          TapDownButton(measurementType: .preciseMeasure, isShowingMenu: $cookConversionViewModel.isShowingPreciseMeasureMenu)
+          TapDownButton(measurementType: .preciseMeasure)
             .accessibilityHint("Tap to open a list of possible input measures to choose.")
             .accessibility(sortPriority: 3)
-          TapDownButton(measurementType: .commonMeasure, isShowingMenu: $cookConversionViewModel.isShowingCommonMeasureMenu)
+          TapDownButton(measurementType: .commonMeasure)
             .accessibilityHint("Tap to open a list of possible output measures to choose.")
             .accessibility(sortPriority: 3)
         }
@@ -36,11 +36,10 @@ struct TopSelectionSection: View {
     }
     .ignoresSafeArea()
     .frame(height: topSafeAreaSize + 150)
-    .zIndex(1)
     // Need this negative padding otherwise this view will move up when keyboard opens
     .padding(.bottom, -keyboardResponder.currentHeight)
     // If user taps in some view(that's not a tappable item), close keyboard and menus
-    .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
+    .onTapGesture { UIApplication.shared.stopShowingKeyboard() }
     .sheet(isPresented: $settingsScreenIsOpen,
            onDismiss: { cookConversionViewModel.updateCurrentSelectedMeasures() }) {
       SettingsView()

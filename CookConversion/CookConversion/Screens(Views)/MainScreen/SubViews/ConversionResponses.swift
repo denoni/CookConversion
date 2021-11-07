@@ -36,9 +36,8 @@ struct ConversionResponses: View {
       }
       .padding(.horizontal, 10)
       .onChange(of: currentScrollViewPosition, perform: { _ in
-        print(currentScrollViewPosition)
         // If user scrolls, automatically close keyboard and menus
-        cookConversionViewModel.stopShowingKeyboardAndMenus()
+        UIApplication.shared.stopShowingKeyboard()
       })
 
       SmallFadingOnScrollViewVerticalBorders()
@@ -47,7 +46,7 @@ struct ConversionResponses: View {
     .padding(.top, -Constants.smallPadding)
     .padding(.vertical, Constants.standardPadding)
     // If user taps in some view(that's not a tappable item), close keyboard and menus
-    .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
+    .onTapGesture { UIApplication.shared.stopShowingKeyboard() }
   }
 
   fileprivate struct SmallFadingOnScrollViewVerticalBorders: View {

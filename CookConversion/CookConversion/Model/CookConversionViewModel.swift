@@ -48,8 +48,6 @@ class CookConversionViewModel: ObservableObject {
   @Published var convertButtonText: String = LocalizedStringKey("convert").stringValue()
   @Published var buttonIsCurrentlyShowingErrorMessage = false
 
-  @Published var isShowingPreciseMeasureMenu = false
-  @Published var isShowingCommonMeasureMenu = false
   @Published var isShowingOnboardingScreen = true
 
   struct ConversionItem: Identifiable {
@@ -107,7 +105,8 @@ class CookConversionViewModel: ObservableObject {
       Accessibility.postConversionFailedNotification(errorMessage: convertButtonText)
       return
     }
-    stopShowingKeyboardAndMenus()
+    
+    UIApplication.shared.stopShowingKeyboard()
     
     let formattedCurrentTypedValue = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)!.doubleValue
     
@@ -194,12 +193,6 @@ class CookConversionViewModel: ObservableObject {
     currentTypedValue = newCurrentTypedValueAsString
   }
 
-  func stopShowingKeyboardAndMenus() {
-    UIApplication.shared.stopShowingKeyboard()
-    isShowingPreciseMeasureMenu = false
-    isShowingCommonMeasureMenu = false
-  }
-  
   func getCurrentSelectedMeasureFor(_ measurementType: CookConversionModel.MeasurementType) -> CookConversionModel.Measure {
     switch measurementType {
     case .preciseMeasure:

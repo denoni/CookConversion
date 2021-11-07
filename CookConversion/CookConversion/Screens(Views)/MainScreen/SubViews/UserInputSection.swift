@@ -84,7 +84,7 @@ struct UserInputSection: View {
     .padding(.bottom, keyboardResponder.currentHeight)
     .animation(.easeOut(duration: 0.16))
     // If user taps in some view(that's not a tappable item), close keyboard and menus
-    .onTapGesture { cookConversionViewModel.stopShowingKeyboardAndMenus() }
+    .onTapGesture { UIApplication.shared.stopShowingKeyboard() }
   }
 
   fileprivate struct CustomStepper: View {

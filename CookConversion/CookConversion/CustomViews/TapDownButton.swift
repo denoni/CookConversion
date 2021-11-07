@@ -9,34 +9,17 @@ import SwiftUI
 
 struct TapDownButton: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
-  var measurementType: CookConversionModel.MeasurementType
-  @Binding var isShowingMenu: Bool
+  @State var isShowingMenu = false
+  let measurementType: CookConversionModel.MeasurementType
 
   var body: some View {
-    Button(action: {
-      withAnimation(.interactiveSpring()) {
-        isShowingMenu.toggle()
-      }
-    }, label: {
-      TapButtonLayout(isShowingMenu: $isShowingMenu, measurementType: measurementType)
-    })
-    .overlay(
-      VStack {
-        if self.isShowingMenu {
-          Spacer(minLength: Constants.bigButtonHeight + Constants.smallPadding)
-          PopOverMenu(selectedItem: measurementType == .preciseMeasure
-                      ? $cookConversionViewModel.currentSelectedPreciseMeasure
-                      : $cookConversionViewModel.currentSelectedCommonMeasure,
-                      isShowingMenu: $isShowingMenu,
-                      measurementType: measurementType)
-        }
-      }, alignment: .topLeading
-    )
+    Menu(content: { MenuItems(isShowingMenu: $isShowingMenu, measurementType: measurementType) },
+         label: { TapButtonLayout(isShowingMenu: isShowingMenu, measurementType: measurementType) })
   }
 
   fileprivate struct TapButtonLayout: View {
     @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
-    @Binding var isShowingMenu: Bool
+    @State var isShowingMenu: Bool
     var measurementType: CookConversionModel.MeasurementType
 
     var body: some View {
@@ -68,50 +51,33 @@ struct TapDownButton: View {
       }
     }
   }
-}
 
-struct PopOverMenu: View {
-  @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
-  @Binding var selectedItem: CookConversionModel.Measure
-  @Binding var isShowingMenu: Bool
-  var measurementType: CookConversionModel.MeasurementType
+  fileprivate struct MenuItems: View {
+    @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
+    @Binding var isShowingMenu: Bool
+    let measurementType: CookConversionModel.MeasurementType
 
-  var body: some View {
-      ZStack {
-        RoundedRectangle(cornerRadius: Constants.standardRadius, style: .continuous)
-          .foregroundColor(.whiteDarkSensitive)
-        ScrollView {
-          VStack {
-            ForEach(cookConversionViewModel.getEnabledMeasures(for: measurementType), id: \.self.name) { measure in
-              Button(action: {
-                selectedItem = measure
-                isShowingMenu = false
-              }, label: {
-                VStack {
-                  Text(measure.name)
-                  if let abbreviatedName = measure.abbreviated {
-                    Text("(\(abbreviatedName))")
-                      .font(.footnote.weight(.bold))
-                      .accessibility(hidden: true)
-                  }
-                }
-                .foregroundColor(.blackDarkSensitive)
-                .padding(.top, 5)
-              })
-              Divider()
-            }
-          }
-          .padding()
+    private func selectItemOfCurrentType(item: CookConversionModel.Measure) {
+      switch measurementType {
+      case .commonMeasure:
+        cookConversionViewModel.currentSelectedCommonMeasure = item
+      case .preciseMeasure:
+        cookConversionViewModel.currentSelectedPreciseMeasure = item
+      }
+    }
+
+    var body: some View {
+      ForEach(cookConversionViewModel.getEnabledMeasures(for: measurementType), id: \.self.name) { measure in
+        Group {
+          let name = measure.name
+          let abbreviated = measure.abbreviated != nil ? "- (\(measure.abbreviated!))" : ""
+
+          Button(action: { selectItemOfCurrentType(item: measure) }, label: {
+            Text("\(name) \(abbreviated)")
+          })
         }
       }
-      .padding(.horizontal, Constants.standardPadding)
-      .shadow(radius: 25)
-      .frame(width: 200)
-      .frame(height: 220)
-      .scaledToFit()
-      .ignoresSafeArea()
-      .zIndex(1)
+      .onDisappear { isShowingMenu = false }
     }
+  }
 }
-
-
