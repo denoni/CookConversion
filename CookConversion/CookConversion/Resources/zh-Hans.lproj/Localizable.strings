@@ -10,6 +10,10 @@
 "enabled-common-measures" = "启用通用措施";
 "language-settings" = "选择您的首选语言";
 "language" = "语言";
+"precision-info" = "精确信息";
+"know-more-about-precision" = "了解更多关于精度";
+"precision-title" = "精确";
+"precision-text" = " 并非所有转换都有 100% 精确的结果。这是因为涉及体积到重量的转换需要成分的特定密度更精确。在未来的更新中，我们将添加选择特定成分的选项，这在某些情况下会提高精度。但是，如果您需要真正精确的测量，您应该使用特定的设备来做到这一点。";
 
 "settings" = "设置";
 "convert" = "转换";

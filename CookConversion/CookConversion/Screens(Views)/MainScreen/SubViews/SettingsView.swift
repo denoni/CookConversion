@@ -43,10 +43,32 @@ struct SettingsView: View {
             }
           }
         }
+        Section(header: Text( LocalizedStringKey("precision-info").stringValue() )) {
+          
+          Section {
+            NavigationLink(destination: PrecisionInfoScreen()) {
+              Text(LocalizedStringKey("know-more-about-precision").stringValue())
+            }
+          }
+        }
       }
       .navigationBarTitle( LocalizedStringKey("settings").stringValue() )
       .navigationBarItems(leading: Button(action: { presentationMode.wrappedValue.dismiss() },
                                           label: { Text( LocalizedStringKey("close").stringValue() ) } ))
+    }
+  }
+
+  private struct PrecisionInfoScreen: View {
+    var body: some View {
+      VStack(alignment: .leading) {
+        Text(LocalizedStringKey("precision-title").stringValue())
+          .font(.title)
+          .bold()
+          .padding(.bottom, 5)
+        Text(LocalizedStringKey("precision-text").stringValue())
+        Spacer()
+      }
+      .padding(.horizontal, 30)
     }
   }
 }

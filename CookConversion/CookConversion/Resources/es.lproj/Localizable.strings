@@ -10,6 +10,10 @@
 "enabled-common-measures" = "MEDIDAS COMUNES HABILITADAS";
 "language-settings" = "AJUSTES DE IDIOMA";
 "language" = "Idioma";
+"precision-info" = "INFORMACIÓN DE PRECISIÓN";
+"know-more-about-precision" = "Conozca Más Sobre La Precisión";
+"precision-title" = "Precisión";
+"precision-text" = "No todas las conversiones tienen un resultado 100% exacto. Esto se debe a que las conversiones que implican cambios de volumen a peso necesitan de la densidad específica del ingrediente para que sean más precisas. En futuras actualizaciones, agregaremos opciones para seleccionar ingredientes específicos, que en algunos casos mejoran la precisión. Pero si necesitas de mediciones realmente precisas, ninguna aplicación de conversión será lo suficientemente buena.";
 
 "settings" = "Ajustes";
 "convert" = "Convertir";

@@ -10,6 +10,10 @@
 "enabled-common-measures" = "ENABLED COMMON MEASURES";
 "language-settings" = "LANGUAGE SETTINGS";
 "language" = "Language";
+"precision-info" = "PRECISION INFO";
+"know-more-about-precision" = "Know More About The Precision";
+"precision-title" = "Precision";
+"precision-text" = "Not all conversions have a 100% precise result. That's because conversions involving volume to weight need the specific density of the ingredient to be more precise. In future updates we'll add options to select specific ingredients, which in some cases improve precision. But, if you need really precise measures, no conversion application will be good enough.";
 
 "settings" = "Settings";
 "convert" = "Convert";
