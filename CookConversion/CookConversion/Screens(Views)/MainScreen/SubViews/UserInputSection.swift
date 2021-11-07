@@ -53,7 +53,7 @@ struct UserInputSection: View {
                                   placeholderText: "25")
             }
             .scaledToFit()
-            .accessibilityHint("Tap to write a new current value.")
+            .accessibilityHint("Tap to write a new input value to convert.")
             .accessibility(addTraits: .isSearchField)
             .accessibilityElement(children: .combine)
             .accessibility(label: accessibilityLabelOfCurrentValueTextField)
@@ -99,7 +99,7 @@ struct UserInputSection: View {
             .overlay(Text("-").font(.title3).bold().foregroundColor(Color.blackDarkSensitive))
         })
           .accessibilityLabel("Decrease")
-          .accessibilityHint("Tap to increase current value by one")
+          .accessibilityHint("Tap to increase current input value by one")
           .accessibility(sortPriority: 1)
         Button(action: { cookConversionViewModel.increaseCurrentTypedValueByOne() }, label: {
           RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -108,7 +108,7 @@ struct UserInputSection: View {
             .overlay(Text("+").font(.title3).bold().foregroundColor(Color.blackDarkSensitive))
         })
           .accessibilityLabel("Increase")
-          .accessibilityHint("Tap to increase current value by one")
+          .accessibilityHint("Tap to increase current input value by one")
           .accessibility(sortPriority: 1)
       }
     }
