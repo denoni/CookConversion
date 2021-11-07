@@ -17,7 +17,7 @@ class CookConversionViewModel: ObservableObject {
 
   @Published var currentLanguage: CookConversionModel.AvailableLanguages {
     didSet {
-      UserDefaults.standard.set(currentLanguage.localizedLanguageCode, forKey: "language")
+      UserDefaults.standard.set(currentLanguage.localizedLanguageCode, forKey: UserDefaultKeys.language.rawValue)
       forceUpdateViewsWithNewLanguage()
     }
   }
@@ -26,7 +26,7 @@ class CookConversionViewModel: ObservableObject {
   @Published var measuresEnabledStatus = [CookConversionModel.Measure: Bool]() {
     didSet {
       if let encodedMeasuresEnabledStatus = try? JSONEncoder().encode(measuresEnabledStatus) {
-        UserDefaults.standard.set(encodedMeasuresEnabledStatus, forKey: "measures-enabled-status")
+        UserDefaults.standard.set(encodedMeasuresEnabledStatus, forKey: UserDefaultKeys.measuresEnabledStatus.rawValue)
       }
     }
   }
@@ -61,8 +61,8 @@ class CookConversionViewModel: ObservableObject {
   @objc func localeChanged() { currentLanguage = CookConversionModel.AvailableLanguages.getLanguage(from: Locale.current.languageCode ?? "") }
 
   init() {
-    let encodedMeasuresEnabledStatus = UserDefaults.standard.object(forKey: "measures-enabled-status") as? Data
-    let userLanguage = UserDefaults.standard.string(forKey: "language")
+    let encodedMeasuresEnabledStatus = UserDefaults.standard.object(forKey: UserDefaultKeys.measuresEnabledStatus.rawValue) as? Data
+    let userLanguage = UserDefaults.standard.string(forKey: UserDefaultKeys.language.rawValue)
 
     previousConversions = [CookConversionViewModel.sampleConversionItem]
 
@@ -89,6 +89,7 @@ class CookConversionViewModel: ObservableObject {
 
     NotificationCenter.default.addObserver(self, selector: #selector(localeChanged), name: NSLocale.currentLocaleDidChangeNotification, object: nil)
   }
+  
 
   // MARK: - Intent(s)
   static func getPreciseMeasures() -> [CookConversionModel.Measure] {

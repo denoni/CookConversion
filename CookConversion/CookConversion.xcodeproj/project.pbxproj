@@ -24,6 +24,7 @@
 		C08EE32327308A3900BD64AD /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */; };
 		C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3262730B4FF00BD64AD /* TextBalloon.swift */; };
 		C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3282730B7CE00BD64AD /* TapDownButton.swift */; };
+		C091221C2738142300EE1D88 /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091221B2738142300EE1D88 /* UserDefaultKeys.swift */; };
 		C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C5273233420088AB03 /* Double+Rounded.swift */; };
 		C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */; };
 		C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097C1842732DDA0000D7763 /* ReadableScrollView.swift */; };
@@ -80,6 +81,7 @@
 		C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 		C08EE3262730B4FF00BD64AD /* TextBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBalloon.swift; sourceTree = "<group>"; };
 		C08EE3282730B7CE00BD64AD /* TapDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapDownButton.swift; sourceTree = "<group>"; };
+		C091221B2738142300EE1D88 /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		C092E5C5273233420088AB03 /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C097C1842732DDA0000D7763 /* ReadableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableScrollView.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				C0AAD6E02735937D00D3EC89 /* Utility.swift */,
 				C0AAD6E62735D63E00D3EC89 /* Accessibility.swift */,
 				C07CFD8527317A9500747568 /* Constants.swift */,
+				C091221B2738142300EE1D88 /* UserDefaultKeys.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				C05B448E273070FC004BF02F /* CookConversionApp.swift in Sources */,
 				C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */,
 				C0AAD6DF27357AF500D3EC89 /* LocalizedStringKey+StringValue.swift in Sources */,
+				C091221C2738142300EE1D88 /* UserDefaultKeys.swift in Sources */,
 				C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */,
 				C0C97D7C27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift in Sources */,
 				C07CFD982731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift in Sources */,
