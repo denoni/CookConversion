@@ -20,18 +20,18 @@ struct UserInputSection: View {
   }
 
   var accessibilityLabelOfCurrentValueTextField: Text {
-    if cookConversionViewModel.currentTypedNumber == "" {
+    if cookConversionViewModel.currentTypedValue == "" {
       return Text("Current value is empty")
     } else {
-      return Text("Current value is \(cookConversionViewModel.currentTypedNumber + currentPreciseMeasure)")
+      return Text("Current value is \(cookConversionViewModel.currentTypedValue + currentPreciseMeasure)")
     }
   }
 
   var accessibilityLabelOfConvertButton: Text {
-    if cookConversionViewModel.currentTypedNumber == "" {
+    if cookConversionViewModel.currentTypedValue == "" {
       return Text("Convert")
     } else {
-      return Text("Tap to convert \(cookConversionViewModel.currentTypedNumber) \(currentPreciseMeasure) to \(currentCommonMeasure)")
+      return Text("Tap to convert \(cookConversionViewModel.currentTypedValue) \(currentPreciseMeasure) to \(currentCommonMeasure)")
     }
   }
 
@@ -49,7 +49,7 @@ struct UserInputSection: View {
               RoundedRectangle(cornerRadius: Constants.standardRadius)
                 .foregroundColor(Color.lightGray)
                 .accessibilityElement(children: .ignore)
-              ConversionTextField(textInput: $cookConversionViewModel.currentTypedNumber,
+              ConversionTextField(textInput: $cookConversionViewModel.currentTypedValue,
                                   placeholderText: "25")
             }
             .scaledToFit()
@@ -92,7 +92,7 @@ struct UserInputSection: View {
 
     var body: some View {
       HStack(spacing: 5) {
-        Button(action: { cookConversionViewModel.decreaseCurrentTypedNumberByOne() }, label: {
+        Button(action: { cookConversionViewModel.decreaseCurrentTypedValueByOne() }, label: {
           RoundedRectangle(cornerRadius: 10, style: .continuous)
             .frame(width: 40, height: 40)
             .foregroundColor(Color.lightGray)
@@ -101,7 +101,7 @@ struct UserInputSection: View {
           .accessibilityLabel("Decrease")
           .accessibilityHint("Tap to increase current value by one")
           .accessibility(sortPriority: 1)
-        Button(action: { cookConversionViewModel.increaseCurrentTypedNumberByOne() }, label: {
+        Button(action: { cookConversionViewModel.increaseCurrentTypedValueByOne() }, label: {
           RoundedRectangle(cornerRadius: 10, style: .continuous)
             .frame(width: 40, height: 40)
             .foregroundColor(Color.lightGray)

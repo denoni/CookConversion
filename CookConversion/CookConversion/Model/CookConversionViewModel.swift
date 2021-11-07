@@ -10,7 +10,7 @@ import SwiftUI
 
 class CookConversionViewModel: ObservableObject {
   private static let model = CookConversionModel()
-  @Published var currentTypedNumber: String = ""
+  @Published var currentTypedValue: String = ""
   @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(preciseMeasure: .milliliter)
   @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(commonMeasure: .tablespoon)
   @Environment(\.locale) var locale
@@ -101,33 +101,33 @@ class CookConversionViewModel: ObservableObject {
   
   func convert() {
 
-    guard currentTypedNumberIsValid().booleanResponse != false else {
+    guard currentTypedValueIsValid().booleanResponse != false else {
       handleInvalidCurrentTypedValue()
       Accessibility.postConversionFailedNotification(errorMessage: convertButtonText)
       return
     }
     stopShowingKeyboardAndMenus()
     
-    let formattedCurrentTypedNumber = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
+    let formattedCurrentTypedValue = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)!.doubleValue
     
-    let result = CookConversionViewModel.model.convert(formattedCurrentTypedNumber,
+    let result = CookConversionViewModel.model.convert(formattedCurrentTypedValue,
                                                        from: currentSelectedPreciseMeasure,
                                                        to: currentSelectedCommonMeasure)
     
-    let formattedCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: formattedCurrentTypedNumber))!
-    let formattedResultNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"
+    let formattedCurrentTypedValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: formattedCurrentTypedValue))!
+    let formattedResultValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"
     
     
     previousConversions.append(ConversionItem(search: (measure: currentSelectedPreciseMeasure.name,
                                                        abbreviated: currentSelectedPreciseMeasure.abbreviated ?? currentSelectedPreciseMeasure.name,
-                                                       value: formattedCurrentTypedNumberAsString),
+                                                       value: formattedCurrentTypedValueAsString),
                                               response: (measure: currentSelectedCommonMeasure.name,
                                                          abbreviated: currentSelectedCommonMeasure.abbreviated ?? currentSelectedCommonMeasure.name,
-                                                         value: formattedResultNumberAsString) ))
+                                                         value: formattedResultValueAsString) ))
     
-    Accessibility.postConversionCompletedNotification(conversionInputValue: formattedCurrentTypedNumberAsString,
+    Accessibility.postConversionCompletedNotification(conversionInputValue: formattedCurrentTypedValueAsString,
                                                       inputMeasure: currentSelectedPreciseMeasure.name,
-                                                      outputValue: formattedResultNumberAsString,
+                                                      outputValue: formattedResultValueAsString,
                                                       outputMeasure: currentSelectedCommonMeasure.name)
   }
   
@@ -167,30 +167,30 @@ class CookConversionViewModel: ObservableObject {
     return getEnabledMeasures(for: measureType).count
   }
 
-  func increaseCurrentTypedNumberByOne() {
-    if currentTypedNumber.isEmpty { currentTypedNumber = "0" }
-    guard currentTypedNumberIsValid().booleanResponse != false else {
+  func increaseCurrentTypedValueByOne() {
+    if currentTypedValue.isEmpty { currentTypedValue = "0" }
+    guard currentTypedValueIsValid().booleanResponse != false else {
       handleInvalidCurrentTypedValue()
       return
     }
 
-    var currentTypedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
-    currentTypedNumberAsDouble += 1
-    let newCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedNumberAsDouble))!
-    currentTypedNumber = newCurrentTypedNumberAsString
+    var currentTypedValueAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)!.doubleValue
+    currentTypedValueAsDouble += 1
+    let newCurrentTypedValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedValueAsDouble))!
+    currentTypedValue = newCurrentTypedValueAsString
   }
 
-  func decreaseCurrentTypedNumberByOne() {
-    if currentTypedNumber.isEmpty { currentTypedNumber = "0" }
-    if currentTypedNumber == "0" { return }
-    guard currentTypedNumberIsValid().booleanResponse != false else {
+  func decreaseCurrentTypedValueByOne() {
+    if currentTypedValue.isEmpty { currentTypedValue = "0" }
+    if currentTypedValue == "0" { return }
+    guard currentTypedValueIsValid().booleanResponse != false else {
       handleInvalidCurrentTypedValue()
       return
     }
-    var currentTypedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)!.doubleValue
-    currentTypedNumberAsDouble -= 1
-    let newCurrentTypedNumberAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedNumberAsDouble))!
-    currentTypedNumber = newCurrentTypedNumberAsString
+    var currentTypedValueAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)!.doubleValue
+    currentTypedValueAsDouble -= 1
+    let newCurrentTypedValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: currentTypedValueAsDouble))!
+    currentTypedValue = newCurrentTypedValueAsString
   }
 
   func stopShowingKeyboardAndMenus() {
@@ -224,7 +224,7 @@ class CookConversionViewModel: ObservableObject {
     buttonIsCurrentlyShowingErrorMessage = true
 
     // Change the button text to a message saying why the number is invalid
-    convertButtonText = currentTypedNumberIsValid().description
+    convertButtonText = currentTypedValueIsValid().description
     // After 1 sec, start to show the standard button text again (e.g. "Convert")
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
       self.buttonIsCurrentlyShowingErrorMessage = false
@@ -232,11 +232,11 @@ class CookConversionViewModel: ObservableObject {
     }
   }
   
-  private func currentTypedNumberIsValid() -> (booleanResponse: Bool, description: String) {
-    guard let typedNumberAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedNumber)?.doubleValue else {
+  private func currentTypedValueIsValid() -> (booleanResponse: Bool, description: String) {
+    guard let typedValueAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)?.doubleValue else {
       return (booleanResponse: false, description: LocalizedStringKey("invalid-number").stringValue())
     }
-    guard typedNumberAsDouble <= 5000 else {
+    guard typedValueAsDouble <= 5000 else {
       return (booleanResponse: false, description: LocalizedStringKey("too-high-number").stringValue())
     }
     // This text will never be showed
