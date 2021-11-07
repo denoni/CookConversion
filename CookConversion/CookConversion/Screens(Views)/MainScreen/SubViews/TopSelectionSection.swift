@@ -13,6 +13,14 @@ struct TopSelectionSection: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
   @State var settingsScreenIsOpen = false
 
+  private var outputMeasure: CookConversionModel.MeasurementType {
+    if cookConversionViewModel.inputMeasureType == .preciseMeasure {
+      return .commonMeasure
+    } else {
+      return .preciseMeasure
+    }
+  }
+
   var body: some View {
     ZStack {
       Rectangle()
@@ -21,10 +29,10 @@ struct TopSelectionSection: View {
       VStack {
         TopButtonsBar(settingsScreenIsOpen: $settingsScreenIsOpen)
         HStack(alignment: .bottom, spacing: Constants.smallPadding) {
-          TapDownButton(measurementType: .preciseMeasure)
+          TapDownButton(measurementType: cookConversionViewModel.inputMeasureType)
             .accessibilityHint("Tap to open a list of possible input measures to choose.")
             .accessibility(sortPriority: 3)
-          TapDownButton(measurementType: .commonMeasure)
+          TapDownButton(measurementType: outputMeasure)
             .accessibilityHint("Tap to open a list of possible output measures to choose.")
             .accessibility(sortPriority: 3)
         }
@@ -47,10 +55,62 @@ struct TopSelectionSection: View {
   }
 
   fileprivate struct TopButtonsBar: View {
+    @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
     @Binding var settingsScreenIsOpen: Bool
+
+    @State private var buttonRotation: Double = 0
+
     var body: some View {
       HStack {
+        // An empty view with 25 width to make the reverse button bellow be centralized
+        Rectangle()
+          .foregroundColor(.clear)
+          .frame(width: 25)
         Spacer()
+        ReverseOrderButton(buttonRotation: $buttonRotation)
+        Spacer()
+        SettingsButton(settingsScreenIsOpen: $settingsScreenIsOpen)
+
+      }
+      .padding(.horizontal, Constants.standardPadding)
+    }
+
+    private struct ReverseOrderButton: View {
+      @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
+      @Binding var buttonRotation: Double
+
+      var body: some View {
+        Button(action: {
+          withAnimation(.easeInOut) {
+            buttonRotation += 180
+          }
+
+          if cookConversionViewModel.inputMeasureType == .preciseMeasure {
+            cookConversionViewModel.inputMeasureType = .commonMeasure
+          } else {
+            cookConversionViewModel.inputMeasureType = .preciseMeasure
+          }
+        }, label: {
+          ZStack {
+            Circle()
+              .frame(width: 35, height: 35)
+              .foregroundColor(.blackDarkSensitive)
+            Image(systemName: "repeat")
+              .resizable()
+              .renderingMode(.template)
+              .foregroundColor(.whiteDarkSensitive)
+              .frame(width: 20, height: 20)
+          }
+        })
+          .rotationEffect(.degrees(buttonRotation))
+          .offset(x: 0, y: 25)
+      }
+    }
+
+    private struct SettingsButton: View {
+      @Binding var settingsScreenIsOpen: Bool
+
+      var body: some View {
         Button(action: {
           settingsScreenIsOpen = true
         }, label: {
@@ -61,8 +121,8 @@ struct TopSelectionSection: View {
             .frame(width: 25, height: 25)
         })
       }
-      .padding(.horizontal, Constants.standardPadding)
     }
+
   }
 
 }

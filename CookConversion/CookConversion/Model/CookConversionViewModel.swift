@@ -11,6 +11,7 @@ import SwiftUI
 class CookConversionViewModel: ObservableObject {
   private static let model = CookConversionModel()
   @Published var currentTypedValue: String = ""
+  @Published var inputMeasureType: CookConversionModel.MeasurementType = .preciseMeasure
   @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(preciseMeasure: .milliliter)
   @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(commonMeasure: .tablespoon)
   @Environment(\.locale) var locale
@@ -108,9 +109,13 @@ class CookConversionViewModel: ObservableObject {
     
     let formattedCurrentTypedValue = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)!.doubleValue
     
-    let result = CookConversionViewModel.model.convert(formattedCurrentTypedValue,
-                                                       from: currentSelectedPreciseMeasure,
-                                                       to: currentSelectedCommonMeasure)
+    var result: Double {
+      if inputMeasureType == .preciseMeasure {
+        return CookConversionViewModel.model.convert(formattedCurrentTypedValue, from: currentSelectedPreciseMeasure, to: currentSelectedCommonMeasure)
+      } else {
+        return CookConversionViewModel.model.convert(formattedCurrentTypedValue, from: currentSelectedCommonMeasure, to: currentSelectedPreciseMeasure)
+      }
+    }
     
     let formattedCurrentTypedValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: formattedCurrentTypedValue))!
     let formattedResultValueAsString = CookConversionViewModel.model.numberFormatter.string(from: NSNumber(value: result)) ?? "0"

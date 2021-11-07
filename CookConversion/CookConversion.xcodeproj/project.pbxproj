@@ -25,6 +25,7 @@
 		C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3262730B4FF00BD64AD /* TextBalloon.swift */; };
 		C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08EE3282730B7CE00BD64AD /* TapDownButton.swift */; };
 		C091221C2738142300EE1D88 /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091221B2738142300EE1D88 /* UserDefaultKeys.swift */; };
+		C091221E27383A5600EE1D88 /* Measure+GetMeasurementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091221D27383A5600EE1D88 /* Measure+GetMeasurementType.swift */; };
 		C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C5273233420088AB03 /* Double+Rounded.swift */; };
 		C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */; };
 		C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097C1842732DDA0000D7763 /* ReadableScrollView.swift */; };
@@ -81,6 +82,7 @@
 		C08EE3262730B4FF00BD64AD /* TextBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBalloon.swift; sourceTree = "<group>"; };
 		C08EE3282730B7CE00BD64AD /* TapDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapDownButton.swift; sourceTree = "<group>"; };
 		C091221B2738142300EE1D88 /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		C091221D27383A5600EE1D88 /* Measure+GetMeasurementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measure+GetMeasurementType.swift"; sourceTree = "<group>"; };
 		C092E5C5273233420088AB03 /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C097C1842732DDA0000D7763 /* ReadableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableScrollView.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
 				C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */,
+				C091221D27383A5600EE1D88 /* Measure+GetMeasurementType.swift */,
 				C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */,
 				C092E5C5273233420088AB03 /* Double+Rounded.swift */,
 				C07CFD832731790A00747568 /* ColorPalette.swift */,
@@ -416,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C091221E27383A5600EE1D88 /* Measure+GetMeasurementType.swift in Sources */,
 				C098B04C2734D98B003F7CCA /* SettingsView.swift in Sources */,
 				C07CFD842731790A00747568 /* ColorPalette.swift in Sources */,
 				C08EE3272730B4FF00BD64AD /* TextBalloon.swift in Sources */,

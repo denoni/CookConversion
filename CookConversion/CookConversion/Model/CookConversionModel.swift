@@ -92,9 +92,14 @@ struct CookConversionModel {
     return formatter
   }()
   
-  func convert(_ number: Double, from initialMeasure: Measure, to finalMeasure: Measure) -> Double {
-    let measureInGrams = convertToGram(number, from: initialMeasure)
-    return convertFromGramToCommonMeasure(measureInGrams, to: finalMeasure)
+  func convert(_ inputValue: Double, from initialMeasure: Measure, to finalMeasure: Measure) -> Double {
+    if initialMeasure.getMeasureType() == .preciseMeasure {
+      let measureInGrams = convertToGram(inputValue, from: initialMeasure)
+      return convertFromGramToCommonMeasure(measureInGrams, to: finalMeasure)
+    } else {
+      let measureInTablespoons = convertToTablespoon(inputValue, from: initialMeasure)
+      return convertFromTablespoonToPreciseMeasure(measureInTablespoons, to: finalMeasure)
+    }
   }
   
   func getPreciseMeasures() -> [Measure] {
@@ -113,20 +118,20 @@ struct CookConversionModel {
     return listOfMeasures
   }
   
-  private func convertToGram(_ number: Double, from initialMeasure: Measure) -> Double {
+  private func convertToGram(_ inputValue: Double, from initialMeasure: Measure) -> Double {
     switch initialMeasure {
     case .preciseMeasure(.ounce):
-      return number * 29.5735 / 0.82
+      return inputValue * 29.5735 / 0.82 // TODO: Depends on density
     case .preciseMeasure(.gallon):
-      return number * 3785.4 / 0.82
+      return inputValue * 3785.4 / 0.82 // TODO: Depends on density
     case .preciseMeasure(.gram):
-      return number
+      return inputValue
     case .preciseMeasure(.kilogram):
-      return number * 1000
+      return inputValue * 1000
     case .preciseMeasure(.milliliter):
-      return number / 0.82 // TODO: Depends on density
+      return inputValue / 0.82 // TODO: Depends on density
     case .preciseMeasure(.liter):
-      return number / 0.82 * 1000 // TODO: Depends on density
+      return inputValue / 0.82 * 1000 // TODO: Depends on density
     default:
       fatalError("Type not implemented for \(initialMeasure)")
     }
@@ -135,13 +140,47 @@ struct CookConversionModel {
   private func convertFromGramToCommonMeasure(_ measureInGrams: Double, to finalMeasure: Measure) -> Double {
     switch finalMeasure {
     case .commonMeasure(.teaspoon):
-      return measureInGrams / 4.92892 * 0.82
+      return measureInGrams / 4.92892 * 0.82 // TODO: Depends on density
     case .commonMeasure(.tablespoon):
-      return measureInGrams / 14.7868 * 0.82
+      return measureInGrams / 14.7868 * 0.82 // TODO: Depends on density
     case .commonMeasure(.cups):
-      return measureInGrams / 236.588 * 0.82
+      return measureInGrams / 236.588 * 0.82 // TODO: Depends on density
     case .commonMeasure(.teacup):
-      return measureInGrams / 118.294 * 0.82
+      return measureInGrams / 118.294 * 0.82 // TODO: Depends on density
+    default:
+      fatalError("Type not implemented for \(finalMeasure)")
+    }
+  }
+
+  private func convertToTablespoon(_ inputValue: Double, from initialMeasure: Measure) -> Double {
+    switch initialMeasure {
+    case .commonMeasure(.teaspoon):
+      return inputValue / 3
+    case .commonMeasure(.tablespoon):
+      return inputValue
+    case .commonMeasure(.teacup):
+      return inputValue * 8
+    case .commonMeasure(.cups):
+      return inputValue * 16
+    default:
+      fatalError("Type not implemented for \(initialMeasure)")
+    }
+  }
+
+  private func convertFromTablespoonToPreciseMeasure(_ measureInTablespoons: Double, to finalMeasure: Measure) -> Double {
+    switch finalMeasure {
+    case .preciseMeasure(.ounce):
+      return measureInTablespoons / 2
+    case .preciseMeasure(.gallon):
+      return measureInTablespoons / 256
+    case .preciseMeasure(.gram):
+      return measureInTablespoons * 16 / 0.82 // TODO: Depends on density
+    case .preciseMeasure(.kilogram):
+      return measureInTablespoons * 16 / 0.82 / 1000 // TODO: Depends on density
+    case .preciseMeasure(.milliliter):
+      return measureInTablespoons * 16
+    case .preciseMeasure(.liter):
+      return measureInTablespoons * 16 / 1000
     default:
       fatalError("Type not implemented for \(finalMeasure)")
     }
