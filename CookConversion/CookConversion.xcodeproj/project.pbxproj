@@ -27,7 +27,6 @@
 		C091221C2738142300EE1D88 /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091221B2738142300EE1D88 /* UserDefaultKeys.swift */; };
 		C091221E27383A5600EE1D88 /* Measure+GetMeasurementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091221D27383A5600EE1D88 /* Measure+GetMeasurementType.swift */; };
 		C092E5C6273233420088AB03 /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C5273233420088AB03 /* Double+Rounded.swift */; };
-		C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */; };
 		C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097C1842732DDA0000D7763 /* ReadableScrollView.swift */; };
 		C098B0402734D001003F7CCA /* NavigationHandlerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B03F2734D001003F7CCA /* NavigationHandlerScreen.swift */; };
 		C098B0462734D8EE003F7CCA /* TopSelectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098B0452734D8EE003F7CCA /* TopSelectionSection.swift */; };
@@ -84,7 +83,6 @@
 		C091221B2738142300EE1D88 /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		C091221D27383A5600EE1D88 /* Measure+GetMeasurementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measure+GetMeasurementType.swift"; sourceTree = "<group>"; };
 		C092E5C5273233420088AB03 /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
-		C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C097C1842732DDA0000D7763 /* ReadableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableScrollView.swift; sourceTree = "<group>"; };
 		C098B03F2734D001003F7CCA /* NavigationHandlerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHandlerScreen.swift; sourceTree = "<group>"; };
 		C098B0452734D8EE003F7CCA /* TopSelectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSelectionSection.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				C08EE32227308A3900BD64AD /* View+RoundedCorner.swift */,
-				C092E5C727323A860088AB03 /* TopSafeAreaSize.swift */,
 				C091221D27383A5600EE1D88 /* Measure+GetMeasurementType.swift */,
 				C07CFD972731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift */,
 				C092E5C5273233420088AB03 /* Double+Rounded.swift */,
@@ -436,7 +433,6 @@
 				C07CFD942731A92900747568 /* CookConversionModel.swift in Sources */,
 				C0C97D7C27360E870042914F /* CommonMeasure+getNameAndAbbreviated.swift in Sources */,
 				C07CFD982731B6BB00747568 /* UIApplication+StopShowingKeyboard.swift in Sources */,
-				C092E5C827323A860088AB03 /* TopSafeAreaSize.swift in Sources */,
 				C08EE3292730B7CE00BD64AD /* TapDownButton.swift in Sources */,
 				C07CFD8627317A9500747568 /* Constants.swift in Sources */,
 				C097C1852732DDA0000D7763 /* ReadableScrollView.swift in Sources */,
@@ -550,7 +546,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -606,7 +602,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -630,6 +626,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -660,6 +657,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

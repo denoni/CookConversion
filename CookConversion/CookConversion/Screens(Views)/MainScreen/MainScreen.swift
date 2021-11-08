@@ -9,16 +9,24 @@ import SwiftUI
 
 struct MainScreen: View {
   var body: some View {
-    ZStack {
-      Color.lightGray
-      VStack(spacing: 0) {
-        TopSelectionSection()
-        ConversionResponses()
-        UserInputSection()
+    GeometryReader { geo in
+      ZStack {
+        VStack(spacing: 0) {
+          Color.skyBlue
+            .frame(height: geo.safeAreaInsets.top)
+          Color.lightGray
+          Color.whiteDarkSensitive
+            .frame(height: geo.safeAreaInsets.bottom)
+        }
+        .ignoresSafeArea()
+        VStack(spacing: 0) {
+          TopSelectionSection()
+          ConversionResponses()
+          UserInputSection()
+        }
       }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    .ignoresSafeArea()
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 
