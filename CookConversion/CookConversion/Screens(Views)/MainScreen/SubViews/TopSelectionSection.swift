@@ -10,7 +10,6 @@ import SwiftUI
 struct TopSelectionSection: View {
   @EnvironmentObject var cookConversionViewModel: CookConversionViewModel
   @ObservedObject private var keyboardResponder = KeyboardResponder()
-  @Environment(\.topSafeAreaSize) var topSafeAreaSize
   @State var settingsScreenIsOpen = false
 
   private var outputMeasureType: CookConversionModel.MeasurementType {
@@ -40,10 +39,9 @@ struct TopSelectionSection: View {
         .padding(Constants.standardPadding)
       }
       .frame(maxHeight: .infinity)
-      .padding(.top, topSafeAreaSize + Constants.standardPadding)
+      .padding(.top, Constants.standardPadding)
     }
-    .ignoresSafeArea()
-    .frame(height: topSafeAreaSize + 150)
+    .frame(height: 150)
     // Need this negative padding otherwise this view will move up when keyboard opens
     .padding(.bottom, -keyboardResponder.currentHeight)
     // If user taps in some view(that's not a tappable item), close keyboard and menus

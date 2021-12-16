@@ -79,7 +79,6 @@ struct UserInputSection: View {
     }
     .frame(height: 150)
     .frame(maxWidth: .infinity)
-    .ignoresSafeArea()
     // So when the keyboard opens the view goes up accordingly
     .padding(.bottom, keyboardResponder.currentHeight)
     .animation(.easeOut(duration: 0.16))
