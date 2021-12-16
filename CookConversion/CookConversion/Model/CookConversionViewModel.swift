@@ -14,7 +14,6 @@ class CookConversionViewModel: ObservableObject {
   @Published var inputMeasureType: CookConversionModel.MeasurementType = .preciseMeasure
   @Published var currentSelectedPreciseMeasure: CookConversionModel.Measure = .preciseMeasure(preciseMeasure: .milliliter)
   @Published var currentSelectedCommonMeasure: CookConversionModel.Measure = .commonMeasure(commonMeasure: .tablespoon)
-  @Environment(\.locale) var locale
 
   @Published var currentLanguage: CookConversionModel.AvailableLanguages {
     didSet {
