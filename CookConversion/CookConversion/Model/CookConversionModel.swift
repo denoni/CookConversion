@@ -68,7 +68,7 @@ struct CookConversionModel {
       case .french:
         return "Français"
       case .chinese:
-        return "中国人"
+        return "中文"
       }
     }
 
