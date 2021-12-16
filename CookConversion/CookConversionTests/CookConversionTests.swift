@@ -69,7 +69,29 @@ class CookConversionTests: XCTestCase {
     XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("too-high-number").stringValue())
   }
 
+  // MARK: - Increase/Decrease Stepper Tests
 
+  func testStepperIncrease() {
+    // GIVEN
+    sut.currentTypedValue = "10"
+
+    // WHEN - User tapped + stepper
+    sut.increaseCurrentTypedValueByOne()
+
+    // THEN - 'currentTypedValue' was increased by one
+    sut.currentTypedValue = "11"
+  }
+
+  func testStepperDecrease() {
+    // GIVEN
+    sut.currentTypedValue = "10"
+
+    // WHEN - User tapped + stepper
+    sut.increaseCurrentTypedValueByOne()
+
+    // THEN - 'currentTypedValue' was decreased by one
+    sut.currentTypedValue = "9"
+  }
 
 
 }
