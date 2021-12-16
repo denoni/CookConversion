@@ -6,28 +6,70 @@
 //
 
 import XCTest
+import SwiftUI
 @testable import CookConversion
 
 class CookConversionTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+  // System under test
+  var sut: CookConversionViewModel!
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    sut = CookConversionViewModel()
+  }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+  override func tearDownWithError() throws {
+    sut = nil
+    try super.tearDownWithError()
+  }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+// MARK: - Input Value Tests
+
+  func testInputValueIsNotANumber() {
+    // GIVEN - User typed value that is not a number
+    sut.currentTypedValue = "abc"
+
+    // WHEN
+    sut.convert()
+
+    // THEN - 'convertButtonText' message showed indication of invalid number
+    XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("invalid-number").stringValue())
+  }
+
+  func testInputValueIsEmpty() {
+    // GIVEN - User typed value that is not a number
+    sut.currentTypedValue = ""
+
+    // WHEN
+    sut.convert()
+
+    // THEN - 'convertButtonText' message showed indication of invalid number
+    XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("invalid-number").stringValue())
+  }
+
+  func testInputValueIsNegative() {
+    // GIVEN - User typed value below zero
+    sut.currentTypedValue = "-1"
+    // WHEN
+    sut.convert()
+
+    // THEN - 'convertButtonText' message showed indication of too high number
+    XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("invalid-number").stringValue())
+  }
+
+  func testInputValueIsTooHigh() {
+    // GIVEN - User typed value that is too high
+    sut.currentTypedValue = "5001" // TODO: HARD CODED MAGIC NUMBER
+
+    // WHEN
+    sut.convert()
+
+    // THEN - 'convertButtonText' message showed indication of too high number
+    XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("too-high-number").stringValue())
+  }
+
+
+
 
 }
