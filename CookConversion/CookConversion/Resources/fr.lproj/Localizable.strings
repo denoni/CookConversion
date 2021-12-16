@@ -18,6 +18,7 @@
 "settings" = "Réglage";
 "convert" = "Convertir";
 "close" = "Fermer";
+"empty-number" = "Saisissez d'abord une valeur";
 "invalid-number" = "La valeur saisie n'est pas un nombre";
 "too-high-number" = "La valeur ne peut pas être supérieure à 5000";
 

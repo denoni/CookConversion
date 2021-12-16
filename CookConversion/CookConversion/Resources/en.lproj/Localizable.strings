@@ -18,6 +18,7 @@
 "settings" = "Settings";
 "convert" = "Convert";
 "close" = "Close";
+"empty-number" = "Type a value first";
 "invalid-number" = "Typed value is not a number";
 "too-high-number" = "Value can't be higher than 5000";
 

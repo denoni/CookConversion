@@ -44,8 +44,8 @@ class CookConversionTests: XCTestCase {
     // WHEN
     sut.convert()
 
-    // THEN - 'convertButtonText' message showed indication of invalid number
-    XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("invalid-number").stringValue())
+    // THEN - 'convertButtonText' message showed indication of an empty
+    XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("empty-number").stringValue())
   }
 
   func testInputValueIsNegative() {
@@ -54,7 +54,7 @@ class CookConversionTests: XCTestCase {
     // WHEN
     sut.convert()
 
-    // THEN - 'convertButtonText' message showed indication of too high number
+    // THEN - 'convertButtonText' message showed indication of invalid number
     XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("invalid-number").stringValue())
   }
 

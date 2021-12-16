@@ -239,6 +239,9 @@ class CookConversionViewModel: ObservableObject {
   }
   
   private func currentTypedValueIsValid() -> (booleanResponse: Bool, description: String) {
+    guard currentTypedValue.isEmpty == false else {
+      return (booleanResponse: false, description: LocalizedStringKey("empty-number").stringValue())
+    }
     guard let typedValueAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)?.doubleValue else {
       return (booleanResponse: false, description: LocalizedStringKey("invalid-number").stringValue())
     }

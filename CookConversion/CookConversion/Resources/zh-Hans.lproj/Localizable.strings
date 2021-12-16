@@ -18,6 +18,7 @@
 "settings" = "设置";
 "convert" = "转换";
 "close" = "关闭";
+"empty-number" = "先输入一个值";
 "invalid-number" = "输入的值不是数字";
 "too-high-number" = "该值不能大于 5000";
 
