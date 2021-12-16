@@ -60,7 +60,7 @@ class CookConversionTests: XCTestCase {
 
   func testInputValueIsTooHigh() {
     // GIVEN - User typed value that is too high
-    sut.currentTypedValue = "5001" // TODO: HARD CODED MAGIC NUMBER
+    sut.currentTypedValue = String(Constants.maxInputValue + 1)
 
     // WHEN
     sut.convert()

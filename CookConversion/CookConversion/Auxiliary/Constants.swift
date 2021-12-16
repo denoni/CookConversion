@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Constants {
+  static let maxInputValue = 5000
+
   static let standardPadding: CGFloat = 20
   static let smallPadding: CGFloat = 10
 

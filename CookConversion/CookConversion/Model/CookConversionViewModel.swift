@@ -242,7 +242,7 @@ class CookConversionViewModel: ObservableObject {
     guard let typedValueAsDouble = CookConversionViewModel.model.numberFormatter.number(from: currentTypedValue)?.doubleValue else {
       return (booleanResponse: false, description: LocalizedStringKey("invalid-number").stringValue())
     }
-    guard typedValueAsDouble <= 5000 else {
+    guard typedValueAsDouble <= Double(Constants.maxInputValue) else {
       return (booleanResponse: false, description: LocalizedStringKey("too-high-number").stringValue())
     }
     // This text will never be showed
