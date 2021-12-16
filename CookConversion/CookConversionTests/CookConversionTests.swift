@@ -9,7 +9,7 @@ import XCTest
 import SwiftUI
 @testable import Cook_Conversion
 
-class CookConversionTests: XCTestCase {
+class InputValueTests: XCTestCase {
 
   // System under test
   var sut: CookConversionViewModel!
@@ -23,8 +23,6 @@ class CookConversionTests: XCTestCase {
     sut = nil
     try super.tearDownWithError()
   }
-
-// MARK: - Input Value Tests
 
   func testInputValueIsNotANumber() {
     // GIVEN - User typed value that is not a number
@@ -68,8 +66,22 @@ class CookConversionTests: XCTestCase {
     // THEN - 'convertButtonText' message showed indication of too high number
     XCTAssertEqual(sut.convertButtonText, LocalizedStringKey("too-high-number").stringValue())
   }
+}
 
-  // MARK: - Increase/Decrease Stepper Tests
+class StepperTest: XCTestCase {
+
+  // System under test
+  var sut: CookConversionViewModel!
+
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    sut = CookConversionViewModel()
+  }
+
+  override func tearDownWithError() throws {
+    sut = nil
+    try super.tearDownWithError()
+  }
 
   func testStepperIncrease() {
     // GIVEN
@@ -92,6 +104,5 @@ class CookConversionTests: XCTestCase {
     // THEN - 'currentTypedValue' was decreased by one
     sut.currentTypedValue = "9"
   }
-
 
 }
