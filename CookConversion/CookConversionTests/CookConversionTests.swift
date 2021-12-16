@@ -9,6 +9,7 @@ import XCTest
 import SwiftUI
 @testable import Cook_Conversion
 
+// MARK: - Input Value Tests
 class InputValueTests: XCTestCase {
 
   // System under test
@@ -68,7 +69,8 @@ class InputValueTests: XCTestCase {
   }
 }
 
-class StepperTest: XCTestCase {
+// MARK: - Stepper Increase/Decrease Tests
+class StepperTests: XCTestCase {
 
   // System under test
   var sut: CookConversionViewModel!
@@ -103,6 +105,82 @@ class StepperTest: XCTestCase {
 
     // THEN - 'currentTypedValue' was decreased by one
     sut.currentTypedValue = "9"
+  }
+
+}
+
+// MARK: - Conversion Results Tests
+class ConversionResultsTests: XCTestCase {
+
+  // System under test
+  var sut: CookConversionModel!
+
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    sut = CookConversionModel()
+  }
+
+  override func tearDownWithError() throws {
+    sut = nil
+    try super.tearDownWithError()
+  }
+
+  func testConversionLiterToCups() {
+    // GIVEN - 10 Liters converted to Cups
+    let valueToConvert = 10.0
+    let inputType = CookConversionModel.Measure.preciseMeasure(preciseMeasure: .liter)
+    let resultType = CookConversionModel.Measure.commonMeasure(commonMeasure: .cups)
+
+
+    // WHEN
+    let result = sut.convert(valueToConvert, from: inputType, to: resultType)
+    let roundedResult = String(format: "%.2f", result)
+
+    // THEN
+    XCTAssertEqual(roundedResult, "42.27")
+  }
+
+  func testConversionCupsToLiters() {
+    // GIVEN - 42.27 Cups converted to Liters
+    let valueToConvert = 42.27
+    let inputType = CookConversionModel.Measure.commonMeasure(commonMeasure: .cups)
+    let resultType = CookConversionModel.Measure.preciseMeasure(preciseMeasure: .liter)
+
+    // WHEN
+    let result = sut.convert(valueToConvert, from: inputType, to: resultType)
+    let roundedResult = String(format: "%.2f", result)
+
+    // THEN
+    XCTAssertEqual(roundedResult, "10.00")
+  }
+
+  func testConversionOunceToTablespoon() {
+    // GIVEN - 1 Ounce converted to Tablespoons
+    let valueToConvert = 1.0
+    let inputType = CookConversionModel.Measure.preciseMeasure(preciseMeasure: .ounce)
+    let resultType = CookConversionModel.Measure.commonMeasure(commonMeasure: .tablespoon)
+
+
+    // WHEN
+    let result = sut.convert(valueToConvert, from: inputType, to: resultType)
+    let roundedResult = String(format: "%.2f", result)
+
+    // THEN
+    XCTAssertEqual(roundedResult, "2.44")
+  }
+
+  func testConversionTablespoonToOunce() {
+    // GIVEN - 2.44 Tablespoons converted to Ounces
+    let valueToConvert = 2.44
+    let inputType = CookConversionModel.Measure.commonMeasure(commonMeasure: .tablespoon)
+    let resultType = CookConversionModel.Measure.preciseMeasure(preciseMeasure: .ounce)
+
+    // WHEN
+    let result = sut.convert(valueToConvert, from: inputType, to: resultType)
+    let roundedResult = String(format: "%.2f", result)
+
+    // THEN
+    XCTAssertEqual(roundedResult, "1.00")
   }
 
 }
