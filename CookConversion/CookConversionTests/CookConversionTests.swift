@@ -7,7 +7,7 @@
 
 import XCTest
 import SwiftUI
-@testable import CookConversion
+@testable import Cook_Conversion
 
 class CookConversionTests: XCTestCase {
 
