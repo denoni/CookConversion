@@ -84,11 +84,7 @@ struct TopSelectionSection: View {
             buttonRotation += 180
           }
 
-          if cookConversionViewModel.inputMeasureType == .preciseMeasure {
-            cookConversionViewModel.inputMeasureType = .commonMeasure
-          } else {
-            cookConversionViewModel.inputMeasureType = .preciseMeasure
-          }
+          cookConversionViewModel.reverseInputAndResultMeasures()
         }, label: {
           ZStack {
             Circle()

@@ -267,5 +267,13 @@ class CookConversionViewModel: ObservableObject {
       return currentSelectedPreciseMeasure
     }
   }
+
+  func reverseInputAndResultMeasures() {
+    if inputMeasureType == .preciseMeasure {
+      inputMeasureType = .commonMeasure
+    } else {
+      inputMeasureType = .preciseMeasure
+    }
+  }
   
 }
