@@ -21,7 +21,7 @@
 "invalid-number" = "La valeur saisie n'est pas un nombre";
 "too-high-number" = "La valeur ne peut pas être supérieure à 5000";
 
-"fluid-ounces" = "Onces";
+"ounces" = "Onces";
 "fluid-ounces" = "Onces Liquides";
 "gallons" = "Gallons";
 "grams" = "Grammes";
