@@ -135,6 +135,7 @@ struct UserInputSection: View {
         }
       })
         .frame(height: Constants.bigButtonHeight)
+        .accessibilityIdentifier("convertButton")
     }
 
     private func simpleErrorHaptic() {

@@ -71,7 +71,7 @@ struct TopSelectionSection: View {
         ReverseOrderButton(buttonRotation: $buttonRotation)
         Spacer()
         SettingsButton(settingsScreenIsOpen: $settingsScreenIsOpen)
-
+          .accessibilityIdentifier("settingsButton")
       }
       .padding(.horizontal, Constants.standardPadding)
     }

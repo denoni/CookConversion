@@ -60,7 +60,53 @@ class CookConversionUITests: XCTestCase {
     XCTAssertEqual(textFieldContainsExpectedResult, true, "Expected this label(\(textField.label)) to contain 200")
   }
 
-  
+  func testLanguageChange() {
 
+    let app = XCUIApplication()
+    app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .scrollView).element.tap()
+
+    app.buttons["settingsButton"].tap()
+
+    let settingsTable = app.tables
+    settingsTable.element.firstMatch.swipeUp()
+    settingsTable.buttons["languageButton"].tap()
+
+    var currentLanguage = ""
+
+    // Checks if English is not currently selected
+    if (settingsTable.switches["English"].value as! String) != "1" {
+      settingsTable.switches["English"].tap()
+      currentLanguage = "English"
+    } else {
+      // If English is currently selected, select Português
+      settingsTable.switches["Português"].tap()
+      currentLanguage = "Português"
+    }
+
+    if currentLanguage == "English" {
+      let settingsNavigationBar = XCUIApplication().navigationBars["Settings"]
+      let settingsTitle = settingsNavigationBar.staticTexts["Settings"].label
+
+      XCTAssertEqual(settingsTitle, "Settings")
+
+      // Close settings
+      settingsNavigationBar.buttons["Close"].tap()
+
+      // Assert that that there's a new response ballon in the scroll view that contains "Tablespoons"
+      XCTAssertTrue(app.scrollViews.otherElements.staticTexts.debugDescription.contains("Tablespoons"))
+    } else {
+      let settingsNavigationBar = XCUIApplication().navigationBars["Configurações"]
+      let settingsTitle = settingsNavigationBar.staticTexts["Configurações"].label
+
+      XCTAssertEqual(settingsTitle, "Configurações")
+
+      // Close settings
+      settingsNavigationBar.buttons["Fechar"].tap()
+
+      // Assert that that there's a new response ballon in the scroll view that contains "Colheres de Sopa"
+      XCTAssertTrue(app.scrollViews.otherElements.staticTexts.debugDescription.contains("Colheres de Sopa"))
+    }
+
+  }
 
 }

@@ -41,6 +41,7 @@ struct SettingsView: View {
                 Text($0.languageFullName)
               }
             }
+            .accessibilityIdentifier("languageButton")
           }
         }
         Section(header: Text( LocalizedStringKey("precision-info").stringValue() )) {
