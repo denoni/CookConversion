@@ -1,6 +1,6 @@
 # SpotifyClone
 
-An iOS app that converts the most used cooking measurements(mL -> cup, tbsp. -> fl. oz., etc...) with a simple and intuitive UI.
+#### An iOS app that converts the most used cooking measurements(mL -> cup, tbsp. -> fl. oz., etc...) with a simple and intuitive UI.
 
 
 <a href="https://apps.apple.com/app/cook-conversion/id1594113679/">
@@ -18,6 +18,7 @@ An iOS app that converts the most used cooking measurements(mL -> cup, tbsp. -> 
 ## Concepts & Technologies Used/Learnt
  - Swift
  - Publishing to App Store
+ - MVVM
  - Internationalization
  - Accessiblity
  - Unit testing(XCTest)
