@@ -93,7 +93,7 @@ class StepperTests: XCTestCase {
     sut.increaseCurrentTypedValueByOne()
 
     // THEN - 'currentTypedValue' was increased by one
-    sut.currentTypedValue = "11"
+    XCTAssertEqual(sut.currentTypedValue, "11")
   }
 
   func testStepperDecrease() {
@@ -101,10 +101,10 @@ class StepperTests: XCTestCase {
     sut.currentTypedValue = "10"
 
     // WHEN - User tapped + stepper
-    sut.increaseCurrentTypedValueByOne()
+    sut.decreaseCurrentTypedValueByOne()
 
     // THEN - 'currentTypedValue' was decreased by one
-    sut.currentTypedValue = "9"
+    XCTAssertEqual(sut.currentTypedValue, "9")
   }
 
 }
