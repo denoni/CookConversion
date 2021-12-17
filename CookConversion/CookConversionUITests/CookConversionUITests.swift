@@ -9,34 +9,37 @@ import XCTest
 
 class CookConversionUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+  var app: XCUIApplication!
 
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    continueAfterFailure = false
+    app = XCUIApplication()
+    app.launch()
+  }
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+  func testStepperButtons() {
+    let app = XCUIApplication()
+
+    // Open text field
+    let textField = app.searchFields.element
+
+    // Tap increase button 10 times
+    let increaseButton = app.buttons["Increase"]
+    for _ in 1...10 {
+      increaseButton.tap()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    // Tap decrease button 1 time
+    let decreaseButton = app.buttons["Decrease"]
+    decreaseButton.tap()
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    // Check if textField label contains the result value
+    // (can't check if it's equal because there's accessibility description text in the label)
+    let textFieldContainsExpectedResult = textField.label.contains("9")
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    XCTAssertEqual(textFieldContainsExpectedResult, true, "Expected this label(\(textField.label)) to contain 9")
+  }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+
 }

@@ -31,9 +31,11 @@ struct TopSelectionSection: View {
           TapDownButton(measurementType: cookConversionViewModel.inputMeasureType)
             .accessibilityHint("Tap to open a list of possible input measures to choose.")
             .accessibility(sortPriority: 3)
+            .accessibilityIdentifier("inputMeasureButton")
           TapDownButton(measurementType: outputMeasureType)
             .accessibilityHint("Tap to open a list of possible output measures to choose.")
             .accessibility(sortPriority: 3)
+            .accessibilityIdentifier("resultMeasureButton")
         }
         .frame(height: Constants.bigButtonHeight)
         .padding(Constants.standardPadding)
