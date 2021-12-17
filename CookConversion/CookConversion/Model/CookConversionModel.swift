@@ -8,6 +8,7 @@
 import Foundation
 
 struct CookConversionModel {
+
   enum MeasurementType {
     case preciseMeasure
     case commonMeasure
@@ -34,62 +35,13 @@ struct CookConversionModel {
       case liter
     }
   }
-
-  enum AvailableLanguages: String, CaseIterable {
-    case english = "en"
-    case portuguese = "pt"
-    case spanish = "es"
-    case french = "fr"
-    case chinese = "zh"
-
-    var localizedLanguageCode: String {
-      switch self {
-      case .english:
-        return "en"
-      case .portuguese:
-        return "pt-BR"
-      case .spanish:
-        return "es"
-      case .french:
-        return "fr"
-      case .chinese:
-        return "zh-Hans"
-      }
-    }
-
-    var languageFullName: String {
-      switch self {
-      case .english:
-        return "English"
-      case .portuguese:
-        return "Português"
-      case .spanish:
-        return "Español"
-      case .french:
-        return "Français"
-      case .chinese:
-        return "中文"
-      }
-    }
-
-    static func getLanguage(from languageCode: String) -> AvailableLanguages {
-      for availableLanguageCode in AvailableLanguages.allCases {
-        if languageCode == availableLanguageCode.localizedLanguageCode {
-          return availableLanguageCode
-        }
-      }
-      // if didn't find a match
-      return .english
-    }
-
-  }
   
   let numberFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.locale = Locale.current
     formatter.numberStyle = .decimal
     formatter.minimum = 0
-    formatter.maximumFractionDigits = 2
+    formatter.maximumFractionDigits = Constants.responsePrecisionInDecimalDigits
     return formatter
   }()
   
@@ -132,7 +84,11 @@ struct CookConversionModel {
     return measureCount
   }
 
-  // MARK: - Conversions
+}
+
+
+// MARK: - Private Conversion Functions
+extension CookConversionModel {
 
   private func convertToGram(_ inputValue: Double, from initialMeasure: Measure) -> Double {
     switch initialMeasure {
@@ -154,7 +110,7 @@ struct CookConversionModel {
       fatalError("Type not implemented for \(initialMeasure)")
     }
   }
-  
+
   private func convertFromGramToCommonMeasure(_ measureInGrams: Double, to finalMeasure: Measure) -> Double {
     switch finalMeasure {
     case .commonMeasure(.teaspoon):
@@ -205,5 +161,60 @@ struct CookConversionModel {
       fatalError("Type not implemented for \(finalMeasure)")
     }
   }
-  
+
+}
+
+
+// MARK: - Language Related
+extension CookConversionModel {
+
+  enum AvailableLanguages: String, CaseIterable {
+    case english = "en"
+    case portuguese = "pt"
+    case spanish = "es"
+    case french = "fr"
+    case chinese = "zh"
+
+    var localizedLanguageCode: String {
+      switch self {
+      case .english:
+        return "en"
+      case .portuguese:
+        return "pt-BR"
+      case .spanish:
+        return "es"
+      case .french:
+        return "fr"
+      case .chinese:
+        return "zh-Hans"
+      }
+    }
+
+    var languageFullName: String {
+      switch self {
+      case .english:
+        return "English"
+      case .portuguese:
+        return "Português"
+      case .spanish:
+        return "Español"
+      case .french:
+        return "Français"
+      case .chinese:
+        return "中文"
+      }
+    }
+
+    static func getLanguage(from languageCode: String) -> AvailableLanguages {
+      for availableLanguageCode in AvailableLanguages.allCases {
+        if languageCode == availableLanguageCode.localizedLanguageCode {
+          return availableLanguageCode
+        }
+      }
+      // if didn't find a match
+      return .english
+    }
+
+  }
+
 }
