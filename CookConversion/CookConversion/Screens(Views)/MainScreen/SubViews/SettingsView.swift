@@ -20,7 +20,7 @@ struct SettingsView: View {
               Text(preciseMeasure.name)
             }
             // Disables the very last enabled item to prevent user from disabling all measures for measure type
-            .disabled(cookConversionViewModel.numberOfEnableItems(for: .preciseMeasure) == 1
+            .disabled(cookConversionViewModel.numberOfEnabledItems(for: .preciseMeasure) == 1
                       && cookConversionViewModel.measuresEnabledStatus[preciseMeasure]! == true)
           }
         }
@@ -30,7 +30,7 @@ struct SettingsView: View {
               Text(commonMeasure.name)
             }
             // Disables the very last enabled item to prevent user from disabling all measures for measure type
-            .disabled(cookConversionViewModel.numberOfEnableItems(for: .commonMeasure) == 1
+            .disabled(cookConversionViewModel.numberOfEnabledItems(for: .commonMeasure) == 1
                       && cookConversionViewModel.measuresEnabledStatus[commonMeasure]! == true)
           }
         }
