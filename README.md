@@ -3,7 +3,7 @@
 An iOS app that converts the most used cooking measurements(mL -> cup, tbsp. -> fl. oz., etc...) with a simple and intuitive UI.
 
 
-<a href="https://apps.apple.com/br/app/cook-conversion/id1594113679/">
+<a href="https://apps.apple.com/app/cook-conversion/id1594113679/">
   <img src= "https://i.ibb.co/4pRKSf0/available-on-the-app-store-logo.png" alt="drawing" height="150"/>
 </a>
 
