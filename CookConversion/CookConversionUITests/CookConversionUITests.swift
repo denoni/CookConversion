@@ -36,9 +36,7 @@ class CookConversionUITests: XCTestCase {
 
     // Check if textField label contains the result value
     // (can't check if it's equal because there's accessibility description text in the label)
-    let textFieldContainsExpectedResult = textField.label.contains("9")
-
-    XCTAssertEqual(textFieldContainsExpectedResult, true, "Expected this label(\(textField.label)) to contain 9")
+    XCTAssertTrue(textField.label.contains("9"), "Expected this label(\(textField.label)) to contain 9")
   }
 
   func testTextField() {

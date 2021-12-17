@@ -115,6 +115,8 @@ class ConversionResultsTests: XCTestCase {
   // System under test
   var sut: CookConversionModel!
 
+  let accuracy = 0.01
+
   override func setUpWithError() throws {
     try super.setUpWithError()
     sut = CookConversionModel()
@@ -134,10 +136,9 @@ class ConversionResultsTests: XCTestCase {
 
     // WHEN
     let result = sut.convert(valueToConvert, from: inputType, to: resultType)
-    let roundedResult = String(format: "%.2f", result)
 
     // THEN
-    XCTAssertEqual(roundedResult, "42.27")
+    XCTAssertEqual(result, 42.27, accuracy: accuracy)
   }
 
   func testConversionCupsToLiters() {
@@ -148,10 +149,9 @@ class ConversionResultsTests: XCTestCase {
 
     // WHEN
     let result = sut.convert(valueToConvert, from: inputType, to: resultType)
-    let roundedResult = String(format: "%.2f", result)
 
     // THEN
-    XCTAssertEqual(roundedResult, "10.00")
+    XCTAssertEqual(result, 10.0, accuracy: accuracy)
   }
 
   func testConversionOunceToTablespoon() {
@@ -163,10 +163,9 @@ class ConversionResultsTests: XCTestCase {
 
     // WHEN
     let result = sut.convert(valueToConvert, from: inputType, to: resultType)
-    let roundedResult = String(format: "%.2f", result)
 
     // THEN
-    XCTAssertEqual(roundedResult, "2.44")
+    XCTAssertEqual(result, 2.44, accuracy: accuracy)
   }
 
   func testConversionTablespoonToOunce() {
@@ -177,10 +176,9 @@ class ConversionResultsTests: XCTestCase {
 
     // WHEN
     let result = sut.convert(valueToConvert, from: inputType, to: resultType)
-    let roundedResult = String(format: "%.2f", result)
 
     // THEN
-    XCTAssertEqual(roundedResult, "1.00")
+    XCTAssertEqual(result, 1.0, accuracy: accuracy)
   }
 
 }
